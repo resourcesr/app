@@ -2,6 +2,8 @@ import "package:flutter/material.dart";
 
 import '../../drawer.dart';
 
+import 'package:riphahwebresources/components/course_item_view.dart';
+
 class HomeUi extends StatefulWidget {
   @override
   _HomeUiState createState() => _HomeUiState();
@@ -20,12 +22,11 @@ class _HomeUiState extends State<HomeUi> {
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: <Widget>[
-                  ListTile(
-                    leading: Icon(Icons.event_note, size: 50),
-                    title: Text('Notes'),
-                    subtitle: Text('Let\'s create notes'),
-                    onTap: () => navigateToNoteUi(context),
-                  ),
+                  CourseItemView(
+                      lIcon: Icons.home,
+                      title: "test",
+                      sTitle: "test da",
+                      tIcon: Icons.home)
                 ],
               ),
             ),
@@ -85,6 +86,7 @@ class _HomeUiState extends State<HomeUi> {
                     leading: Icon(Icons.settings, size: 50),
                     title: Text('Settings'),
                     subtitle: Text("Manage the app."),
+                    trailing: Icon(Icons.settings, size: 50),
                   ),
                 ],
               ),
