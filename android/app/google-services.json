@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "497533596196",
+    "firebase_url": "https://riphah-web-resources.firebaseio.com",
+    "project_id": "riphah-web-resources",
+    "storage_bucket": "riphah-web-resources.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:497533596196:android:048f782ab678a1c8be1eb1",
+        "android_client_info": {
+          "package_name": "ClassR.lablnet.me"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "497533596196-ehlf8sinnuqm8nmg9208fcge4kota6dn.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCA_-nHCAbf_WJrB_tvFO0XwP9s7Z169ro"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "497533596196-ehlf8sinnuqm8nmg9208fcge4kota6dn.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
