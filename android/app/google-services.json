@@ -1,34 +1,34 @@
 {
   "project_info": {
-    "project_number": "497533596196",
-    "firebase_url": "https://riphah-web-resources.firebaseio.com",
-    "project_id": "riphah-web-resources",
-    "storage_bucket": "riphah-web-resources.appspot.com"
+    "project_number": "1097420873455",
+    "firebase_url": "https://resourcesr.firebaseio.com",
+    "project_id": "resourcesr",
+    "storage_bucket": "resourcesr.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:497533596196:android:048f782ab678a1c8be1eb1",
+        "mobilesdk_app_id": "1:1097420873455:android:c3933e6d298a15a981051a",
         "android_client_info": {
-          "package_name": "ClassR.lablnet.me"
+          "package_name": "resourcesr.web.app"
         }
       },
       "oauth_client": [
         {
-          "client_id": "497533596196-ehlf8sinnuqm8nmg9208fcge4kota6dn.apps.googleusercontent.com",
+          "client_id": "1097420873455-k3qpib4fgevpdhbm914nikhgncq5mrmf.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyCA_-nHCAbf_WJrB_tvFO0XwP9s7Z169ro"
+          "current_key": "AIzaSyBJwILoPhbetfy5q0A3ObTTG5S5J-KsYGU"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "497533596196-ehlf8sinnuqm8nmg9208fcge4kota6dn.apps.googleusercontent.com",
+              "client_id": "1097420873455-k3qpib4fgevpdhbm914nikhgncq5mrmf.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

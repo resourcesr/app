@@ -9,7 +9,7 @@ class Klasss {
   Stream<QuerySnapshot> getByDepartment() {
     return _firestore
         .collection('subjects/classes/main')
-        .where("class_id", isEqualTo: this.department)
+        .where("program", isEqualTo: this.department)
         .snapshots();
   }
 }
