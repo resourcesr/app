@@ -1,4 +1,5 @@
 import "package:flutter/material.dart";
+import 'package:riphahwebresources/pages/auth/login_ui.dart';
 
 class WebResourceAppDrawer extends StatelessWidget {
   @override
@@ -14,6 +15,14 @@ class WebResourceAppDrawer extends StatelessWidget {
             leading: Icon(Icons.home),
             title: Text("Home"),
           ),
+          ListTile(
+            leading: Icon(Icons.people),
+            title: Text("Account"),
+            onTap: () => {
+              Navigator.push(
+                  context, MaterialPageRoute(builder: (context) => LoginUi()))
+            },
+          )
         ],
       ),
     );
