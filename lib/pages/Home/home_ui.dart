@@ -4,6 +4,8 @@ import '../../drawer.dart';
 
 import 'package:riphahwebresources/components/course_item_view.dart';
 
+import 'package:riphahwebresources/pages/klasses_ui.dart';
+
 class HomeUi extends StatefulWidget {
   @override
   _HomeUiState createState() => _HomeUiState();
@@ -27,7 +29,7 @@ class _HomeUiState extends State<HomeUi> {
                     title: "Department Of Computing",
                     sTitle: "FC",
                     tIcon: Icons.home,
-                    route: "/classes",
+                    route: () => KlassesUi(dep: "fc"),
                   )
                 ],
               ),
@@ -39,7 +41,7 @@ class _HomeUiState extends State<HomeUi> {
     return scaffold;
   }
 
-  Future navigateToNoteUi(context) async {
-    //Navigator.push(context, MaterialPageRoute(builder: (context) => NoteUi()));
+  Future navigateToNoteUi(context, params) async {
+    //Navigator.push(context, MaterialPageRoute(builder: (context) => NoteUi(params)));
   }
 }

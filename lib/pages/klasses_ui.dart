@@ -3,6 +3,9 @@ import '../drawer.dart';
 import 'package:riphahwebresources/components/course_item_view.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:riphahwebresources/data/klasses.dart';
+import 'package:riphahwebresources/components/empty_state.dart';
+import 'package:riphahwebresources/components/custom_app_bar.dart';
+import 'package:riphahwebresources/pages/courses_ui.dart';
 
 class KlassesUi extends StatefulWidget {
   KlassesUi({this.dep});
@@ -15,7 +18,10 @@ class _KlassesUiState extends State<KlassesUi> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(title: Text('Classes')), body: _buildBody(context));
+      appBar: AppBar(title: Text('Classes')),
+      drawer: WebResourceAppDrawer(),
+      body: _buildBody(context),
+    );
   }
 
   Widget _buildBody(BuildContext context) {
@@ -23,7 +29,13 @@ class _KlassesUiState extends State<KlassesUi> {
       stream: Klasss(department: widget.dep).getByDepartment(),
       builder: (context, snapshot) {
         if (!snapshot.hasData) return LinearProgressIndicator();
-
+        if (snapshot.data.documents.isEmpty)
+          return EmptyState(
+            icon: Icons.class_,
+            text: "Sorry, no class found",
+            tSize: 2.5,
+            iSize: 50.5,
+          );
         return _buildList(context, snapshot.data.documents);
       },
     );
@@ -41,10 +53,14 @@ class _KlassesUiState extends State<KlassesUi> {
       padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
       child: Card(
           child: CourseItemView(
-              lIcon: Icons.class_,
-              title: data.data['name'],
-              sTitle: data.data['cr'],
-              tIcon: Icons.arrow_forward)),
+        lIcon: Icons.class_,
+        title: data.data['name'],
+        sTitle: data.data['cr'],
+        tIcon: Icons.arrow_forward,
+        route: () => CoursesUi(
+          code: data.documentID,
+        ),
+      )),
     );
   }
 }

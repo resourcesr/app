@@ -7,19 +7,30 @@ class CourseItemView extends StatelessWidget {
   final String title;
   final String sTitle;
   final IconData tIcon;
-  final String route;
+  final Function route;
 
   @override
   Widget build(BuildContext context) {
     return Container(
       child: ListTile(
           leading: Icon(this.lIcon, size: 50),
-          title: Text(this.title),
-          subtitle: Text(this.sTitle),
+          title: Text(
+            this.title,
+            style: TextStyle(
+              fontSize: 14,
+            ),
+          ),
+          subtitle: Text(
+            this.sTitle,
+            style: TextStyle(
+              fontSize: 12,
+            ),
+          ),
           trailing: Icon(this.tIcon, size: 30),
           onTap: () {
             // Navigate to the second screen using a named route.
-            Navigator.pushNamed(context, this.route);
+            Navigator.push(
+                context, MaterialPageRoute(builder: (context) => this.route()));
           }),
     );
   }
