@@ -15,7 +15,6 @@ class WebResourceApp extends StatelessWidget {
         theme: lightTheme(),
         darkTheme: darkTheme(),
         routes: {
-          // When navigating to the "/second" route, build the SecondScreen widget.
           '/classes': (context) => KlassesUi(dep: "fc"),
         });
   }

@@ -23,11 +23,12 @@ class _ResetUiState extends State<ResetUi> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        key: _scaffoldKey,
         appBar: AppBar(title: Text("Reset Password")),
         body: _buildBody(context));
   }
 
-  void onSuccess() {
+  void onSuccess(context) {
     _scaffoldKey.currentState.showSnackBar(
       SnackBar(
         content: Text("Password reset link has been set to your email."),
@@ -53,9 +54,9 @@ class _ResetUiState extends State<ResetUi> {
 
   void onSubmit(context) async {
     setState(() => isLoading = true);
-    await user.resetPassword(emailController.text);
     try {
-      onSuccess();
+      await user.resetPassword(emailController.text);
+      onSuccess(context);
     } catch (err) {
       onError(context, err);
     }
@@ -123,9 +124,7 @@ class _ResetUiState extends State<ResetUi> {
                     width: double.infinity,
                     child: RaisedButton(
                       child: Text("Reset"),
-                      onPressed: () => {
-                        onSubmit(context),
-                      },
+                      onPressed: () => {onSubmit(context)},
                     ),
                   ),
                 ),
