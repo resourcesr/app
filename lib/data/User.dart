@@ -12,9 +12,8 @@ class User with ChangeNotifier {
   String get uid => _uid;
   User() {
     getPrefState().then((val) {
-      // do some operation
-      _uid = val;
       if (val != null) {
+        _uid = val;
         _loggedIn = true;
       }
       notifyListeners();
@@ -30,7 +29,7 @@ class User with ChangeNotifier {
 
   Future<void> saveId(uid) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    prefs.setString("uid", uid);
+    await prefs.setString("uid", uid);
   }
 
   Future<void> saveUserInDocument(String uid, String name, String sap) {
