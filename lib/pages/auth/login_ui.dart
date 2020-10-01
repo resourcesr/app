@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:riphahwebresources/data/User.dart';
 import 'package:riphahwebresources/pages/auth/register_ui.dart';
 import 'package:riphahwebresources/pages/auth/reset_ui.dart';
 import 'package:riphahwebresources/components/buttons.dart';
@@ -11,6 +12,8 @@ class LoginUi extends StatefulWidget {
 class _LoginUiState extends State<LoginUi> {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
+  final _scaffoldKey = GlobalKey<ScaffoldState>();
+  User user = User();
   final _formKey = GlobalKey<FormState>();
   bool isLoading = false;
 
@@ -24,7 +27,48 @@ class _LoginUiState extends State<LoginUi> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(title: Text("Login")), body: _buildBody(context));
+        key: _scaffoldKey,
+        appBar: AppBar(title: Text("Login")),
+        body: _buildBody(context));
+  }
+
+  void onSuccess(context) {
+    _scaffoldKey.currentState.showSnackBar(
+      SnackBar(
+        content: Text("Your, account has been loggedin."),
+        action: SnackBarAction(
+          label: "Close",
+          onPressed: () => {},
+        ),
+      ),
+    );
+  }
+
+  void onError(context, err) {
+    _scaffoldKey.currentState.showSnackBar(
+      SnackBar(
+        content: Text(err.message),
+        action: SnackBarAction(
+          label: "Close",
+          onPressed: () => {},
+        ),
+      ),
+    );
+  }
+
+  void onSubmit(context) async {
+    setState(() => isLoading = true);
+    try {
+      await user.login(emailController.text, passwordController.text);
+      onSuccess(context);
+    } catch (err) {
+      onError(context, err);
+    }
+    setState(() {
+      emailController.clear();
+      passwordController.clear();
+    });
+    setState(() => isLoading = false);
   }
 
   Widget _buildBody(BuildContext context) {
@@ -131,11 +175,11 @@ class _LoginUiState extends State<LoginUi> {
                       width: double.infinity,
                       child: RaisedButton(
                         child: Text("Login"),
-                        onPressed: () => {},
+                        onPressed: () => {onSubmit(context)},
                       ),
                     ),
                   ),
-                  Padding(
+                  /*Padding(
                     padding: const EdgeInsets.all(4.5),
                     child: SizedBox(
                       width: double.infinity,
@@ -145,6 +189,7 @@ class _LoginUiState extends State<LoginUi> {
                       ),
                     ),
                   ),
+                  SizedBox(height: 30),*/
                 ],
               )),
             ],

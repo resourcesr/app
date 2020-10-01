@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:riphahwebresources/data/User.dart';
 import 'package:riphahwebresources/pages/auth/login_ui.dart';
 
 class RegisterUi extends StatefulWidget {
@@ -7,28 +8,81 @@ class RegisterUi extends StatefulWidget {
 }
 
 class _RegisterUiState extends State<RegisterUi> {
-  final fieldController = TextEditingController();
+  TextEditingController nameController = TextEditingController();
+  TextEditingController emailController = TextEditingController();
+  TextEditingController sapController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+  bool isLoading = false;
+  final _scaffoldKey = GlobalKey<ScaffoldState>();
+  User user = User();
   final _formKey = GlobalKey<FormState>();
-  @override
-  void dispose() {
-    // Clean up the controller when the widget is disposed.
-    fieldController.dispose();
-    super.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(title: Text("Register")), body: _buildBody(context));
+        key: _scaffoldKey,
+        appBar: AppBar(title: Text("Register")),
+        body: _buildBody(context));
+  }
+
+  //@override
+  //void dispose() {
+  // Clean up the controller when the widget is disposed.
+  //fieldController.dispose();
+  //super.dispose();
+  //}
+
+  void onSuccess(context) {
+    _scaffoldKey.currentState.showSnackBar(
+      SnackBar(
+        content: Text("Password reset link has been set to your email."),
+        action: SnackBarAction(
+          label: "Close",
+          onPressed: () => {},
+        ),
+      ),
+    );
+  }
+
+  void onError(context, err) {
+    _scaffoldKey.currentState.showSnackBar(
+      SnackBar(
+        content: Text(err.message),
+        action: SnackBarAction(
+          label: "Close",
+          onPressed: () => {},
+        ),
+      ),
+    );
+  }
+
+  void onSubmit(context) async {
+    setState(() => isLoading = true);
+    try {
+      await user.signup(emailController.text, passwordController.text,
+          nameController.text, sapController.text);
+      onSuccess(context);
+    } catch (err) {
+      onError(context, err);
+    }
+    setState(() {
+      emailController.clear();
+      passwordController.clear();
+      nameController.clear();
+      sapController.clear();
+    });
+    setState(() => isLoading = false);
   }
 
   Widget _buildBody(BuildContext context) {
     return ListView(children: [
       Form(
+        key: _formKey,
         child: Padding(
           padding: const EdgeInsets.all(16.0),
           child: Column(
             children: <Widget>[
+              isLoading ? LinearProgressIndicator() : SizedBox(height: 6),
               Card(
                   child: Column(
                 children: <Widget>[
@@ -62,7 +116,7 @@ class _RegisterUiState extends State<RegisterUi> {
                   Padding(
                     padding: const EdgeInsets.all(20.20),
                     child: TextFormField(
-                      controller: fieldController,
+                      controller: nameController,
                       decoration: InputDecoration(
                         border: OutlineInputBorder(
                             borderSide: BorderSide(color: Colors.black)),
@@ -79,7 +133,7 @@ class _RegisterUiState extends State<RegisterUi> {
                   Padding(
                     padding: const EdgeInsets.all(20.20),
                     child: TextFormField(
-                      controller: fieldController,
+                      controller: emailController,
                       decoration: InputDecoration(
                         border: OutlineInputBorder(
                             borderSide: BorderSide(color: Colors.black)),
@@ -96,7 +150,7 @@ class _RegisterUiState extends State<RegisterUi> {
                   Padding(
                     padding: const EdgeInsets.all(20.20),
                     child: TextFormField(
-                      controller: fieldController,
+                      controller: sapController,
                       decoration: InputDecoration(
                         border: OutlineInputBorder(
                             borderSide: BorderSide(color: Colors.black)),
@@ -114,7 +168,7 @@ class _RegisterUiState extends State<RegisterUi> {
                     padding: const EdgeInsets.all(20.20),
                     child: TextFormField(
                       obscureText: true, // password field
-                      controller: fieldController,
+                      controller: passwordController,
                       decoration: InputDecoration(
                         border: OutlineInputBorder(
                             borderSide: BorderSide(color: Colors.black)),
@@ -149,7 +203,7 @@ class _RegisterUiState extends State<RegisterUi> {
                       width: double.infinity,
                       child: RaisedButton(
                         child: Text("Register"),
-                        onPressed: () => {},
+                        onPressed: () => {onSubmit(context)},
                       ),
                     ),
                   ),

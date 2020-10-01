@@ -37,6 +37,9 @@ dev_dependencies:
   cloud_firestore: ^0.12.9
   intl: ^0.16.1
   flutter_downloader: ^1.5.1
+  shared_preferences: ^0.5.12
+  provider:
+
 
 
 # For information on the generic Dart part of this file, see the

@@ -61,6 +61,7 @@ class _ResetUiState extends State<ResetUi> {
       onError(context, err);
     }
     setState(() => isLoading = false);
+    setState(() => emailController.clear());
   }
 
   Widget _buildBody(BuildContext context) {
