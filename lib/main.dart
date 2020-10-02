@@ -20,11 +20,13 @@ class WebResourceApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        home: HomeUi(),
-        theme: lightTheme(),
-        darkTheme: darkTheme(),
-        routes: {
-          '/classes': (context) => KlassesUi(dep: "fc"),
-        });
+      home: HomeUi(),
+      theme: lightTheme(),
+      darkTheme: darkTheme(),
+      routes: {
+        '/classes': (context) => KlassesUi(dep: "fc"),
+      },
+      debugShowCheckedModeBanner: false,
+    );
   }
 }
