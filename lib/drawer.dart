@@ -2,6 +2,7 @@ import "package:flutter/material.dart";
 import 'package:riphahwebresources/data/User.dart';
 import 'package:riphahwebresources/pages/Home/home_ui.dart';
 import 'package:riphahwebresources/pages/auth/login_ui.dart';
+import 'package:riphahwebresources/pages/auth/profile_ui.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:provider/provider.dart';
 
@@ -47,15 +48,19 @@ class _AppDrawer extends State<AppDrawer> {
         title: Text("Profile"),
         onTap: () => {
           Navigator.push(
-              context, MaterialPageRoute(builder: (context) => LoginUi()))
+              context,
+              MaterialPageRoute(
+                  builder: (context) => ProfileUi(
+                        uid: user.uid,
+                      )))
         },
       ));
       children.add(ListTile(
         leading: Icon(Icons.timer_outlined),
         title: Text("Timetable"),
         onTap: () => {
-          Navigator.push(
-              context, MaterialPageRoute(builder: (context) => LoginUi()))
+          // Navigator.push(
+          //context, MaterialPageRoute(builder: (context) => LoginUi()))
         },
       ));
       children.add(ListTile(
@@ -99,7 +104,7 @@ class _AppDrawer extends State<AppDrawer> {
             padding: const EdgeInsets.all(8),
             children: <Widget>[
               DrawerHeader(
-                child: Text("User ${user.loggedIn.toString()}"),
+                child: Text("User ${user.uid}"),
               ),
               ...children,
             ],

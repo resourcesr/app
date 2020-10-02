@@ -15,7 +15,7 @@ class _HomeUiState extends State<HomeUi> {
   @override
   Widget build(BuildContext context) {
     var scaffold = Scaffold(
-      appBar: AppBar(title: Text("EasyTools")),
+      appBar: AppBar(title: Text("ResourcesR")),
       drawer: WebResourceAppDrawer(),
       body: Center(
         child: Column(

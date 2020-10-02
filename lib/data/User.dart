@@ -32,6 +32,19 @@ class User with ChangeNotifier {
     await prefs.setString("uid", uid);
   }
 
+  getRec(
+    String uid,
+  ) {
+    return _firestore.document("users/$uid/").get();
+  }
+
+  Future<void> update(String uid, String name, String sap) {
+    _firestore.collection("users").document(uid).updateData({
+      "name": name,
+      "sap": sap,
+    });
+  }
+
   Future<void> saveUserInDocument(String uid, String name, String sap) {
     _firestore.collection("users").document(uid).setData({
       "name": name,

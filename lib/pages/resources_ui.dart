@@ -6,10 +6,13 @@ import 'package:riphahwebresources/data/Resources.dart';
 import 'package:riphahwebresources/components/empty_state.dart';
 import 'package:intl/intl.dart';
 import 'package:riphahwebresources/functions.dart';
+import 'package:flutter_downloader/flutter_downloader.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class ResourcesUi extends StatefulWidget {
   ResourcesUi({this.courseId});
   final String courseId;
+
   @override
   _ResourcesUiState createState() => _ResourcesUiState();
 }
@@ -51,6 +54,30 @@ class _ResourcesUiState extends State<ResourcesUi> {
     );
   }
 
+  _openUrl(url) async {
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw 'Could not launch $url';
+    }
+  }
+
+  void download(link) async {
+    WidgetsFlutterBinding.ensureInitialized();
+    await FlutterDownloader.initialize(
+        debug: true // optional: set false to disable printing logs to console
+        );
+    final taskId = await FlutterDownloader.enqueue(
+      url: '$link',
+      savedDir: '/',
+      showNotification:
+          true, // show download progress in status bar (for Android)
+      openFileFromNotification:
+          true, // click on notification to open downloaded file (for Android)
+    );
+    print("test");
+  }
+
   Widget _buildBody(BuildContext context) {
     return StreamBuilder<QuerySnapshot>(
       stream: Resources(courseId: widget.courseId).getByCourseId(),
@@ -66,6 +93,36 @@ class _ResourcesUiState extends State<ResourcesUi> {
         return _buildList(context, snapshot.data.documents);
       },
     );
+  }
+
+  _showMaterialDialog(openUrl, downloadUrl) {
+    showDialog(
+        context: context,
+        builder: (_) => AlertDialog(
+              title: Text("downnload"),
+              content: Column(
+                children: <Widget>[
+                  ListTile(
+                    leading: Icon(Icons.open_in_browser),
+                    title: Text('Open in Browser'),
+                    onTap: () => {_openUrl(openUrl)},
+                  ),
+                  ListTile(
+                    leading: Icon(Icons.play_arrow),
+                    title: Text('Download'),
+                    onTap: () => {download(downloadUrl)},
+                  )
+                ],
+              ),
+              actions: <Widget>[
+                FlatButton(
+                  child: Text('Close me!'),
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                )
+              ],
+            ));
   }
 
   Widget _buildList(BuildContext context, List<DocumentSnapshot> snapshot) {
@@ -110,7 +167,11 @@ class _ResourcesUiState extends State<ResourcesUi> {
                       subtitle: Text("$formatted"),
                       trailing: RaisedButton(
                         color: Colors.white,
-                        onPressed: () {},
+                        onPressed: () {
+                          _showMaterialDialog(
+                              data.data['openUrl'], data.data['downloadUrl']);
+                          //download(context, data.data['downloadUrl']);
+                        },
                         child: Icon(Icons.offline_pin),
                       ),
                     ),
