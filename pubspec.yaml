@@ -40,6 +40,8 @@ dev_dependencies:
   shared_preferences: ^0.5.12
   provider:
   url_launcher: ^5.7.2
+  firebase_messaging:
+  device_id:
 
 
 
