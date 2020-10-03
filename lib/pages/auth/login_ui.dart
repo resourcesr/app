@@ -42,6 +42,7 @@ class _LoginUiState extends State<LoginUi> {
         ),
       ),
     );
+    Navigator.push(context, MaterialPageRoute(builder: (context) => LoginUi()));
   }
 
   void onError(context, err) {

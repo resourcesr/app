@@ -6,7 +6,6 @@ import 'package:riphahwebresources/pages/auth/profile_ui.dart';
 import 'package:provider/provider.dart';
 
 class WebResourceAppDrawer extends StatefulWidget {
-  // This widget is the root of your application.
   @override
   _WebResourceAppDrawerState createState() => _WebResourceAppDrawerState();
 }
@@ -30,17 +29,6 @@ class _AppDrawer extends State<AppDrawer> {
 
   @override
   Widget build(BuildContext context) {
-    /* return Drawer(
-      child: ListView(
-        padding: const EdgeInsets.all(8),
-        children: <Widget>[
-          DrawerHeader(
-            child: Text("Menu"),
-          ),
-          ...children,
-        ],
-      ),
-    );*/
     return Container(
       child: Consumer<User>(
         builder: (context, user, child) => Drawer(
