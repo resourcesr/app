@@ -6,9 +6,10 @@ import './theme.dart';
 import 'data/User.dart';
 import 'package:provider/provider.dart';
 
+final GlobalKey<NavigatorState> navigatorKey = GlobalKey();
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  PushNotifications().init();
+
   runApp(
     ChangeNotifierProvider<User>(
       create: (_) => User(),
@@ -18,10 +19,23 @@ Future<void> main() async {
   //runApp(WebResourceApp());
 }
 
-class WebResourceApp extends StatelessWidget {
+class WebResourceApp extends StatefulWidget {
+  WebResourceApp({Key key}) : super(key: key);
+  @override
+  _WebResourceAppState createState() => _WebResourceAppState();
+}
+
+class _WebResourceAppState extends State<WebResourceApp> {
+  @override
+  void initState() {
+    PushNotifications().init();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      navigatorKey: navigatorKey,
       home: HomeUi(),
       theme: lightTheme(),
       darkTheme: darkTheme(),

@@ -9,9 +9,13 @@ class PushNotifications {
 
   final FirebaseMessaging _firebaseMessaging = FirebaseMessaging();
   bool _initialized = false;
+  void _registerOnFirebase() {
+    _firebaseMessaging.subscribeToTopic('all');
+  }
 
   Future<void> init() async {
     if (!_initialized) {
+      _registerOnFirebase();
       // For iOS required premission.
       _firebaseMessaging.requestNotificationPermissions();
 
@@ -31,7 +35,7 @@ class PushNotifications {
       String token = await _firebaseMessaging.getToken();
       print("token: $token");
 
-      _initialized = false;
+      _initialized = true;
     }
   }
 }
