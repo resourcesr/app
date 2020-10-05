@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:riphahwebresources/data/User.dart';
+import 'package:riphahwebresources/pages/Home/home_ui.dart';
 
 class ProfileUi extends StatefulWidget {
   ProfileUi({this.uid});
@@ -68,6 +69,7 @@ class _ProfileUiState extends State<ProfileUi> {
       sapController.clear();
     });
     setState(() => isLoading = false);
+    Navigator.push(context, MaterialPageRoute(builder: (context) => HomeUi()));
   }
 
   Widget _buildBody(BuildContext context) {
