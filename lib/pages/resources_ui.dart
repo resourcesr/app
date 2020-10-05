@@ -1,5 +1,4 @@
 import "package:flutter/material.dart";
-//import '../drawer.dart';
 import 'package:riphahwebresources/components/list_header.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:riphahwebresources/data/Resources.dart';
@@ -8,6 +7,9 @@ import 'package:intl/intl.dart';
 import 'package:riphahwebresources/functions.dart';
 import 'package:flutter_downloader/flutter_downloader.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:path/path.dart' as path;
+import 'dart:io';
 
 class ResourcesUi extends StatefulWidget {
   ResourcesUi({this.courseId});
@@ -62,14 +64,19 @@ class _ResourcesUiState extends State<ResourcesUi> {
     }
   }
 
+  Future<Directory> _getDownloadDirectory() async {
+    return await getApplicationDocumentsDirectory();
+  }
+
   void download(link) async {
-    WidgetsFlutterBinding.ensureInitialized();
+    final dir = await _getDownloadDirectory();
+    final savePath = path.join(dir.path);
     await FlutterDownloader.initialize(
         debug: true // optional: set false to disable printing logs to console
         );
     final taskId = await FlutterDownloader.enqueue(
       url: '$link',
-      savedDir: '/',
+      savedDir: savePath,
       showNotification:
           true, // show download progress in status bar (for Android)
       openFileFromNotification:
@@ -95,7 +102,7 @@ class _ResourcesUiState extends State<ResourcesUi> {
     );
   }
 
-  _showMaterialDialog(openUrl, downloadUrl) {
+  /*_showMaterialDialog(openUrl, downloadUrl) {
     showDialog(
         context: context,
         builder: (_) => AlertDialog(
@@ -123,7 +130,7 @@ class _ResourcesUiState extends State<ResourcesUi> {
                 )
               ],
             ));
-  }
+  }*/
 
   Widget _buildList(BuildContext context, List<DocumentSnapshot> snapshot) {
     final d = snapshot.toList();
@@ -168,9 +175,7 @@ class _ResourcesUiState extends State<ResourcesUi> {
                       trailing: RaisedButton(
                         color: Colors.white,
                         onPressed: () {
-                          _showMaterialDialog(
-                              data.data['openUrl'], data.data['downloadUrl']);
-                          //download(context, data.data['downloadUrl']);
+                          download(data.data['downloadUrl']);
                         },
                         child: Icon(Icons.offline_pin),
                       ),
