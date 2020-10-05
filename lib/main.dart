@@ -1,3 +1,4 @@
+import 'package:riphahwebresources/config.dart';
 import 'package:riphahwebresources/data/PushNotification.dart';
 import 'package:riphahwebresources/pages/Home/home_ui.dart';
 import 'package:riphahwebresources/pages/klasses_ui.dart';
@@ -5,6 +6,7 @@ import "package:flutter/material.dart";
 import './theme.dart';
 import 'data/User.dart';
 import 'package:provider/provider.dart';
+import './config.dart';
 
 final GlobalKey<NavigatorState> navigatorKey = GlobalKey();
 Future<void> main() async {
@@ -30,6 +32,9 @@ class _WebResourceAppState extends State<WebResourceApp> {
   void initState() {
     PushNotifications().init();
     super.initState();
+    currentTheme.addListener(() {
+      setState(() {});
+    });
   }
 
   @override
@@ -39,6 +44,7 @@ class _WebResourceAppState extends State<WebResourceApp> {
       home: HomeUi(),
       theme: lightTheme(),
       darkTheme: darkTheme(),
+      themeMode: currentTheme.currentTheme(),
       routes: {
         '/classes': (context) => KlassesUi(dep: "fc"),
       },

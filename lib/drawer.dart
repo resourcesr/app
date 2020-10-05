@@ -1,4 +1,5 @@
 import "package:flutter/material.dart";
+import 'package:riphahwebresources/config.dart';
 import 'package:riphahwebresources/data/User.dart';
 import 'package:riphahwebresources/pages/Home/home_ui.dart';
 import 'package:riphahwebresources/pages/auth/login_ui.dart';
@@ -86,7 +87,14 @@ class _AppDrawer extends State<AppDrawer> {
                     Navigator.push(context,
                         MaterialPageRoute(builder: (context) => LoginUi()))
                   },
-                )
+                ),
+              ListTile(
+                leading: Icon(Icons.wb_sunny),
+                title: Text(currentTheme.isDark ? "Light" : "Dark"),
+                onTap: () => {
+                  currentTheme.switchTheme(),
+                },
+              )
             ],
           ),
         ),
