@@ -72,7 +72,11 @@ class _AppDrawer extends State<AppDrawer> {
                 ListTile(
                   leading: Icon(Icons.logout),
                   title: Text("Logout"),
-                  onTap: () => {user.logout()},
+                  onTap: () => {
+                    user.logout(),
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => LoginUi()))
+                  },
                 ),
               if (!user.loggedIn)
                 ListTile(
