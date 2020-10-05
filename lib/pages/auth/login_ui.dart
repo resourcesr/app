@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:riphahwebresources/data/User.dart';
+import 'package:riphahwebresources/pages/Home/home_ui.dart';
 import 'package:riphahwebresources/pages/auth/register_ui.dart';
 import 'package:riphahwebresources/pages/auth/reset_ui.dart';
 import 'package:riphahwebresources/components/buttons.dart';
@@ -42,7 +43,7 @@ class _LoginUiState extends State<LoginUi> {
         ),
       ),
     );
-    Navigator.push(context, MaterialPageRoute(builder: (context) => LoginUi()));
+    Navigator.push(context, MaterialPageRoute(builder: (context) => HomeUi()));
   }
 
   void onError(context, err) {
