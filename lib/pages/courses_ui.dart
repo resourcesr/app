@@ -1,5 +1,4 @@
 import "package:flutter/material.dart";
-import '../drawer.dart';
 import 'package:riphahwebresources/components/course_item_view.dart';
 import 'package:riphahwebresources/components/list_header.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -19,7 +18,6 @@ class _CoursesUiState extends State<CoursesUi> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text('Courses')),
-      drawer: WebResourceAppDrawer(),
       body: _buildBody(context),
     );
   }
