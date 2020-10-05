@@ -87,14 +87,7 @@ class _AppDrawer extends State<AppDrawer> {
                     Navigator.push(context,
                         MaterialPageRoute(builder: (context) => LoginUi()))
                   },
-                ),
-              ListTile(
-                leading: Icon(Icons.wb_sunny),
-                title: Text(currentTheme.isDark ? "Light" : "Dark"),
-                onTap: () => {
-                  currentTheme.switchTheme(),
-                },
-              )
+                )
             ],
           ),
         ),
