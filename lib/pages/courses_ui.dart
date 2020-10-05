@@ -1,5 +1,6 @@
 import "package:flutter/material.dart";
 import 'package:riphahwebresources/components/course_item_view.dart';
+import 'package:riphahwebresources/components/custom_app_bar.dart';
 import 'package:riphahwebresources/components/list_header.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:riphahwebresources/data/Courses.dart';
@@ -17,7 +18,7 @@ class _CoursesUiState extends State<CoursesUi> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Courses')),
+      appBar: customAppBar(context, "Courses"),
       body: _buildBody(context),
     );
   }

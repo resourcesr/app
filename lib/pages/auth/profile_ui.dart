@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:riphahwebresources/components/custom_app_bar.dart';
 import 'package:riphahwebresources/data/User.dart';
 import 'package:riphahwebresources/pages/Home/home_ui.dart';
 
@@ -28,7 +29,7 @@ class _ProfileUiState extends State<ProfileUi> {
   Widget build(BuildContext context) {
     return Scaffold(
         key: _scaffoldKey,
-        appBar: AppBar(title: Text("Profile")),
+        appBar: customAppBar(context, "Profile"),
         body: _buildBody(context));
   }
 

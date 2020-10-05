@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:riphahwebresources/components/custom_app_bar.dart';
 import 'package:riphahwebresources/data/User.dart';
 import 'package:riphahwebresources/pages/auth/login_ui.dart';
 
@@ -21,7 +22,7 @@ class _RegisterUiState extends State<RegisterUi> {
   Widget build(BuildContext context) {
     return Scaffold(
         key: _scaffoldKey,
-        appBar: AppBar(title: Text("Register")),
+        appBar: customAppBar(context, "Register"),
         body: _buildBody(context));
   }
 

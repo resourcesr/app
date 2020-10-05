@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:riphahwebresources/components/custom_app_bar.dart';
 import 'package:riphahwebresources/data/User.dart';
 
 class ResetUi extends StatefulWidget {
@@ -24,7 +25,7 @@ class _ResetUiState extends State<ResetUi> {
   Widget build(BuildContext context) {
     return Scaffold(
         key: _scaffoldKey,
-        appBar: AppBar(title: Text("Reset Password")),
+        appBar: customAppBar(context, "Reset Password"),
         body: _buildBody(context));
   }
 

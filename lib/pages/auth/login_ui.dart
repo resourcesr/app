@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:riphahwebresources/components/custom_app_bar.dart';
 import 'package:riphahwebresources/data/User.dart';
 import 'package:riphahwebresources/pages/Home/home_ui.dart';
 import 'package:riphahwebresources/pages/auth/register_ui.dart';
@@ -29,7 +30,7 @@ class _LoginUiState extends State<LoginUi> {
   Widget build(BuildContext context) {
     return Scaffold(
         key: _scaffoldKey,
-        appBar: AppBar(title: Text("Login")),
+        appBar: customAppBar(context, "Login"),
         body: _buildBody(context));
   }
 

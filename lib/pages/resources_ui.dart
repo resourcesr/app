@@ -1,4 +1,5 @@
 import "package:flutter/material.dart";
+import 'package:riphahwebresources/components/custom_app_bar.dart';
 import 'package:riphahwebresources/components/list_header.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:riphahwebresources/data/Resources.dart';
@@ -50,7 +51,7 @@ class _ResourcesUiState extends State<ResourcesUi> {
       ),
     );*/
     return Scaffold(
-      appBar: AppBar(title: Text('Resources')),
+      appBar: customAppBar(context, "Resources"),
       //drawer: WebResourceAppDrawer(),
       body: _buildBody(context),
     );

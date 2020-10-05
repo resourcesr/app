@@ -1,6 +1,7 @@
 import "package:flutter/material.dart";
 import 'package:riphahwebresources/components/course_item_view.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:riphahwebresources/components/custom_app_bar.dart';
 import 'package:riphahwebresources/data/klasses.dart';
 import 'package:riphahwebresources/components/empty_state.dart';
 import 'package:riphahwebresources/pages/courses_ui.dart';
@@ -16,7 +17,7 @@ class _KlassesUiState extends State<KlassesUi> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Classes')),
+      appBar: customAppBar(context, "Classes"),
       body: _buildBody(context),
     );
   }

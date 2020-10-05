@@ -1,4 +1,5 @@
 import "package:flutter/material.dart";
+import 'package:riphahwebresources/components/custom_app_bar.dart';
 
 import '../../drawer.dart';
 
@@ -15,7 +16,7 @@ class _HomeUiState extends State<HomeUi> {
   @override
   Widget build(BuildContext context) {
     var scaffold = Scaffold(
-      appBar: AppBar(title: Text("ResourcesR")),
+      appBar: customAppBar(context, "Home"),
       drawer: WebResourceAppDrawer(),
       body: Center(
         child: Column(
