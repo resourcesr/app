@@ -2,6 +2,7 @@ import "package:flutter/material.dart";
 import 'package:riphahwebresources/components/custom_app_bar.dart';
 import 'package:riphahwebresources/components/list_header.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:riphahwebresources/components/loader.dart';
 import 'package:riphahwebresources/data/Resources.dart';
 import 'package:riphahwebresources/components/empty_state.dart';
 import 'package:intl/intl.dart';
@@ -90,7 +91,7 @@ class _ResourcesUiState extends State<ResourcesUi> {
     return StreamBuilder<QuerySnapshot>(
       stream: Resources(courseId: widget.courseId).getByCourseId(),
       builder: (context, snapshot) {
-        if (!snapshot.hasData) return LinearProgressIndicator();
+        if (!snapshot.hasData) return Loader();
         if (snapshot.data.documents.isEmpty)
           return EmptyState(
             icon: Icons.collections_bookmark,

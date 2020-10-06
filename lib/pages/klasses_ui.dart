@@ -2,6 +2,7 @@ import "package:flutter/material.dart";
 import 'package:riphahwebresources/components/course_item_view.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:riphahwebresources/components/custom_app_bar.dart';
+import 'package:riphahwebresources/components/loader.dart';
 import 'package:riphahwebresources/data/klasses.dart';
 import 'package:riphahwebresources/components/empty_state.dart';
 import 'package:riphahwebresources/pages/courses_ui.dart';
@@ -26,7 +27,7 @@ class _KlassesUiState extends State<KlassesUi> {
     return StreamBuilder<QuerySnapshot>(
       stream: Klasss(department: widget.dep).getByDepartment(),
       builder: (context, snapshot) {
-        if (!snapshot.hasData) return LinearProgressIndicator();
+        if (!snapshot.hasData) return Loader();
         if (snapshot.data.documents.isEmpty)
           return EmptyState(
             icon: Icons.class_,

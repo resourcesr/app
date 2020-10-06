@@ -3,6 +3,7 @@ import 'package:riphahwebresources/components/course_item_view.dart';
 import 'package:riphahwebresources/components/custom_app_bar.dart';
 import 'package:riphahwebresources/components/list_header.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:riphahwebresources/components/loader.dart';
 import 'package:riphahwebresources/data/Courses.dart';
 import 'package:riphahwebresources/components/empty_state.dart';
 import 'package:riphahwebresources/pages/resources_ui.dart';
@@ -27,7 +28,7 @@ class _CoursesUiState extends State<CoursesUi> {
     return StreamBuilder<QuerySnapshot>(
       stream: Courses(code: widget.code).getByClassId(),
       builder: (context, snapshot) {
-        if (!snapshot.hasData) return LinearProgressIndicator();
+        if (!snapshot.hasData) return Loader();
         if (snapshot.data.documents.isEmpty)
           return EmptyState(
             icon: Icons.library_books,
