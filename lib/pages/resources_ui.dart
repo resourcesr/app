@@ -1,4 +1,5 @@
 import "package:flutter/material.dart";
+import 'package:riphahwebresources/components/avatars.dart';
 import 'package:riphahwebresources/components/custom_app_bar.dart';
 import 'package:riphahwebresources/components/list_header.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -170,7 +171,8 @@ class _ResourcesUiState extends State<ResourcesUi> {
                   child: Card(
                     child: ListTile(
                       leading: CircleAvatar(
-                        child: Icon(Icons.book),
+                        backgroundColor: Colors.transparent,
+                        child: FileIconAvatar(fileType: data.data['icon']),
                       ),
                       title: Text(data.data['name'] ?? ""),
                       subtitle: Text("$formatted"),

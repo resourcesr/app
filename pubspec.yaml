@@ -46,6 +46,7 @@ dev_dependencies:
   permission_handler: ^5.0.1+1
   flutter_launcher_icons: "^0.8.0"
   string_to_hex: ^0.2.1+30
+  flutter_svg: ^0.19.0
 
   
 
@@ -69,6 +70,11 @@ flutter:
 
   assets:
     - assets/images/google-logo.png
+    - assets/images/files/file.svg
+    - assets/images/files/pdf.svg
+    - assets/images/files/powerpoint.svg
+    - assets/images/files/word.svg
+    - assets/images/files/zip.svg
 
   # To add assets to your application, add an assets section, like this:
   # assets:
