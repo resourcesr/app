@@ -1,6 +1,7 @@
 import "package:flutter/material.dart";
 import 'package:riphahwebresources/config.dart';
 import 'package:riphahwebresources/data/User.dart';
+import 'package:riphahwebresources/pages/dashboard_ui.dart';
 import 'package:riphahwebresources/pages/Home/home_ui.dart';
 import 'package:riphahwebresources/pages/auth/login_ui.dart';
 import 'package:riphahwebresources/pages/auth/profile_ui.dart';
@@ -45,6 +46,14 @@ class _AppDrawer extends State<AppDrawer> {
                 onTap: () => {
                   Navigator.push(context,
                       MaterialPageRoute(builder: (context) => HomeUi()))
+                },
+              ),
+              ListTile(
+                leading: Icon(Icons.home),
+                title: Text("DashboardUi"),
+                onTap: () => {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => DashboardUi()))
                 },
               ),
               if (user.loggedIn)

@@ -1,6 +1,7 @@
 import "package:flutter/material.dart";
 import 'package:riphahwebresources/pages/Home/home_ui.dart';
 import 'package:riphahwebresources/pages/courses_ui.dart';
+import 'package:riphahwebresources/pages/menu_ui.dart';
 
 class DashboardUi extends StatefulWidget {
   @override
@@ -17,7 +18,7 @@ class _DashboardUiState extends State<DashboardUi> {
       {"name": "Home", "icon": Icons.home, "page": HomeUi()},
       {"name": "Courses", "icon": Icons.book, "page": CoursesUi()},
       //{"name": "Time Table", "icon": Icons.calendar_today, "page": null},
-      {"name": "Menu", "icon": Icons.menu, "page": null}
+      {"name": "Menu", "icon": Icons.menu, "page": MenuUi()}
     ];
 
     for (var tab in tabs) {
