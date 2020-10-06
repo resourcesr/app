@@ -59,7 +59,7 @@ class _CoursesUiState extends State<CoursesUi> {
               child: CourseItemView(
                 lIcon: Icons.class_,
                 title: data.data['title'],
-                sTitle: data.data['teacher'],
+                sTitle: data.data['code'] + " - " + data.data['teacher'],
                 tIcon: Icons.arrow_forward,
                 route: () => ResourcesUi(courseId: data.documentID),
               ),

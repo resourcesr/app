@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:riphahwebresources/components/avatars.dart';
 
 class CourseItemView extends StatelessWidget {
   CourseItemView({this.lIcon, this.title, this.sTitle, this.tIcon, this.route});
@@ -13,7 +14,9 @@ class CourseItemView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       child: ListTile(
-          leading: Icon(this.lIcon, size: 50),
+          leading: TextAvatar(
+            text: this.title,
+          ),
           title: Text(
             this.title,
             style: TextStyle(
@@ -26,7 +29,7 @@ class CourseItemView extends StatelessWidget {
               fontSize: 12,
             ),
           ),
-          trailing: Icon(this.tIcon, size: 30),
+          //trailing: Icon(this.tIcon, size: 30),
           onTap: () {
             // Navigate to the second screen using a named route.
             Navigator.push(
