@@ -33,8 +33,8 @@ class _CoursesUiState extends State<CoursesUi> {
           return EmptyState(
             icon: Icons.library_books,
             text: "Sorry, no course found",
-            tSize: 2.5,
-            iSize: 50.5,
+            tSize: 1.5,
+            iSize: 40.5,
           );
         return _buildList(context, snapshot.data.documents);
       },

@@ -97,7 +97,7 @@ class _ResourcesUiState extends State<ResourcesUi> {
             icon: Icons.collections_bookmark,
             text: "Sorry, no resources found",
             tSize: 1.5,
-            iSize: 50.5,
+            iSize: 40.5,
           );
         return _buildList(context, snapshot.data.documents);
       },
