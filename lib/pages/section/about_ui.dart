@@ -1,7 +1,6 @@
 import "package:flutter/material.dart";
 import 'package:riphahwebresources/components/custom_app_bar.dart';
 import 'package:riphahwebresources/components/list_header.dart';
-import 'package:package_info/package_info.dart';
 
 class AboutUi extends StatelessWidget {
   @override
