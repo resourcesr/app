@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:riphahwebresources/components/custom_app_bar.dart';
+import 'package:riphahwebresources/components/custom_form.dart';
+import 'package:riphahwebresources/components/custom_input.dart';
 import 'package:riphahwebresources/data/User.dart';
 import 'package:riphahwebresources/pages/Home/home_ui.dart';
 
 class ProfileUi extends StatefulWidget {
-  ProfileUi({this.uid});
-  String uid;
+  ProfileUi({this.user});
+  User user;
   @override
   _ProfileUiState createState() => _ProfileUiState();
 }
@@ -14,7 +16,6 @@ class _ProfileUiState extends State<ProfileUi> {
   TextEditingController nameController = TextEditingController();
   TextEditingController sapController = TextEditingController();
   final _scaffoldKey = GlobalKey<ScaffoldState>();
-  User user = User();
   final _formKey = GlobalKey<FormState>();
   bool isLoading = false;
 
@@ -60,7 +61,8 @@ class _ProfileUiState extends State<ProfileUi> {
   void onSubmit(context) async {
     setState(() => isLoading = true);
     try {
-      await user.update(widget.uid, nameController.text, sapController.text);
+      await widget.user
+          .update(widget.user.uid, nameController.text, sapController.text);
       onSuccess(context);
     } catch (err) {
       onError(context, err);
@@ -76,95 +78,34 @@ class _ProfileUiState extends State<ProfileUi> {
   Widget _buildBody(BuildContext context) {
     //List<Widget> children = [];
 
-    return Form(
+    return CustomForm(
       key: _formKey,
-      child: ListView(children: <Widget>[
-        isLoading ? LinearProgressIndicator() : SizedBox(height: 6),
-        SizedBox(height: 30),
+      loading: isLoading,
+      imagePath: null,
+      children: <Widget>[
+        CustomInput(
+          controller: nameController,
+          label: "Name",
+          obscureText: false,
+        ),
+        CustomInput(
+          controller: sapController,
+          label: "SAP",
+          obscureText: false,
+        ),
         Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Column(
-            children: <Widget>[
-              Card(
-                  child: Column(
-                children: <Widget>[
-                  Center(
-                    child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: <Widget>[
-                          Padding(
-                            padding: const EdgeInsets.all(25.5),
-                            child: Text(
-                              "Update Profile".toUpperCase(),
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 25,
-                              ),
-                              textAlign: TextAlign.center,
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.all(5.5),
-                            child: Text(
-                              "Please enter the following detail to get update",
-                              style: TextStyle(
-                                fontSize: 14,
-                              ),
-                              textAlign: TextAlign.center,
-                            ),
-                          ),
-                        ]),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(20.20),
-                    child: TextFormField(
-                      controller: nameController,
-                      decoration: InputDecoration(
-                        border: OutlineInputBorder(
-                            borderSide: BorderSide(color: Colors.black)),
-                        labelText: "Name",
-                        hintText: "Enter your name",
-                        prefixIcon: const Icon(
-                          Icons.email,
-                          color: Colors.black,
-                        ),
-                        prefixText: ' ',
-                      ),
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(20.20),
-                    child: TextFormField(
-                      controller: sapController,
-                      decoration: InputDecoration(
-                        border: OutlineInputBorder(
-                            borderSide: BorderSide(color: Colors.black)),
-                        labelText: "sap",
-                        hintText: "Enter your sap",
-                        prefixIcon: const Icon(
-                          Icons.security_rounded,
-                          color: Colors.black,
-                        ),
-                        prefixText: ' ',
-                      ),
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(20.20),
-                    child: SizedBox(
-                      width: double.infinity,
-                      child: RaisedButton(
-                        child: Text("Update"),
-                        onPressed: () => {onSubmit(context)},
-                      ),
-                    ),
-                  ),
-                ],
-              )),
-            ],
+          padding: const EdgeInsets.all(20.20),
+          child: SizedBox(
+            width: double.infinity,
+            child: RaisedButton(
+              child: Text("Update"),
+              color: Theme.of(context).accentColor,
+              textColor: Theme.of(context).primaryColor,
+              onPressed: () => {onSubmit(context)},
+            ),
           ),
         ),
-      ]),
+      ],
     );
   }
 }

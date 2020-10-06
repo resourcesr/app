@@ -28,6 +28,13 @@ class _CoursesUiState extends State<CoursesUi> {
     return StreamBuilder<QuerySnapshot>(
       stream: Courses(code: widget.code).getByClassId(),
       builder: (context, snapshot) {
+        if (widget.code == null)
+          return EmptyState(
+            icon: Icons.library_books,
+            text: "Select your course.",
+            tSize: 1.5,
+            iSize: 40.5,
+          );
         if (!snapshot.hasData) return Loader();
         if (snapshot.data.documents.isEmpty)
           return EmptyState(

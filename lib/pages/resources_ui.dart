@@ -4,6 +4,7 @@ import 'package:riphahwebresources/components/custom_app_bar.dart';
 import 'package:riphahwebresources/components/list_header.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:riphahwebresources/components/loader.dart';
+import 'package:riphahwebresources/data/Downloader.dart';
 import 'package:riphahwebresources/data/Resources.dart';
 import 'package:riphahwebresources/components/empty_state.dart';
 import 'package:intl/intl.dart';
@@ -23,6 +24,7 @@ class ResourcesUi extends StatefulWidget {
 }
 
 class _ResourcesUiState extends State<ResourcesUi> {
+  Downloader downloader = Downloader();
   @override
   Widget build(BuildContext context) {
     /*return DefaultTabController(
@@ -86,6 +88,10 @@ class _ResourcesUiState extends State<ResourcesUi> {
           true, // click on notification to open downloaded file (for Android)
     );
     print("test");
+  }
+
+  listTrallingWidget(url) {
+    return Icon(Icons.offline_pin);
   }
 
   Widget _buildBody(BuildContext context) {
@@ -176,13 +182,7 @@ class _ResourcesUiState extends State<ResourcesUi> {
                       ),
                       title: Text(data.data['name'] ?? ""),
                       subtitle: Text("$formatted"),
-                      trailing: RaisedButton(
-                        color: Colors.white,
-                        onPressed: () {
-                          download(data.data['downloadUrl']);
-                        },
-                        child: Icon(Icons.offline_pin),
-                      ),
+                      trailing: listTrallingWidget(data.data['downloadUrl']),
                     ),
                   ),
                 ),

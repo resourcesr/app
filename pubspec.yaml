@@ -47,7 +47,7 @@ dev_dependencies:
   flutter_launcher_icons: "^0.8.0"
   string_to_hex: ^0.2.1+30
   flutter_svg: ^0.19.0
-
+  share: ^0.6.5+2
   
 
 flutter_icons:
@@ -69,12 +69,14 @@ flutter:
   uses-material-design: true
 
   assets:
+    - assets/images/logo.png
     - assets/images/google-logo.png
     - assets/images/files/file.svg
     - assets/images/files/pdf.svg
     - assets/images/files/powerpoint.svg
     - assets/images/files/word.svg
     - assets/images/files/zip.svg
+    - assets/images/Login.png
 
   # To add assets to your application, add an assets section, like this:
   # assets:

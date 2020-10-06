@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:riphahwebresources/components/custom_app_bar.dart';
+import 'package:riphahwebresources/components/custom_form.dart';
+import 'package:riphahwebresources/components/custom_input.dart';
 import 'package:riphahwebresources/data/User.dart';
 
 class ResetUi extends StatefulWidget {
@@ -66,75 +68,28 @@ class _ResetUiState extends State<ResetUi> {
   }
 
   Widget _buildBody(BuildContext context) {
-    return Form(
-      key: _formKey,
-      child: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          children: <Widget>[
-            isLoading ? LinearProgressIndicator() : SizedBox(height: 6),
-            Card(
-                child: Column(
-              children: <Widget>[
-                Center(
-                  child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        Padding(
-                          padding: const EdgeInsets.all(25.5),
-                          child: Text(
-                            "Reset Password".toUpperCase(),
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 25,
-                            ),
-                            textAlign: TextAlign.center,
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.all(5.5),
-                          child: Text(
-                            "Enter your email to reset your password",
-                            style: TextStyle(
-                              fontSize: 14,
-                            ),
-                            textAlign: TextAlign.center,
-                          ),
-                        ),
-                      ]),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(20.20),
-                  child: TextFormField(
-                    controller: emailController,
-                    decoration: InputDecoration(
-                      border: OutlineInputBorder(
-                          borderSide: BorderSide(color: Colors.black)),
-                      labelText: "Email Address",
-                      hintText: "Enter your email",
-                      prefixIcon: const Icon(
-                        Icons.email,
-                        color: Colors.black,
-                      ),
-                      prefixText: ' ',
-                    ),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(20.20),
-                  child: SizedBox(
-                    width: double.infinity,
-                    child: RaisedButton(
-                      child: Text("Reset"),
-                      onPressed: () => {onSubmit(context)},
-                    ),
-                  ),
-                ),
-              ],
-            )),
-          ],
-        ),
-      ),
-    );
+    return CustomForm(
+        key: _formKey,
+        loading: isLoading,
+        imagePath: null,
+        children: <Widget>[
+          CustomInput(
+            controller: emailController,
+            label: "Email",
+            obscureText: false,
+          ),
+          Padding(
+            padding: const EdgeInsets.all(20.20),
+            child: SizedBox(
+              width: double.infinity,
+              child: RaisedButton(
+                child: Text("Reset"),
+                color: Theme.of(context).accentColor,
+                textColor: Theme.of(context).primaryColor,
+                onPressed: () => {onSubmit(context)},
+              ),
+            ),
+          )
+        ]);
   }
 }

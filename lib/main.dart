@@ -1,6 +1,7 @@
 import 'package:riphahwebresources/config.dart';
 import 'package:riphahwebresources/data/PushNotification.dart';
 import 'package:riphahwebresources/pages/Home/home_ui.dart';
+import 'package:riphahwebresources/pages/dashboard_ui.dart';
 import 'package:riphahwebresources/pages/klasses_ui.dart';
 import "package:flutter/material.dart";
 import './theme.dart';
@@ -18,7 +19,6 @@ Future<void> main() async {
       child: WebResourceApp(),
     ),
   );
-  //runApp(WebResourceApp());
 }
 
 class WebResourceApp extends StatefulWidget {
@@ -28,6 +28,7 @@ class WebResourceApp extends StatefulWidget {
 }
 
 class _WebResourceAppState extends State<WebResourceApp> {
+  User user = User();
   @override
   void initState() {
     PushNotifications().init();
@@ -41,7 +42,7 @@ class _WebResourceAppState extends State<WebResourceApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
       navigatorKey: navigatorKey,
-      home: HomeUi(),
+      home: user.loggedIn ? DashboardUi(user) : HomeUi(),
       theme: lightTheme(),
       darkTheme: darkTheme(),
       themeMode: currentTheme.currentTheme(),

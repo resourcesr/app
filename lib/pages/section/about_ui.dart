@@ -34,7 +34,7 @@ class AboutUi extends StatelessWidget {
             ),
             ListTile(
               title: Text("Dark SDK version"),
-              subtitle: Text("xxx"),
+              subtitle: Text("2.9.2"),
             ),
           ],
         ),

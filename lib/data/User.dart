@@ -8,8 +8,12 @@ class User with ChangeNotifier {
   Firestore _firestore = Firestore.instance;
   bool _loggedIn = false;
   bool get loggedIn => _loggedIn;
-  String _uid = "";
+  String _uid, _name, _role, _subject;
   String get uid => _uid;
+  String get name => _name;
+  String get role => _role;
+  String get subject => _subject;
+
   User() {
     getPrefState().then((val) {
       if (val != null) {
@@ -17,6 +21,14 @@ class User with ChangeNotifier {
         _loggedIn = true;
       }
       notifyListeners();
+      getUserProfile(_uid).then((val) {
+        if (val != null) {
+          _name = val['name'] ?? "";
+          _role = val['role'];
+          _subject = val['subject'] ?? null;
+        }
+        notifyListeners();
+      });
     });
   }
 
@@ -32,10 +44,10 @@ class User with ChangeNotifier {
     await prefs.setString("uid", uid);
   }
 
-  getRec(
-    String uid,
-  ) {
-    return _firestore.document("users/$uid/").get();
+  Future<dynamic> getUserProfile(String id) async {
+    var doc = await _firestore.document("/users/$id/").get();
+    //return doc.documentID;
+    return doc.data;
   }
 
   Future<void> update(String uid, String name, String sap) {

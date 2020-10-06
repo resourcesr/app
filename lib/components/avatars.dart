@@ -58,3 +58,18 @@ class FileIconAvatar extends StatelessWidget {
     );
   }
 }
+
+class ImageAvatar extends StatelessWidget {
+  ImageAvatar(this.url);
+  String url;
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: CircleAvatar(
+        backgroundColor: Colors.transparent,
+        backgroundImage: NetworkImage(url),
+        child: null,
+      ),
+    );
+  }
+}
