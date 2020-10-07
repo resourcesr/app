@@ -10,7 +10,6 @@ import './config.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 Future<void> main() async {
-  WidgetsFlutterBinding.ensureInitialized();
   String uid = "";
   try {
     WidgetsFlutterBinding.ensureInitialized();
@@ -24,7 +23,6 @@ Future<void> main() async {
 class WebResourceApp extends StatefulWidget {
   WebResourceApp(this.uid);
   final String uid;
-  //WebResourceApp({Key key}) : super(key: key);
   @override
   _WebResourceAppState createState() => _WebResourceAppState();
 }
