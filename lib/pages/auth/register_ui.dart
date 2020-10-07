@@ -4,6 +4,7 @@ import 'package:riphahwebresources/components/custom_form.dart';
 import 'package:riphahwebresources/components/custom_input.dart';
 import 'package:riphahwebresources/data/User.dart';
 import 'package:riphahwebresources/pages/auth/login_ui.dart';
+import 'package:riphahwebresources/pages/dashboard_ui.dart';
 
 class RegisterUi extends StatefulWidget {
   @override
@@ -17,7 +18,7 @@ class _RegisterUiState extends State<RegisterUi> {
   TextEditingController passwordController = TextEditingController();
   bool isLoading = false;
   final _scaffoldKey = GlobalKey<ScaffoldState>();
-  User user = User();
+  User user = User("");
   final _formKey = GlobalKey<FormState>();
 
   @override
@@ -35,16 +36,18 @@ class _RegisterUiState extends State<RegisterUi> {
   //super.dispose();
   //}
 
-  void onSuccess(context) {
+  void onSuccess(context, u) {
     _scaffoldKey.currentState.showSnackBar(
       SnackBar(
-        content: Text("Password reset link has been set to your email."),
+        content: Text("Your Accoount has been created."),
         action: SnackBarAction(
           label: "Close",
           onPressed: () => {},
         ),
       ),
     );
+    Navigator.push(
+        context, MaterialPageRoute(builder: (context) => DashboardUi(u)));
   }
 
   void onError(context, err) {
@@ -62,9 +65,9 @@ class _RegisterUiState extends State<RegisterUi> {
   void onSubmit(context) async {
     setState(() => isLoading = true);
     try {
-      await user.signup(emailController.text, passwordController.text,
+      var u = await user.signup(emailController.text, passwordController.text,
           nameController.text, sapController.text);
-      onSuccess(context);
+      onSuccess(context, u);
     } catch (err) {
       onError(context, err);
     }

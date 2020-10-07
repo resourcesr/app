@@ -11,7 +11,7 @@ class ResetUi extends StatefulWidget {
 
 class _ResetUiState extends State<ResetUi> {
   TextEditingController emailController = TextEditingController();
-  User user = User();
+  User user = User("");
   final _formKey = GlobalKey<FormState>();
   bool isLoading = false;
   final _scaffoldKey = GlobalKey<ScaffoldState>();

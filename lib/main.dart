@@ -6,43 +6,45 @@ import 'package:riphahwebresources/pages/klasses_ui.dart';
 import "package:flutter/material.dart";
 import './theme.dart';
 import 'data/User.dart';
-import 'package:provider/provider.dart';
 import './config.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-final GlobalKey<NavigatorState> navigatorKey = GlobalKey();
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  String uid = "";
+  try {
+    WidgetsFlutterBinding.ensureInitialized();
 
-  runApp(
-    ChangeNotifierProvider<User>(
-      create: (_) => User(),
-      child: WebResourceApp(),
-    ),
-  );
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    uid = prefs.getString('uid') ?? "";
+  } catch (_) {}
+  runApp(WebResourceApp(uid));
 }
 
 class WebResourceApp extends StatefulWidget {
-  WebResourceApp({Key key}) : super(key: key);
+  WebResourceApp(this.uid);
+  final String uid;
+  //WebResourceApp({Key key}) : super(key: key);
   @override
   _WebResourceAppState createState() => _WebResourceAppState();
 }
 
 class _WebResourceAppState extends State<WebResourceApp> {
-  User user = User();
+  User user;
   @override
   void initState() {
     PushNotifications().init();
-    super.initState();
     currentTheme.addListener(() {
       setState(() {});
     });
+    user = User(widget.uid);
+    super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      navigatorKey: navigatorKey,
-      home: user.loggedIn ? DashboardUi(user) : HomeUi(),
+      home: user.status == AccountStatus.Success ? DashboardUi(user) : HomeUi(),
       theme: lightTheme(),
       darkTheme: darkTheme(),
       themeMode: currentTheme.currentTheme(),

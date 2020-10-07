@@ -17,7 +17,7 @@ class _LoginUiState extends State<LoginUi> {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   final _scaffoldKey = GlobalKey<ScaffoldState>();
-  User user = User();
+  User user = User("");
   final _formKey = GlobalKey<FormState>();
   bool isLoading = false;
 
@@ -36,7 +36,7 @@ class _LoginUiState extends State<LoginUi> {
         body: _buildBody(context));
   }
 
-  void onSuccess(context) {
+  void onSuccess(context, u) {
     _scaffoldKey.currentState.showSnackBar(
       SnackBar(
         content: Text("Your, account has been loggedin."),
@@ -46,7 +46,9 @@ class _LoginUiState extends State<LoginUi> {
         ),
       ),
     );
-    Navigator.pushNamed(context, '/');
+    //Navigator.pushNamed(context, '/');
+    Navigator.push(
+        context, MaterialPageRoute(builder: (context) => DashboardUi(u)));
   }
 
   void onError(context, err) {
@@ -64,8 +66,8 @@ class _LoginUiState extends State<LoginUi> {
   void onSubmit(context) async {
     setState(() => isLoading = true);
     try {
-      await user.login(emailController.text, passwordController.text);
-      onSuccess(context);
+      var u = await user.login(emailController.text, passwordController.text);
+      onSuccess(context, u);
     } catch (err) {
       onError(context, err);
     }

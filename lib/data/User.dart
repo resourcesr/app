@@ -3,33 +3,35 @@ import 'package:flutter/foundation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
+enum AccountStatus { Success, LoggedOut }
+
 class User with ChangeNotifier {
   FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
   Firestore _firestore = Firestore.instance;
   bool _loggedIn = false;
   bool get loggedIn => _loggedIn;
   String _uid, _name, _role, _subject;
+  AccountStatus status = AccountStatus.LoggedOut;
   String get uid => _uid;
   String get name => _name;
   String get role => _role;
   String get subject => _subject;
 
-  User() {
-    getPrefState().then((val) {
-      if (val != null) {
-        _uid = val;
-        _loggedIn = true;
-      }
-      notifyListeners();
+  User(_uid) {
+    print(_uid);
+    if (_uid != "") {
+      _loggedIn = true;
       getUserProfile(_uid).then((val) {
         if (val != null) {
-          _name = val['name'] ?? "";
+          _name = val['name'];
           _role = val['role'];
           _subject = val['subject'] ?? null;
         }
         notifyListeners();
       });
-    });
+      status = AccountStatus.Success;
+      notifyListeners();
+    }
   }
 
   Future<String> getPrefState() async {
@@ -70,7 +72,7 @@ class User with ChangeNotifier {
   }
 
   // user signup.
-  Future<void> signup(
+  Future<User> signup(
       String email, String password, String name, String sap) async {
     FirebaseUser user = (await _firebaseAuth.createUserWithEmailAndPassword(
             email: email, password: password))
@@ -79,19 +81,23 @@ class User with ChangeNotifier {
       saveUserInDocument(user.uid, name, sap);
       saveId(user.uid);
       _loggedIn = true;
+      status = AccountStatus.Success;
       notifyListeners();
+      return User(user.uid);
     }
   }
 
   /// user login
-  Future<void> login(String email, String password) async {
+  Future<User> login(String email, String password) async {
     FirebaseUser user = (await _firebaseAuth.signInWithEmailAndPassword(
             email: email, password: password))
         .user;
     if (user != null) {
       saveId(user.uid);
       _loggedIn = true;
+      status = AccountStatus.Success;
       notifyListeners();
+      return User(user.uid);
     }
   }
 
@@ -100,6 +106,7 @@ class User with ChangeNotifier {
     _firebaseAuth.signOut();
     saveId(null);
     _loggedIn = false;
+    status = AccountStatus.LoggedOut;
     notifyListeners();
   }
 
