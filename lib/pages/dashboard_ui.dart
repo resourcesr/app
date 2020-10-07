@@ -23,7 +23,7 @@ class _DashboardUiState extends State<DashboardUi> {
         "name": "Courses",
         "icon": Icons.book,
         "page": CoursesUi(
-          code: null,
+          code: "NONXSMaZExTgzKwNmdT7",
         )
       },
       //{"name": "Time Table", "icon": Icons.calendar_today, "page": null},

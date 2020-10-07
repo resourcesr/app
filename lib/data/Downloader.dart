@@ -5,6 +5,15 @@ import 'package:flutter_downloader/flutter_downloader.dart';
 
 class Downloader {
   String _path;
+  Downloader() {
+    init();
+  }
+  init() async {
+    await FlutterDownloader.initialize(
+        debug: true // optional: set false to disable printing logs to console
+        );
+  }
+
   Future<void> getPath() async {
     Directory appDocDir = await getExternalStorageDirectory();
     _path = appDocDir.path + '/Download';
@@ -12,21 +21,27 @@ class Downloader {
 
   Future<List<DownloadTask>> getByUrl(String url) async {
     return await FlutterDownloader.loadTasksWithRawQuery(
-        query:
-            'SELECT * FROM task WHERE url="$url" AND (status=2 OR status=6 OR status=1);');
+        query: 'SELECT * FROM task WHERE url="$url";');
   }
 
-  Future<String> start(String url, String fileName) async {
+  Future<List<DownloadTask>> getAll() async {
+    return await FlutterDownloader.loadTasksWithRawQuery(
+        query: 'SELECT * FROM task WHERE status=3;');
+  }
+
+  Future<String> start(String url) async {
     var tasks = await getByUrl(url);
     await getPath();
     if (tasks.isNotEmpty) return tasks[0].taskId;
-
+    var savedDir = Directory(_path);
+    bool hasDir = await savedDir.exists();
+    if (!hasDir) savedDir.create();
     return await FlutterDownloader.enqueue(
       url: url,
       savedDir: _path,
       showNotification: true,
       openFileFromNotification: true,
-      fileName: fileName,
+      //fileName: fileName ?? null,
     );
   }
 
@@ -47,5 +62,9 @@ class Downloader {
 
   Future<void> resume(String taskId) async {
     await FlutterDownloader.resume(taskId: taskId);
+  }
+
+  Future<void> delete(String taskId) async {
+    await FlutterDownloader.remove(taskId: taskId);
   }
 }

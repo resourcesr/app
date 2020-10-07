@@ -9,10 +9,8 @@ import 'package:riphahwebresources/data/Resources.dart';
 import 'package:riphahwebresources/components/empty_state.dart';
 import 'package:intl/intl.dart';
 import 'package:riphahwebresources/functions.dart';
-import 'package:flutter_downloader/flutter_downloader.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:path_provider/path_provider.dart';
-import 'package:path/path.dart' as path;
 import 'dart:io';
 
 class ResourcesUi extends StatefulWidget {
@@ -74,24 +72,58 @@ class _ResourcesUiState extends State<ResourcesUi> {
   }
 
   void download(link) async {
-    final dir = await _getDownloadDirectory();
-    final savePath = path.join(dir.path);
-    await FlutterDownloader.initialize(
-        debug: true // optional: set false to disable printing logs to console
-        );
-    final taskId = await FlutterDownloader.enqueue(
-      url: '$link',
-      savedDir: savePath,
-      showNotification:
-          true, // show download progress in status bar (for Android)
-      openFileFromNotification:
-          true, // click on notification to open downloaded file (for Android)
-    );
-    print("test");
+    var task = await downloader.start(link);
+    print(task);
+    print("Downloaded done");
   }
 
   listTrallingWidget(url) {
-    return Icon(Icons.offline_pin);
+    //var task = await downloader.getByUrl(url);
+    //if (task.isNotEmpty) return Icon(Icons.offline_pin);
+
+    return null;
+  }
+
+  _showBottomSheet(context, url) async {
+    var task = await downloader.getByUrl(url);
+    List<Widget> children = [];
+    if (task.isNotEmpty) {
+      var id = task.first.taskId;
+      if (task.first.progress == 100) {
+        children.add(
+          ListTile(
+            leading: Icon(Icons.download_rounded),
+            title: Text("Delete"),
+            onTap: () => {downloader.delete(id), Navigator.pop(context)},
+          ),
+        );
+      } else {
+        children.add(
+          ListTile(
+            leading: Icon(Icons.download_rounded),
+            title: Text("Cancel"),
+            onTap: () => {downloader.cancel(id), Navigator.pop(context)},
+          ),
+        );
+      }
+    } else {
+      children.add(
+        ListTile(
+          leading: Icon(Icons.download_rounded),
+          title: Text("Download"),
+          onTap: () => {download(url), Navigator.pop(context)},
+        ),
+      );
+    }
+    showModalBottomSheet(
+        context: context,
+        builder: (BuildContext bc) {
+          return Container(
+            child: Wrap(
+              children: <Widget>[...children],
+            ),
+          );
+        });
   }
 
   Widget _buildBody(BuildContext context) {
@@ -183,6 +215,8 @@ class _ResourcesUiState extends State<ResourcesUi> {
                       title: Text(data.data['name'] ?? ""),
                       subtitle: Text("$formatted"),
                       trailing: listTrallingWidget(data.data['downloadUrl']),
+                      onTap: () =>
+                          {_showBottomSheet(context, data.data['downloadUrl'])},
                     ),
                   ),
                 ),

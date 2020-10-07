@@ -5,6 +5,7 @@ import 'package:riphahwebresources/data/User.dart';
 import 'package:riphahwebresources/pages/Home/home_ui.dart';
 import 'package:riphahwebresources/pages/auth/login_ui.dart';
 import 'package:riphahwebresources/pages/auth/profile_ui.dart';
+import 'package:riphahwebresources/pages/downlaod_ui.dart';
 import 'package:riphahwebresources/pages/section/about_ui.dart';
 import 'package:riphahwebresources/pages/section/developer_ui.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -62,6 +63,14 @@ class _MenuUiState extends State<MenuUi> {
               },
             ),
             Divider(),
+            ListTile(
+              leading: Icon(Icons.offline_pin),
+              title: Text("My Downloads"),
+              onTap: () => {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => DownloadUi()))
+              },
+            ),
             ListTile(
               leading: Icon(Icons.security),
               title: Text("Privacy Policy"),
