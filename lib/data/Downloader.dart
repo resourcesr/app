@@ -28,6 +28,12 @@ class Downloader {
         query: 'SELECT * FROM task WHERE url="$url";');
   }
 
+  // Get downloaded task by ID
+  Future<List<DownloadTask>> getById(var id) async {
+    return await FlutterDownloader.loadTasksWithRawQuery(
+        query: 'SELECT * FROM task WHERE task_id="$id";');
+  }
+
   // Get all downloaded tasks
   Future<List<DownloadTask>> getAll() async {
     return await FlutterDownloader.loadTasksWithRawQuery(
@@ -76,6 +82,11 @@ class Downloader {
 
   // Remove the download by ID
   Future<void> delete(String taskId) async {
+    var task = await getById(taskId);
+    await getPath();
+    var file = task.first.filename;
+    var toDeleted = File("${_path}/${file}");
+    toDeleted.delete();
     await FlutterDownloader.remove(taskId: taskId);
   }
 }
