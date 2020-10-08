@@ -66,6 +66,7 @@ class _FeedbackUiState extends State<FeedbackUi> {
           controller: commentController,
           label: "Comment",
           obscureText: false,
+          maxLines: 4,
         ),
         Padding(
           padding: const EdgeInsets.all(20.20),
