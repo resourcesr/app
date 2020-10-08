@@ -59,6 +59,8 @@ class _DownloadUiState extends State<DownloadUi> {
             downloader.delete(taskId);
             Navigator.pop(context);
             onDeleted(context);
+
+            //Untill i figure out how can i reload activity upon
             Navigator.pop(context);
           },
         ),

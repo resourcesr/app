@@ -98,6 +98,34 @@ class _ResourcesUiState extends State<ResourcesUi> {
     return icon;
   }
 
+  _confirmBox(BuildContext context, taskId) {
+    AlertDialog alert = AlertDialog(
+      content: Text("Are you sure?"),
+      actions: <Widget>[
+        FlatButton(
+          child: Text('No'),
+          onPressed: () {
+            Navigator.of(context).pop(false);
+          },
+        ),
+        FlatButton(
+          child: Text('Yes'),
+          onPressed: () {
+            downloader.delete(taskId);
+            Navigator.pop(context);
+          },
+        ),
+      ],
+    );
+
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return alert;
+      },
+    );
+  }
+
   _showBottomSheet(context, url) async {
     var task = await downloader.getByUrl(url);
     List<Widget> children = [];
@@ -129,7 +157,9 @@ class _ResourcesUiState extends State<ResourcesUi> {
           ListTile(
             leading: Icon(Icons.delete_forever),
             title: Text("Delete"),
-            onTap: () => {downloader.delete(id), Navigator.pop(context)},
+            onTap: () => {
+              _confirmBox(context, task.first.taskId),
+            },
           ),
         );
       } else {
