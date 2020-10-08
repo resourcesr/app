@@ -12,6 +12,8 @@ import 'package:riphahwebresources/functions.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:path_provider/path_provider.dart';
 import 'dart:io';
+import 'package:share/share.dart';
+import 'package:open_file/open_file.dart';
 
 class ResourcesUi extends StatefulWidget {
   ResourcesUi({this.courseId});
@@ -67,6 +69,12 @@ class _ResourcesUiState extends State<ResourcesUi> {
     }
   }
 
+  void _openFile(file) async {
+    try {
+      await OpenFile.open(file);
+    } catch (_) {}
+  }
+
   Future<Directory> _getDownloadDirectory() async {
     return await getApplicationDocumentsDirectory();
   }
@@ -98,7 +106,28 @@ class _ResourcesUiState extends State<ResourcesUi> {
       if (task.first.progress == 100) {
         children.add(
           ListTile(
-            leading: Icon(Icons.download_rounded),
+            leading: Icon(Icons.file_present),
+            title: Text("Open"),
+            onTap: () => {
+              _openFile(task.first.savedDir + "/" + task.first.filename),
+              Navigator.pop(context)
+            },
+          ),
+        );
+        children.add(
+          ListTile(
+            leading: Icon(Icons.share),
+            title: Text("Share"),
+            onTap: () => {
+              Share.shareFiles(
+                  [task.first.savedDir + "/" + task.first.filename]),
+              Navigator.pop(context)
+            },
+          ),
+        );
+        children.add(
+          ListTile(
+            leading: Icon(Icons.delete_forever),
             title: Text("Delete"),
             onTap: () => {downloader.delete(id), Navigator.pop(context)},
           ),

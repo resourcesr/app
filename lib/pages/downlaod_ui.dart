@@ -7,7 +7,6 @@ import 'package:riphahwebresources/components/empty_state.dart';
 import 'package:riphahwebresources/components/loader.dart';
 import 'package:riphahwebresources/data/Downloader.dart';
 import 'package:riphahwebresources/functions.dart';
-import 'package:url_launcher/url_launcher.dart';
 import 'package:share/share.dart';
 import 'package:open_file/open_file.dart';
 
@@ -39,8 +38,39 @@ class _DownloadUiState extends State<DownloadUi> {
   }
 
   void _openFile(file) async {
-    print("Openinf File $file");
-    await OpenFile.open(file);
+    try {
+      await OpenFile.open(file);
+    } catch (_) {}
+  }
+
+  _confirmBox(BuildContext context, taskId) {
+    AlertDialog alert = AlertDialog(
+      content: Text("Are you sure?"),
+      actions: <Widget>[
+        FlatButton(
+          child: Text('No'),
+          onPressed: () {
+            Navigator.of(context).pop(false);
+          },
+        ),
+        FlatButton(
+          child: Text('Yes'),
+          onPressed: () {
+            downloader.delete(taskId);
+            Navigator.pop(context);
+            onDeleted(context);
+            Navigator.pop(context);
+          },
+        ),
+      ],
+    );
+
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return alert;
+      },
+    );
   }
 
   _showBottomSheet(taskId, file) async {
@@ -56,12 +86,17 @@ class _DownloadUiState extends State<DownloadUi> {
                   onTap: () => {_openFile(file), Navigator.pop(context)},
                 ),
                 ListTile(
-                  leading: Icon(Icons.download_rounded),
+                  leading: Icon(Icons.share),
+                  title: Text("Share"),
+                  onTap: () => {
+                    Share.shareFiles([file])
+                  },
+                ),
+                ListTile(
+                  leading: Icon(Icons.delete_forever),
                   title: Text("Delete"),
                   onTap: () => {
-                    downloader.delete(taskId),
-                    Navigator.pop(context),
-                    onDeleted(context),
+                    _confirmBox(context, taskId),
                   },
                 ),
               ],
