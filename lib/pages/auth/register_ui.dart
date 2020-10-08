@@ -84,7 +84,7 @@ class _RegisterUiState extends State<RegisterUi> {
     return CustomForm(
         key: _formKey,
         loading: isLoading,
-        imagePath: null,
+        imagePath: "assets/images/Login.png",
         children: <Widget>[
           CustomInput(
             controller: nameController,

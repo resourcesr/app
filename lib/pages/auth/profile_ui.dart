@@ -81,7 +81,7 @@ class _ProfileUiState extends State<ProfileUi> {
     return CustomForm(
       key: _formKey,
       loading: isLoading,
-      imagePath: null,
+      imagePath: "assets/images/Login.png",
       children: <Widget>[
         CustomInput(
           controller: nameController,

@@ -3,7 +3,6 @@ import 'package:riphahwebresources/components/custom_app_bar.dart';
 import 'package:riphahwebresources/components/custom_form.dart';
 import 'package:riphahwebresources/components/custom_input.dart';
 import 'package:riphahwebresources/data/User.dart';
-import 'package:riphahwebresources/pages/Home/home.dart';
 import 'package:riphahwebresources/pages/auth/register_ui.dart';
 import 'package:riphahwebresources/pages/auth/reset_ui.dart';
 import 'package:riphahwebresources/pages/dashboard_ui.dart';

@@ -1,5 +1,6 @@
 import "package:flutter/material.dart";
 import 'package:riphahwebresources/pages/downlaod_ui.dart';
+import 'package:riphahwebresources/pages/feedback_ui.dart';
 import 'package:riphahwebresources/pages/section/about_ui.dart';
 import 'package:riphahwebresources/pages/section/developer_ui.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -22,6 +23,16 @@ List<Widget> menu(context) {
       onTap: () => {
         Navigator.push(
             context, MaterialPageRoute(builder: (context) => DownloadUi()))
+      },
+    ),
+  );
+  childrens.add(
+    ListTile(
+      leading: Icon(Icons.contact_mail),
+      title: Text("Feedback"),
+      onTap: () => {
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => FeedbackUi()))
       },
     ),
   );
