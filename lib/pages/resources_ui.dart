@@ -10,8 +10,6 @@ import 'package:riphahwebresources/components/empty_state.dart';
 import 'package:intl/intl.dart';
 import 'package:riphahwebresources/functions.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:path_provider/path_provider.dart';
-import 'dart:io';
 import 'package:share/share.dart';
 import 'package:open_file/open_file.dart';
 
@@ -75,10 +73,6 @@ class _ResourcesUiState extends State<ResourcesUi> {
     } catch (_) {}
   }
 
-  Future<Directory> _getDownloadDirectory() async {
-    return await getApplicationDocumentsDirectory();
-  }
-
   void download(link) async {
     var task = await downloader.start(link);
     print(task);
@@ -88,13 +82,16 @@ class _ResourcesUiState extends State<ResourcesUi> {
   listTrallingWidget(url) {
     var task = downloader.getByUrl(url);
     var icon;
+    var data;
     icon = Icon(Icons.home);
     task.then((value) => {
-          icon = Icon(Icons.offline_pin),
+          // icon = Icon(Icons.offline_pin),
+          data = value,
         });
+
     //if (task.isNotEmpty) return Icon(Icons.offline_pin);
 
-    print("Icon ${icon}");
+    print("Icon ${data}");
     return icon;
   }
 
@@ -132,7 +129,7 @@ class _ResourcesUiState extends State<ResourcesUi> {
     if (task.isNotEmpty) {
       var id = task.first.taskId;
       if (task.first.progress == 100) {
-        children.add(
+        children.addAll([
           ListTile(
             leading: Icon(Icons.file_present),
             title: Text("Open"),
@@ -141,8 +138,6 @@ class _ResourcesUiState extends State<ResourcesUi> {
               Navigator.pop(context)
             },
           ),
-        );
-        children.add(
           ListTile(
             leading: Icon(Icons.share),
             title: Text("Share"),
@@ -152,8 +147,6 @@ class _ResourcesUiState extends State<ResourcesUi> {
               Navigator.pop(context)
             },
           ),
-        );
-        children.add(
           ListTile(
             leading: Icon(Icons.delete_forever),
             title: Text("Delete"),
@@ -161,7 +154,7 @@ class _ResourcesUiState extends State<ResourcesUi> {
               _confirmBox(context, task.first.taskId),
             },
           ),
-        );
+        ]);
       } else {
         children.add(
           ListTile(

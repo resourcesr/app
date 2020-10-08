@@ -16,7 +16,7 @@ _openUrl(url) async {
 
 List<Widget> menu(context) {
   List<Widget> childrens = [];
-  childrens.add(
+  childrens.addAll([
     ListTile(
       leading: Icon(Icons.download_rounded),
       title: Text("My Downloads"),
@@ -25,8 +25,6 @@ List<Widget> menu(context) {
             context, MaterialPageRoute(builder: (context) => DownloadUi()))
       },
     ),
-  );
-  childrens.add(
     ListTile(
       leading: Icon(Icons.contact_mail),
       title: Text("Feedback"),
@@ -35,8 +33,6 @@ List<Widget> menu(context) {
             context, MaterialPageRoute(builder: (context) => FeedbackUi()))
       },
     ),
-  );
-  childrens.add(
     ListTile(
       leading: Icon(Icons.security),
       title: Text("Privacy Policy"),
@@ -44,8 +40,6 @@ List<Widget> menu(context) {
         _openUrl("http://resourcesr.web.app/privacy"),
       },
     ),
-  );
-  childrens.add(
     ListTile(
       leading: Icon(Icons.share),
       title: Text("Share app"),
@@ -54,8 +48,6 @@ List<Widget> menu(context) {
             "Hi, checkout this ResourcesR app https://resourcesr.web.app/")
       },
     ),
-  );
-  childrens.add(
     ListTile(
       leading: Icon(Icons.info),
       title: Text("About App"),
@@ -64,8 +56,6 @@ List<Widget> menu(context) {
             context, MaterialPageRoute(builder: (context) => AboutUi()))
       },
     ),
-  );
-  childrens.add(
     ListTile(
       leading: Icon(Icons.developer_board),
       title: Text("Developers"),
@@ -74,13 +64,14 @@ List<Widget> menu(context) {
             context, MaterialPageRoute(builder: (context) => DeveloperUi()))
       },
     ),
-  );
-  childrens.add(ListTile(
-    leading: Icon(Icons.code),
-    title: Text("Source Code"),
-    onTap: () => {
-      _openUrl("https://github.com/resourcesr/app"),
-    },
-  ));
+    ListTile(
+      leading: Icon(Icons.code),
+      title: Text("Source Code"),
+      onTap: () => {
+        _openUrl("https://github.com/resourcesr/app"),
+      },
+    ),
+  ]);
+
   return childrens;
 }
