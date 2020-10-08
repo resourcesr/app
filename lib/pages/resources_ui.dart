@@ -8,7 +8,7 @@ import 'package:riphahwebresources/data/Downloader.dart';
 import 'package:riphahwebresources/data/Resources.dart';
 import 'package:riphahwebresources/components/empty_state.dart';
 import 'package:intl/intl.dart';
-import 'package:riphahwebresources/functions.dart';
+import 'package:riphahwebresources/utils/functions.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:share/share.dart';
 import 'package:open_file/open_file.dart';
@@ -48,7 +48,6 @@ class _ResourcesUiState extends State<ResourcesUi> {
             ),*/
           ]),
         ),
-        drawer: WebResourceAppDrawer(),
         body: _buildBody(context),
       ),
     );*/
@@ -74,9 +73,7 @@ class _ResourcesUiState extends State<ResourcesUi> {
   }
 
   void download(link) async {
-    var task = await downloader.start(link);
-    print(task);
-    print("Downloaded done");
+    await downloader.start(link);
   }
 
   listTrallingWidget(url) {
@@ -200,36 +197,6 @@ class _ResourcesUiState extends State<ResourcesUi> {
       },
     );
   }
-
-  /*_showMaterialDialog(openUrl, downloadUrl) {
-    showDialog(
-        context: context,
-        builder: (_) => AlertDialog(
-              title: Text("downnload"),
-              content: Column(
-                children: <Widget>[
-                  ListTile(
-                    leading: Icon(Icons.open_in_browser),
-                    title: Text('Open in Browser'),
-                    onTap: () => {_openUrl(openUrl)},
-                  ),
-                  ListTile(
-                    leading: Icon(Icons.play_arrow),
-                    title: Text('Download'),
-                    onTap: () => {download(downloadUrl)},
-                  )
-                ],
-              ),
-              actions: <Widget>[
-                FlatButton(
-                  child: Text('Close me!'),
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                  },
-                )
-              ],
-            ));
-  }*/
 
   Widget _buildList(BuildContext context, List<DocumentSnapshot> snapshot) {
     final d = snapshot.toList();
