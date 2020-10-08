@@ -86,7 +86,9 @@ class Downloader {
     await getPath();
     var file = task.first.filename;
     var toDeleted = File("${_path}/${file}");
-    toDeleted.delete();
+    bool hasFile = await toDeleted.exists();
+    // Before deleting check, does file exists.
+    if (hasFile) toDeleted.delete();
     await FlutterDownloader.remove(taskId: taskId);
   }
 
