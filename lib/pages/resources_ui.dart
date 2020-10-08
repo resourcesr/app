@@ -238,7 +238,7 @@ class _ResourcesUiState extends State<ResourcesUi> {
                       ),
                       title: Text(data.data['name'] ?? ""),
                       subtitle: Text("$formatted"),
-                      trailing: listTrallingWidget(data.data['downloadUrl']),
+                      //trailing: listTrallingWidget(data.data['downloadUrl']),
                       onTap: () =>
                           {_showBottomSheet(context, data.data['downloadUrl'])},
                     ),

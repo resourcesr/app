@@ -6,7 +6,7 @@ import 'package:riphahwebresources/components/custom_app_bar.dart';
 import 'package:riphahwebresources/components/empty_state.dart';
 import 'package:riphahwebresources/components/loader.dart';
 import 'package:riphahwebresources/data/Downloader.dart';
-import 'package:riphahwebresources/functions.dart';
+import 'package:riphahwebresources/utils/functions.dart';
 import 'package:share/share.dart';
 import 'package:open_file/open_file.dart';
 
