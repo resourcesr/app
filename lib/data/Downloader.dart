@@ -8,27 +8,33 @@ class Downloader {
   Downloader() {
     init();
   }
+
+  // Init the Flutter downloader
   init() async {
     await FlutterDownloader.initialize(
         debug: true // optional: set false to disable printing logs to console
         );
   }
 
+  // Get the application path.
   Future<void> getPath() async {
     Directory appDocDir = await getExternalStorageDirectory();
     _path = appDocDir.path + '/Download';
   }
 
+  // Get downloaded task by URL
   Future<List<DownloadTask>> getByUrl(String url) async {
     return await FlutterDownloader.loadTasksWithRawQuery(
         query: 'SELECT * FROM task WHERE url="$url";');
   }
 
+  // Get all downloaded tasks
   Future<List<DownloadTask>> getAll() async {
     return await FlutterDownloader.loadTasksWithRawQuery(
         query: 'SELECT * FROM task WHERE status=3;');
   }
 
+  // Start downloading file
   Future<String> start(String url) async {
     var tasks = await getByUrl(url);
     await getPath();
@@ -45,6 +51,7 @@ class Downloader {
     );
   }
 
+  // Get status of file by url
   Future<DownloadTaskStatus> getStatus(String url) async {
     var tasks = await getByUrl(url);
     return (tasks ?? []).isNotEmpty
@@ -52,18 +59,22 @@ class Downloader {
         : DownloadTaskStatus.undefined;
   }
 
+  // Cancle the download by ID
   Future<void> cancel(String taskId) async {
     await FlutterDownloader.remove(taskId: taskId);
   }
 
+  // Pause the download by ID
   Future<void> pause(String taskId) async {
     await FlutterDownloader.pause(taskId: taskId);
   }
 
+  // Resume the download by ID
   Future<void> resume(String taskId) async {
     await FlutterDownloader.resume(taskId: taskId);
   }
 
+  // Remove the download by ID
   Future<void> delete(String taskId) async {
     await FlutterDownloader.remove(taskId: taskId);
   }

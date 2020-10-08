@@ -7,6 +7,7 @@ class Courses {
   final String code;
   final Firestore _firestore = Firestore.instance;
 
+  // Get course by class ID.
   Stream<QuerySnapshot> getByClassId() {
     return _firestore
         .collection('subjects/classes/courses')

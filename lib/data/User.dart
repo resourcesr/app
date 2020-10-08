@@ -17,8 +17,8 @@ class User with ChangeNotifier {
   String get role => _role;
   String get subject => _subject;
 
+  // Init the user class.
   User(_uid) {
-    print(_uid);
     if (_uid != "") {
       _loggedIn = true;
       getUserProfile(_uid).then((val) {
@@ -34,6 +34,7 @@ class User with ChangeNotifier {
     }
   }
 
+  // get user preference.
   Future<String> getPrefState() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     //Return String
@@ -41,17 +42,20 @@ class User with ChangeNotifier {
     return stringValue;
   }
 
+  // Store user Id in local preferene
   Future<void> saveId(uid) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     await prefs.setString("uid", uid);
   }
 
+  // Get user profile.
   Future<dynamic> getUserProfile(String id) async {
     var doc = await _firestore.document("/users/$id/").get();
     //return doc.documentID;
     return doc.data;
   }
 
+  // Update user profile
   Future<void> update(String uid, String name, String sap) {
     _firestore.collection("users").document(uid).updateData({
       "name": name,
@@ -59,6 +63,7 @@ class User with ChangeNotifier {
     });
   }
 
+  // Save user profile
   Future<void> saveUserInDocument(String uid, String name, String sap) {
     _firestore.collection("users").document(uid).setData({
       "name": name,
@@ -67,6 +72,7 @@ class User with ChangeNotifier {
     });
   }
 
+  // Get current user.
   Future<FirebaseUser> getCurrentUser() async {
     return await _firebaseAuth.currentUser();
   }
