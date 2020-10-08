@@ -47,7 +47,7 @@ class Downloader {
       url: url,
       savedDir: _path,
       showNotification: true,
-      openFileFromNotification: true,
+      openFileFromNotification: false,
       //fileName: fileName ?? null,
     );
   }

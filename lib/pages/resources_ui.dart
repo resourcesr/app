@@ -78,10 +78,16 @@ class _ResourcesUiState extends State<ResourcesUi> {
   }
 
   listTrallingWidget(url) {
-    //var task = await downloader.getByUrl(url);
+    var task = downloader.getByUrl(url);
+    var icon;
+    icon = Icon(Icons.home);
+    task.then((value) => {
+          icon = Icon(Icons.offline_pin),
+        });
     //if (task.isNotEmpty) return Icon(Icons.offline_pin);
 
-    return null;
+    print("Icon ${icon}");
+    return icon;
   }
 
   _showBottomSheet(context, url) async {
@@ -197,7 +203,6 @@ class _ResourcesUiState extends State<ResourcesUi> {
         for (var data in d) {
           if (content == data.data['content']) {
             if (type == data.data['type']) {
-              String name = "";
               DateTime date =
                   (data.data['created'] ?? Timestamp.now()).toDate();
               var formatter = new DateFormat('MMM dd, yyyy');

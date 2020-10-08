@@ -7,6 +7,9 @@ import 'package:riphahwebresources/components/empty_state.dart';
 import 'package:riphahwebresources/components/loader.dart';
 import 'package:riphahwebresources/data/Downloader.dart';
 import 'package:riphahwebresources/functions.dart';
+import 'package:url_launcher/url_launcher.dart';
+import 'package:share/share.dart';
+import 'package:open_file/open_file.dart';
 
 class DownloadUi extends StatefulWidget {
   List<Widget> children = [];
@@ -35,7 +38,12 @@ class _DownloadUiState extends State<DownloadUi> {
     Navigator.pop(context);
   }
 
-  _showBottomSheet(taskId) async {
+  void _openFile(file) async {
+    print("Openinf File $file");
+    await OpenFile.open(file);
+  }
+
+  _showBottomSheet(taskId, file) async {
     showModalBottomSheet(
         context: context,
         builder: (BuildContext bc) {
@@ -45,8 +53,7 @@ class _DownloadUiState extends State<DownloadUi> {
                 ListTile(
                   leading: Icon(Icons.file_present),
                   title: Text("Open"),
-                  onTap: () =>
-                      {downloader.open(taskId), Navigator.pop(context)},
+                  onTap: () => {_openFile(file), Navigator.pop(context)},
                 ),
                 ListTile(
                   leading: Icon(Icons.download_rounded),
@@ -83,7 +90,10 @@ class _DownloadUiState extends State<DownloadUi> {
               ),
               title: Text(task.filename),
               subtitle: Text(time_ago(task.timeCreated)),
-              onTap: () => {_showBottomSheet(task.taskId)},
+              onTap: () => {
+                _showBottomSheet(
+                    task.taskId, task.savedDir + "/" + task.filename)
+              },
             ),
           ),
         );
