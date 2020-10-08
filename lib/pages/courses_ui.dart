@@ -33,7 +33,7 @@ class _CoursesUiState extends State<CoursesUi> {
             icon: Icons.library_books,
             text: "Select your course.",
             tSize: 1.5,
-            iSize: 40.5,
+            iSize: 70.5,
           );
         if (!snapshot.hasData) return Loader();
         if (snapshot.data.documents.isEmpty)
@@ -41,7 +41,7 @@ class _CoursesUiState extends State<CoursesUi> {
             icon: Icons.library_books,
             text: "Sorry, no course found",
             tSize: 1.5,
-            iSize: 40.5,
+            iSize: 70.5,
           );
         return _buildList(context, snapshot.data.documents);
       },

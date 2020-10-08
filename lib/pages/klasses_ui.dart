@@ -33,7 +33,7 @@ class _KlassesUiState extends State<KlassesUi> {
             icon: Icons.class_,
             text: "Sorry, no class found",
             tSize: 1.5,
-            iSize: 40.5,
+            iSize: 70.5,
           );
         return _buildList(context, snapshot.data.documents);
       },

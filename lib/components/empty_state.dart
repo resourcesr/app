@@ -19,9 +19,12 @@ class EmptyState extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
-          Icon(
-            this.icon,
-            size: this.iSize,
+          Opacity(
+            opacity: 0.5,
+            child: Icon(
+              this.icon,
+              size: this.iSize,
+            ),
           ),
           Padding(
             padding: EdgeInsets.only(top: 35),
