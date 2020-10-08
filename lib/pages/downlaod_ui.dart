@@ -43,7 +43,7 @@ class _DownloadUiState extends State<DownloadUi> {
             child: Wrap(
               children: <Widget>[
                 ListTile(
-                  leading: Icon(Icons.download_rounded),
+                  leading: Icon(Icons.file_present),
                   title: Text("Open"),
                   onTap: () =>
                       {downloader.open(taskId), Navigator.pop(context)},
