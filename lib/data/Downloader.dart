@@ -6,7 +6,7 @@ import 'package:flutter_downloader/flutter_downloader.dart';
 class Downloader {
   String _path;
   Downloader() {
-    init();
+    //init();
   }
 
   // Init the Flutter downloader
@@ -88,5 +88,9 @@ class Downloader {
     var toDeleted = File("${_path}/${file}");
     toDeleted.delete();
     await FlutterDownloader.remove(taskId: taskId);
+  }
+
+  Future<void> open(String taskId) async {
+    await FlutterDownloader.open(taskId: taskId);
   }
 }
