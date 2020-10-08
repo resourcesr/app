@@ -1,4 +1,5 @@
 import 'package:riphahwebresources/config.dart';
+import 'package:riphahwebresources/data/Downloader.dart';
 import 'package:riphahwebresources/data/PushNotification.dart';
 import 'package:riphahwebresources/pages/Home/home_ui.dart';
 import 'package:riphahwebresources/pages/dashboard_ui.dart';
@@ -13,7 +14,7 @@ Future<void> main() async {
   String uid = "";
   try {
     WidgetsFlutterBinding.ensureInitialized();
-
+    await Downloader().init();
     SharedPreferences prefs = await SharedPreferences.getInstance();
     uid = prefs.getString('uid') ?? "";
   } catch (_) {}
