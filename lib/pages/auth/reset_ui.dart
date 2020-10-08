@@ -71,7 +71,7 @@ class _ResetUiState extends State<ResetUi> {
     return CustomForm(
         key: _formKey,
         loading: isLoading,
-        imagePath: null,
+        imagePath: "assets/images/forgot.png",
         children: <Widget>[
           CustomInput(
             controller: emailController,

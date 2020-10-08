@@ -26,11 +26,6 @@ class _MenuUiState extends State<MenuUi> {
               leading: TextAvatar(text: widget.user.name ?? "Your Name"),
               title: Text(widget.user.name ?? "Your Name"),
               subtitle: Text(widget.user.role ?? "Your Status"),
-            ),
-            Divider(),
-            ListTile(
-              leading: Icon(Icons.people),
-              title: Text("Profile"),
               onTap: () => {
                 Navigator.push(
                     context,
@@ -40,6 +35,9 @@ class _MenuUiState extends State<MenuUi> {
                             )))
               },
             ),
+            Divider(),
+            ...menu(context),
+            Divider(),
             ListTile(
               leading: Icon(Icons.logout),
               title: Text("Logout"),
@@ -49,8 +47,6 @@ class _MenuUiState extends State<MenuUi> {
                     context, MaterialPageRoute(builder: (context) => HomeUi()))
               },
             ),
-            Divider(),
-            ...menu(context)
           ],
         ),
       ),

@@ -96,6 +96,7 @@ class _LoginUiState extends State<LoginUi> {
           obscureText: true,
         ),
         Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
             FlatButton(
               onPressed: () => {
