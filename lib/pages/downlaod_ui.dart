@@ -60,7 +60,7 @@ class _DownloadUiState extends State<DownloadUi> {
             Navigator.pop(context);
             onDeleted(context);
 
-            //Untill i figure out how can i reload activity upon
+            //Untill i figure out how can i reload activity upon, we have to be tricky.
             Navigator.pop(context);
           },
         ),
