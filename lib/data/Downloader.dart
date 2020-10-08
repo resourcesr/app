@@ -5,15 +5,10 @@ import 'package:flutter_downloader/flutter_downloader.dart';
 
 class Downloader {
   String _path;
-  Downloader() {
-    //init();
-  }
 
   // Init the Flutter downloader
   init() async {
-    await FlutterDownloader.initialize(
-        debug: true // optional: set false to disable printing logs to console
-        );
+    await FlutterDownloader.initialize(debug: false);
   }
 
   // Get the application path.
