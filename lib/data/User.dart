@@ -26,8 +26,12 @@ class User with ChangeNotifier {
           _role = val['role'];
           _subject = val['subject'] ?? null;
         }
-        notifyListeners();
       });
+
+      // If user profile deleted or disable force him to logout.
+      getCurrentUser().then((val) => {
+            if (val == null) {logout()}
+          });
       status = AccountStatus.Success;
       notifyListeners();
     }
