@@ -17,7 +17,7 @@ class AboutUi extends StatelessWidget {
             ),
             ListTile(
               title: Text("Copyright"),
-              subtitle: Text("20 20 - 2024 Muhammad Umer Farooq"),
+              subtitle: Text("2020 - 2024 Muhammad Umer Farooq"),
             ),
             ListTile(
               title: Text("License"),
@@ -26,11 +26,11 @@ class AboutUi extends StatelessWidget {
             ListHeader(title: "Flutter"),
             ListTile(
               title: Text("Flutter version"),
-              subtitle: Text("1.22.0"),
+              subtitle: Text("1.22.1"),
             ),
             ListTile(
               title: Text("SDK Channel"),
-              subtitle: Text("Master"),
+              subtitle: Text("Beta"),
             ),
             ListTile(
               title: Text("Dark SDK version"),

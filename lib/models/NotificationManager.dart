@@ -45,7 +45,6 @@ class NotificationManager {
 
   Future<void> sendNotification(String title, String body,
       {String payload = ""}) async {
-    print("test");
     // Fire notification
     await FlutterLocalNotificationsPlugin().show(
       // Todo generate ID.

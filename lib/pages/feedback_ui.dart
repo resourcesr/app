@@ -75,7 +75,7 @@ class _FeedbackUiState extends State<FeedbackUi> {
             child: RaisedButton(
               color: Theme.of(context).accentColor,
               textColor: Theme.of(context).primaryColor,
-              child: Text("Login"),
+              child: Text("Submit"),
               onPressed: () => {onSubmit(context)},
             ),
           ),

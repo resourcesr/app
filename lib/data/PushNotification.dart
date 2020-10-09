@@ -28,25 +28,25 @@ class PushNotifications {
           NotificationManager().sendNotification(
               message['notification']['title'],
               message['notification']['title']);
-          print("onMessage: $message");
+          //print("onMessage: $message");
         },
         onLaunch: (Map<String, dynamic> message) async {
           NotificationManager().sendNotification(
               message['notification']['title'],
               message['notification']['title']);
-          print("onLaunch: $message");
+          //print("onLaunch: $message");
         },
         onResume: (Map<String, dynamic> message) async {
           NotificationManager().sendNotification(
               message['notification']['title'],
               message['notification']['title']);
-          print("onResume: $message");
+          //print("onResume: $message");
         },
       );
 
       // For testing print the Messaging token
-      String token = await _firebaseMessaging.getToken();
-      print("token: $token");
+      //String token = await _firebaseMessaging.getToken();
+      //print("token: $token");
 
       _initialized = true;
     }
