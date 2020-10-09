@@ -50,6 +50,7 @@ dev_dependencies:
   share: ^0.6.5+2
   http: ^0.12.2
   open_file: ^3.0.1
+  flutter_local_notifications: ^2.0.0
   
 
 flutter_icons:
