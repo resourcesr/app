@@ -47,23 +47,26 @@ class _DashboardUiState extends State<DashboardUi> {
   @override
   Widget build(BuildContext context) {
     var navItems = initTabs();
-    return Scaffold(
-      key: PageStorageKey('BottomNavigationBar'),
-      body: Builder(
-        builder: (context) => tabs[tabIndex]["page"],
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: tabIndex,
-        type: BottomNavigationBarType.shifting,
-        selectedFontSize: 12,
-        selectedItemColor: Theme.of(context).accentColor,
-        items: navItems,
-        onTap: (index) {
-          if (tabIndex == index) return;
-          setState(() {
-            tabIndex = index;
-          });
-        },
+    return WillPopScope(
+      onWillPop: () async => false,
+      child: Scaffold(
+        key: PageStorageKey('BottomNavigationBar'),
+        body: Builder(
+          builder: (context) => tabs[tabIndex]["page"],
+        ),
+        bottomNavigationBar: BottomNavigationBar(
+          currentIndex: tabIndex,
+          type: BottomNavigationBarType.shifting,
+          selectedFontSize: 12,
+          selectedItemColor: Theme.of(context).accentColor,
+          items: navItems,
+          onTap: (index) {
+            if (tabIndex == index) return;
+            setState(() {
+              tabIndex = index;
+            });
+          },
+        ),
       ),
     );
   }
