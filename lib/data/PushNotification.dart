@@ -1,5 +1,5 @@
 import 'package:firebase_messaging/firebase_messaging.dart';
-import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:riphahwebresources/models/NotificationManager.dart';
 
 class PushNotifications {
   PushNotifications._();
@@ -25,12 +25,21 @@ class PushNotifications {
       // Let's configure it.
       _firebaseMessaging.configure(
         onMessage: (Map<String, dynamic> message) async {
+          NotificationManager().sendNotification(
+              message['notification']['title'],
+              message['notification']['title']);
           print("onMessage: $message");
         },
         onLaunch: (Map<String, dynamic> message) async {
+          NotificationManager().sendNotification(
+              message['notification']['title'],
+              message['notification']['title']);
           print("onLaunch: $message");
         },
         onResume: (Map<String, dynamic> message) async {
+          NotificationManager().sendNotification(
+              message['notification']['title'],
+              message['notification']['title']);
           print("onResume: $message");
         },
       );
