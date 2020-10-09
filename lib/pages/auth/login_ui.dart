@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:riphahwebresources/components/buttons.dart';
 import 'package:riphahwebresources/components/custom_app_bar.dart';
 import 'package:riphahwebresources/components/custom_form.dart';
 import 'package:riphahwebresources/components/custom_input.dart';
@@ -77,6 +78,17 @@ class _LoginUiState extends State<LoginUi> {
     setState(() => isLoading = false);
   }
 
+  void onGoogleSubmit(context) async {
+    setState(() => isLoading = true);
+    try {
+      var u = await user.loginWithGoogle();
+      onSuccess(context, u);
+    } catch (err) {
+      onError(context, err);
+    }
+    setState(() => isLoading = false);
+  }
+
   Widget _buildBody(BuildContext context) {
     List<Widget> children = [];
     return CustomForm(
@@ -129,17 +141,17 @@ class _LoginUiState extends State<LoginUi> {
             ),
           ),
         ),
-        /*Padding(
-                    padding: const EdgeInsets.all(4.5),
-                    child: SizedBox(
-                      width: double.infinity,
-                      child: GoogleSignInButton(
-                        onPressed: () => {},
-                        //darkMode: true,
-                      ),
-                    ),
-                  ),
-                  SizedBox(height: 30),*/
+        Padding(
+          padding: const EdgeInsets.all(4.5),
+          child: SizedBox(
+            width: double.infinity,
+            child: GoogleSignInButton(
+              onPressed: () => {onGoogleSubmit(context)},
+              //darkMode: true,
+            ),
+          ),
+        ),
+        SizedBox(height: 30)
       ],
     );
   }

@@ -51,6 +51,8 @@ dev_dependencies:
   http: ^0.12.2
   open_file: ^3.0.1
   flutter_local_notifications: ^2.0.0
+  google_sign_in: ^4.5.4
+
   
 
 flutter_icons:
