@@ -8,28 +8,4 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
-    <receiver android:name="com.dexterous.flutterlocalnotifications.ScheduledNotificationBootReceiver">
-        <intent-filter>
-            <action android:name="android.intent.action.BOOT_COMPLETED"/>
-            <action android:name="android.intent.action.MY_PACKAGE_REPLACED"/>
-        </intent-filter>
-    </receiver>
-    <receiver android:name="com.dexterous.flutterlocalnotifications.ScheduledNotificationReceiver" />
-
-    <!-- handle click action on notification to open the downloaded file -->
-    <provider
-        android:name="vn.hunghd.flutterdownloader.DownloadedFileProvider"
-        android:authorities="${applicationId}.flutter_downloader.provider"
-        android:exported="false"
-        android:grantUriPermissions="true">
-        <meta-data
-            android:name="android.support.FILE_PROVIDER_PATHS"
-            android:resource="@xml/provider_paths"/>
-    </provider>
-
-    <!-- Open app on click of notification -->
-    <intent-filter>
-        <action android:name="FLUTTER_NOTIFICATION_CLICK" />
-        <category android:name="android.intent.category.DEFAULT" />
-    </intent-filter>
 </manifest>
