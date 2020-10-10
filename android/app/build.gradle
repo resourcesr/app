@@ -44,7 +44,7 @@ android {
 
     defaultConfig {
         applicationId "resourcesr.web.app"
-        minSdkVersion 23
+        minSdkVersion 21 // Lollipop, released 2014
         targetSdkVersion 29
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
