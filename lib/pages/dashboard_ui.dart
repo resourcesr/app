@@ -16,14 +16,18 @@ class _DashboardUiState extends State<DashboardUi> {
   List tabs;
 
   List<BottomNavigationBarItem> initTabs() {
+    // Refresh profile data.
+    widget.user.refresh();
     List<BottomNavigationBarItem> navItems = [];
+    var k_id = widget.user.klass;
+    print(k_id);
     tabs = [
       {"name": "Home", "icon": Icons.home, "page": Home()},
       {
         "name": "Courses",
         "icon": Icons.book,
         "page": CoursesUi(
-          code: "NONXSMaZExTgzKwNmdT7",
+          code: k_id ?? null,
         )
       },
       //{"name": "Time Table", "icon": Icons.calendar_today, "page": null},

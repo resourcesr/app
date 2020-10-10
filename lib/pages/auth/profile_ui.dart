@@ -4,9 +4,10 @@ import 'package:riphahwebresources/components/custom_form.dart';
 import 'package:riphahwebresources/components/custom_input.dart';
 import 'package:riphahwebresources/data/User.dart';
 import 'package:riphahwebresources/pages/Home/home_ui.dart';
+import 'package:riphahwebresources/pages/auth/select_klass_ui.dart';
 
 class ProfileUi extends StatefulWidget {
-  ProfileUi({this.user});
+  ProfileUi({@required this.user});
   User user;
   @override
   _ProfileUiState createState() => _ProfileUiState();
@@ -103,6 +104,22 @@ class _ProfileUiState extends State<ProfileUi> {
               textColor: Theme.of(context).primaryColor,
               onPressed: () => {onSubmit(context)},
             ),
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.all(20.20),
+          child: FlatButton(
+            onPressed: () => {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => SelectKlassUi(
+                    user: widget.user,
+                  ),
+                ),
+              ),
+            },
+            child: Text("Change Class"),
           ),
         ),
       ],

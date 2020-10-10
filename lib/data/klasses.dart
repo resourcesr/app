@@ -6,6 +6,11 @@ class Klasss {
   final String department;
   final Firestore _firestore = Firestore.instance;
 
+  // Get all classes.
+  Stream<QuerySnapshot> getAllKlasses() {
+    return _firestore.collection('subjects/classes/main').snapshots();
+  }
+
   // Get class by departent code.
   Stream<QuerySnapshot> getByDepartment() {
     return _firestore

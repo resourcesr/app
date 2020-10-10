@@ -10,23 +10,25 @@ class User with ChangeNotifier {
   FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
   Firestore _firestore = Firestore.instance;
   final GoogleSignIn _googleSignIn = GoogleSignIn();
-  String _uid, _name, _role, _subject;
+  String _uid, _name, _role, _klass;
   AccountStatus status = AccountStatus.LoggedOut;
   String get uid => _uid;
   String get name => _name;
   String get role => _role;
-  String get subject => _subject;
+  String get klass => _klass;
 
   // Init the user class.
   User(_uid) {
     if (_uid != "") {
-      getUserProfile(_uid).then((val) {
-        if (val != null) {
-          _name = val['name'];
-          _role = val['role'];
-          _subject = val['subject'] ?? null;
-        }
-      });
+      getCurrentUser().then((value) => {
+            getUserProfile(value.uid).then((val) {
+              if (val != null) {
+                _name = val['name'];
+                _role = val['role'];
+                _klass = val['klass'];
+              }
+            })
+          });
 
       // If user profile deleted or disable force him to logout.
       getCurrentUser().then((val) => {
@@ -35,6 +37,19 @@ class User with ChangeNotifier {
       status = AccountStatus.Success;
       notifyListeners();
     }
+  }
+
+  refresh() {
+    getCurrentUser().then((value) => {
+          getUserProfile(value.uid).then((val) {
+            if (val != null) {
+              _name = val['name'];
+              _role = val['role'];
+              _klass = val['klass'];
+              notifyListeners();
+            }
+          })
+        });
   }
 
   // get user preference.
@@ -69,6 +84,7 @@ class User with ChangeNotifier {
       "name": name,
       "sap": sap,
       'role': "student",
+      'klass': null,
     });
   }
 
@@ -87,6 +103,15 @@ class User with ChangeNotifier {
       await updateProfile(uid, name, sap);
     else
       await saveUserInDocument(uid, name, sap);
+  }
+
+  // Update user class.
+  Future<void> updateKlass(String k_id) async {
+    getCurrentUser().then((val) => {
+          _firestore.collection("users").document(val.uid).updateData({
+            "klass": k_id,
+          })
+        });
   }
 
   // Get current user.
