@@ -21,7 +21,13 @@ class _DashboardUiState extends State<DashboardUi> {
     List<BottomNavigationBarItem> navItems = [];
     var k_id = widget.user.klass;
     tabs = [
-      {"name": "Home", "icon": Icons.home, "page": Home()},
+      {
+        "name": "Home",
+        "icon": Icons.home,
+        "page": Home(
+          code: k_id ?? null,
+        )
+      },
       {
         "name": "Courses",
         "icon": Icons.book,
