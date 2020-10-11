@@ -43,6 +43,7 @@ dependencies:
   open_file: ^3.0.1
   flutter_local_notifications: ^2.0.0
   google_sign_in: ^4.5.4
+  flutter_week_view: ^1.0.0+1
 
 
   # The following adds the Cupertino Icons font to your application.

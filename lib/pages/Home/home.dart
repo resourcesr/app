@@ -76,8 +76,7 @@ class _HomeState extends State<Home> {
     var today = DateFormat('EEEE').format(date);
     var time = DateFormat('Hm').format(date);
     final items = snapshot.toList();
-    print(time);
-    List<Widget> children, header = [];
+    List<Widget> children = [], header = [];
     header.add(ListHeader(
       title: 'Today\'s Classes',
     ));
