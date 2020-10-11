@@ -6,7 +6,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:riphahwebresources/components/loader.dart';
 import 'package:riphahwebresources/data/Courses.dart';
 import 'package:riphahwebresources/components/empty_state.dart';
-import 'package:riphahwebresources/pages/resources_ui.dart';
+import 'package:riphahwebresources/pages/Courses/resources_ui.dart';
 
 class CoursesUi extends StatefulWidget {
   CoursesUi({this.code});

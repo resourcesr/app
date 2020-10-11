@@ -3,7 +3,7 @@ import 'package:riphahwebresources/data/Downloader.dart';
 import 'package:riphahwebresources/data/PushNotification.dart';
 import 'package:riphahwebresources/pages/Home/home_ui.dart';
 import 'package:riphahwebresources/pages/dashboard_splash_ui.dart';
-import 'package:riphahwebresources/pages/klasses_ui.dart';
+import 'package:riphahwebresources/pages/Courses/klasses_ui.dart';
 import "package:flutter/material.dart";
 import './theme.dart';
 import 'data/User.dart';

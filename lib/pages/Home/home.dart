@@ -7,7 +7,7 @@ import 'package:riphahwebresources/components/empty_state.dart';
 import 'package:riphahwebresources/components/list_header.dart';
 import 'package:riphahwebresources/components/loader.dart';
 import 'package:riphahwebresources/data/KlassEvents.dart';
-import 'package:riphahwebresources/pages/event_detail_ui.dart';
+import 'package:riphahwebresources/pages/Event/event_detail_ui.dart';
 import 'package:riphahwebresources/utils/functions.dart';
 
 class Home extends StatefulWidget {

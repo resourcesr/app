@@ -6,7 +6,7 @@ import 'package:riphahwebresources/components/empty_state.dart';
 import 'package:riphahwebresources/components/loader.dart';
 import 'package:riphahwebresources/data/KlassEvents.dart';
 import 'package:flutter_week_view/flutter_week_view.dart';
-import 'package:riphahwebresources/pages/event_detail_ui.dart';
+import 'package:riphahwebresources/pages/Event/event_detail_ui.dart';
 import 'package:string_to_hex/string_to_hex.dart';
 import 'package:riphahwebresources/utils/functions.dart';
 

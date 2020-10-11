@@ -5,7 +5,7 @@ import 'package:riphahwebresources/components/custom_app_bar.dart';
 import 'package:riphahwebresources/components/loader.dart';
 import 'package:riphahwebresources/data/klasses.dart';
 import 'package:riphahwebresources/components/empty_state.dart';
-import 'package:riphahwebresources/pages/courses_ui.dart';
+import 'package:riphahwebresources/pages/Courses/courses_ui.dart';
 
 class KlassesUi extends StatefulWidget {
   KlassesUi({this.dep});

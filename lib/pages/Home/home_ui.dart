@@ -5,7 +5,7 @@ import '../../drawer.dart';
 
 import 'package:riphahwebresources/components/course_item_view.dart';
 
-import 'package:riphahwebresources/pages/klasses_ui.dart';
+import 'package:riphahwebresources/pages/Courses/klasses_ui.dart';
 
 class HomeUi extends StatefulWidget {
   @override
