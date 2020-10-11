@@ -56,7 +56,8 @@ class NotificationManager {
     );
   }
 
-  scheduleNotification(String title, String body, {String payload = ""}) async {
+  scheduleNotification(String title, String body, duration,
+      {String payload = ""}) async {
     tz.initializeTimeZones();
     tz.setLocalLocation(tz.getLocation("America/Detroit"));
 
@@ -67,7 +68,8 @@ class NotificationManager {
       title,
       body,
       // Todo change the time to accpet from method param.
-      tz.TZDateTime.now(tz.local).add(const Duration(seconds: 5)),
+      tz.TZDateTime.now(tz.local).add(Duration(
+          days: duration.day, hours: duration.hour, minutes: duration.minute)),
       prepareNotification(title, body, payload),
       payload: payload,
       androidAllowWhileIdle: true,

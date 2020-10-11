@@ -6,6 +6,7 @@ import 'package:riphahwebresources/components/empty_state.dart';
 import 'package:riphahwebresources/components/loader.dart';
 import 'package:riphahwebresources/data/KlassEvents.dart';
 import 'package:flutter_week_view/flutter_week_view.dart';
+import 'package:riphahwebresources/models/NotificationManager.dart';
 import 'package:riphahwebresources/pages/Event/event_detail_ui.dart';
 import 'package:string_to_hex/string_to_hex.dart';
 import 'package:riphahwebresources/utils/functions.dart';
@@ -67,6 +68,10 @@ class _TimetableUiState extends State<TimetableUi> {
       for (var items in data) {
         var day = items.data['day'];
         if (DateFormat('EEEE').format(_date) == day) {
+          NotificationManager().scheduleNotification(
+              "Class Started",
+              items.data['course_title'],
+              dateTimeFromTime(items.data['start'], _date.day));
           events.add(
             FlutterWeekViewEvent(
               backgroundColor:

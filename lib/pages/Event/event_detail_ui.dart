@@ -8,7 +8,6 @@ class EventDetailUi extends StatelessWidget {
   @override
   @override
   Widget build(BuildContext context) {
-    print(title);
     return Scaffold(
       appBar: AppBar(
         leading: FlatButton(
