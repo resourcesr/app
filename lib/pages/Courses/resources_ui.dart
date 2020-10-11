@@ -221,7 +221,7 @@ class _ResourcesUiState extends State<ResourcesUi> {
           children.add(ListHeader(title: capitalize(type ?? " ")));
         for (var data in d) {
           if (content == data.data['content']) {
-            if (type == data.data['type']) {
+            if (type == data.data['type'] && data.data['delete'] == null) {
               DateTime date =
                   (data.data['created'] ?? Timestamp.now()).toDate();
               var formatter = new DateFormat('MMM dd, yyyy');

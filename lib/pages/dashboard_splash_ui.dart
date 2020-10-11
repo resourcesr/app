@@ -25,7 +25,7 @@ class _DashboardSplashUi extends State<DashboardSplashUi> {
   }
 
   startTimer() async {
-    var duration = Duration(seconds: 3);
+    var duration = Duration(seconds: 5);
     return Timer(duration, route);
   }
 
