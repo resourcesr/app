@@ -114,7 +114,7 @@ class _HomeState extends State<Home> {
       title: 'Today\'s Tasks',
     ));*/
 
-    if (children == null) return _emptyState();
+    if (children.isEmpty) return _emptyState();
 
     return ListView(
         padding: const EdgeInsets.only(top: 20.0), children: header + children);
