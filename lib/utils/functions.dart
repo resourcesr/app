@@ -39,3 +39,9 @@ humanize(String time) {
   var mint = int.parse(t[1]);
   return "${hr != 12 ? hr % 12 : hr}:${mint <= 9 ? (mint.toString() + "0") : mint} ${hr >= 12 ? "PM" : "AM"}";
 }
+
+calcluate_duration(String start, String end) {
+  var s = start.split(":");
+  var e = end.split(":");
+  return "${int.parse(e[0]) - int.parse(s[0])}:${int.parse(e[1]) - int.parse(s[1])} hr(s)";
+}

@@ -82,13 +82,18 @@ class _TimetableUiState extends State<TimetableUi> {
               end: dateTimeFromTime(items.data['end'], _date.day),
               onTap: () => {
                 Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => EventDetailUi(
-                            title: items.data['course_title'],
-                            start: humanize(items.data['start']),
-                            end: humanize(items.data['end']),
-                            room: items.data['room'])))
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => EventDetailUi(
+                      title: items.data['course_title'],
+                      start: humanize(items.data['start']),
+                      end: humanize(items.data['end']),
+                      room: items.data['room'],
+                      duration: calcluate_duration(
+                          items.data['start'], items.data['end']),
+                    ),
+                  ),
+                )
               },
             ),
           );

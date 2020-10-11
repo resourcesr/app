@@ -3,8 +3,8 @@ import 'package:riphahwebresources/components/avatars.dart';
 import 'package:riphahwebresources/components/list_header.dart';
 
 class EventDetailUi extends StatelessWidget {
-  EventDetailUi({this.title, this.start, this.end, this.room});
-  var title, start, end, room;
+  EventDetailUi({this.title, this.start, this.end, this.room, this.duration});
+  var title, start, end, room, duration;
   @override
   @override
   Widget build(BuildContext context) {
@@ -14,6 +14,7 @@ class EventDetailUi extends StatelessWidget {
           onPressed: () => {Navigator.of(context).pop(true)},
           child: Icon(Icons.close),
         ),
+        elevation: 0.0,
         title: Text("Event Detail"),
       ),
       body: _buildBody(context),
@@ -38,6 +39,11 @@ class EventDetailUi extends StatelessWidget {
           leading: Icon(Icons.time_to_leave),
           title: Text("End time"),
           subtitle: Text(end),
+        ),
+        ListTile(
+          leading: Icon(Icons.do_disturb_alt_outlined),
+          title: Text("Duration"),
+          subtitle: Text(duration),
         ),
       ],
     );

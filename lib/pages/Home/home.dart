@@ -51,12 +51,6 @@ class _HomeState extends State<Home> {
         now.year, now.month, now.day, int.parse(t[0]), int.parse(t[1]));
   }
 
-  _duration(String start, String end) {
-    var s = start.split(":");
-    var e = end.split(":");
-    return "${int.parse(e[0]) - int.parse(s[0])}:${int.parse(e[1]) - int.parse(s[1])} hr(s)";
-  }
-
   Widget _emptyState() {
     return EmptyState(
       icon: Icons.hourglass_empty_outlined,
@@ -100,13 +94,18 @@ class _HomeState extends State<Home> {
                 ),
                 onTap: () => {
                   Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => EventDetailUi(
-                              title: item.data['course_title'],
-                              start: humanize(item.data['start']),
-                              end: humanize(item.data['end']),
-                              room: item.data['room'])))
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => EventDetailUi(
+                        title: item.data['course_title'],
+                        start: humanize(item.data['start']),
+                        end: humanize(item.data['end']),
+                        room: item.data['room'],
+                        duration: calcluate_duration(
+                            item.data['start'], item.data['end']),
+                      ),
+                    ),
+                  )
                 },
               ),
             ),
