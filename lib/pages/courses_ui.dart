@@ -56,7 +56,7 @@ class _CoursesUiState extends State<CoursesUi> {
     sems = sems.toSet().toList();
     sems.sort((b, a) => a.compareTo(b));
     for (final i in sems) {
-      children.add(ListHeader(title: "Semestor 0" + i.toString()));
+      children.add(ListHeader(title: "Semester 0" + i.toString()));
       for (final data in d) {
         if (i == data.data['semstor']) {
           children.add(Padding(

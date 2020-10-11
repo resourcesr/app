@@ -38,8 +38,8 @@ class _HomeState extends State<Home> {
         if (!snapshot.hasData) return Loader();
         if (snapshot.data.documents.isEmpty)
           return EmptyState(
-            icon: Icons.library_books,
-            text: "Sorry, no course found",
+            icon: Icons.hourglass_empty_outlined,
+            text: "All set",
             tSize: 1.5,
             iSize: 70.5,
           );
@@ -99,8 +99,6 @@ class _HomeState extends State<Home> {
                         " - " +
                         _humanize(item.data['end'])),
                     Text(item.data['room'] ?? ""),
-                    Text(
-                        "Duration ${_duration(item.data['start'], item.data['end'])}"),
                   ],
                 ),
               ),
