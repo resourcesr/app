@@ -7,6 +7,8 @@ import 'package:riphahwebresources/components/empty_state.dart';
 import 'package:riphahwebresources/components/list_header.dart';
 import 'package:riphahwebresources/components/loader.dart';
 import 'package:riphahwebresources/data/KlassEvents.dart';
+import 'package:riphahwebresources/pages/event_detail_ui.dart';
+import 'package:riphahwebresources/utils/functions.dart';
 
 class Home extends StatefulWidget {
   Home({this.code});
@@ -47,13 +49,6 @@ class _HomeState extends State<Home> {
     var now = DateTime.now();
     return DateTime(
         now.year, now.month, now.day, int.parse(t[0]), int.parse(t[1]));
-  }
-
-  _humanize(String time) {
-    var t = time.split(":");
-    var hr = int.parse(t[0]);
-    var mint = int.parse(t[1]);
-    return "${hr != 12 ? hr % 12 : hr}:${mint <= 9 ? (mint.toString() + "0") : mint} ${hr >= 12 ? "PM" : "AM"}";
   }
 
   _duration(String start, String end) {
@@ -97,12 +92,22 @@ class _HomeState extends State<Home> {
                 subtitle: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
-                    Text(_humanize(item.data['start']) +
+                    Text(humanize(item.data['start']) +
                         " - " +
-                        _humanize(item.data['end'])),
+                        humanize(item.data['end'])),
                     Text(item.data['room'] ?? ""),
                   ],
                 ),
+                onTap: () => {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => EventDetailUi(
+                              title: item.data['course_title'],
+                              start: humanize(item.data['start']),
+                              end: humanize(item.data['end']),
+                              room: item.data['room'])))
+                },
               ),
             ),
           ),

@@ -9,7 +9,7 @@ class KlassEvents {
   // Get event by course ID.
   Stream<QuerySnapshot> getByKlassId() {
     return _firestore
-        .collection('subjects/classes/event')
+        .collection('events')
         .where("klass_id", isEqualTo: this.klassId)
         .snapshots();
   }

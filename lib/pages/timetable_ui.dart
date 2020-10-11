@@ -6,7 +6,9 @@ import 'package:riphahwebresources/components/empty_state.dart';
 import 'package:riphahwebresources/components/loader.dart';
 import 'package:riphahwebresources/data/KlassEvents.dart';
 import 'package:flutter_week_view/flutter_week_view.dart';
+import 'package:riphahwebresources/pages/event_detail_ui.dart';
 import 'package:string_to_hex/string_to_hex.dart';
+import 'package:riphahwebresources/utils/functions.dart';
 
 class TimetableUi extends StatefulWidget {
   TimetableUi({@required this.code});
@@ -61,25 +63,9 @@ class _TimetableUiState extends State<TimetableUi> {
       DateTime(now.year, now.month, now.day + 5),
       DateTime(now.year, now.month, now.day + 6),
     ];
-    var currDay = DateFormat('EEEE').format(date);
-    int i = 1;
     for (var _date in dates) {
       for (var items in data) {
         var day = items.data['day'];
-        var d = now.day;
-        if (DateFormat('EEEE').format(_date) == "Monday") d = now.day;
-        if (DateFormat('EEEE').format(_date) == "Tuseday")
-          d = now.add(Duration(days: i)).day;
-        if (DateFormat('EEEE').format(_date) == "Wednesday")
-          d = now.add(Duration(days: i)).day;
-        if (DateFormat('EEEE').format(_date) == "Thursday")
-          d = now.add(Duration(days: i)).day;
-        if (DateFormat('EEEE').format(_date) == "Friday")
-          d = now.add(Duration(days: i)).day;
-        if (DateFormat('EEEE').format(_date) == "Saturday")
-          d = now.add(Duration(days: i)).day;
-        if (DateFormat('EEEE').format(_date) == "Sunday")
-          d = now.add(Duration(days: i)).day;
         if (DateFormat('EEEE').format(_date) == day) {
           events.add(
             FlutterWeekViewEvent(
@@ -89,10 +75,19 @@ class _TimetableUiState extends State<TimetableUi> {
               description: "",
               start: dateTimeFromTime(items.data['start'], _date.day),
               end: dateTimeFromTime(items.data['end'], _date.day),
+              onTap: () => {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => EventDetailUi(
+                            title: items.data['course_title'],
+                            start: humanize(items.data['start']),
+                            end: humanize(items.data['end']),
+                            room: items.data['room'])))
+              },
             ),
           );
         }
-        i++;
       }
     }
     return WeekView(

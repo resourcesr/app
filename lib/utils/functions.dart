@@ -32,3 +32,10 @@ String time_ago(timestamp) {
         ? "Yr ago"
         : '${(diff / 31207680).toStringAsFixed(2)} yrs ago';
 }
+
+humanize(String time) {
+  var t = time.split(":");
+  var hr = int.parse(t[0]);
+  var mint = int.parse(t[1]);
+  return "${hr != 12 ? hr % 12 : hr}:${mint <= 9 ? (mint.toString() + "0") : mint} ${hr >= 12 ? "PM" : "AM"}";
+}
