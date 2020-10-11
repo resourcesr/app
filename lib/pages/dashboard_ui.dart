@@ -1,9 +1,9 @@
 import "package:flutter/material.dart";
-import 'package:riphahwebresources/components/loader.dart';
 import 'package:riphahwebresources/data/User.dart';
 import 'package:riphahwebresources/pages/Home/home.dart';
 import 'package:riphahwebresources/pages/courses_ui.dart';
 import 'package:riphahwebresources/pages/menu_ui.dart';
+import 'package:riphahwebresources/pages/timetable_ui.dart';
 
 class DashboardUi extends StatefulWidget {
   DashboardUi(this.user);
@@ -21,7 +21,6 @@ class _DashboardUiState extends State<DashboardUi> {
     widget.user.refresh();
     List<BottomNavigationBarItem> navItems = [];
     var k_id = widget.user.klass;
-    print(k_id);
     tabs = [
       {
         "name": "Home",
@@ -37,7 +36,11 @@ class _DashboardUiState extends State<DashboardUi> {
           code: k_id ?? null,
         )
       },
-      //{"name": "Time Table", "icon": Icons.calendar_today, "page": null},
+      {
+        "name": "Time Table",
+        "icon": Icons.calendar_today,
+        "page": TimetableUi(code: k_id ?? null)
+      },
       {"name": "Menu", "icon": Icons.menu, "page": MenuUi(user: widget.user)}
     ];
 
@@ -57,7 +60,6 @@ class _DashboardUiState extends State<DashboardUi> {
 
   @override
   Widget build(BuildContext context) {
-    //if (widget.user.uid == null) return Loader();
     var navItems = initTabs();
     return WillPopScope(
       onWillPop: () async => false,

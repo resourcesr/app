@@ -36,13 +36,7 @@ class _HomeState extends State<Home> {
             iSize: 70.5,
           );
         if (!snapshot.hasData) return Loader();
-        if (snapshot.data.documents.isEmpty)
-          return EmptyState(
-            icon: Icons.hourglass_empty_outlined,
-            text: "All set",
-            tSize: 1.5,
-            iSize: 70.5,
-          );
+        if (snapshot.data.documents.isEmpty) _emptyState();
         return _buildList(context, snapshot.data.documents);
       },
     );
@@ -68,14 +62,23 @@ class _HomeState extends State<Home> {
     return "${int.parse(e[0]) - int.parse(s[0])}:${int.parse(e[1]) - int.parse(s[1])} hr(s)";
   }
 
+  Widget _emptyState() {
+    return EmptyState(
+      icon: Icons.hourglass_empty_outlined,
+      text: "All set",
+      tSize: 1.5,
+      iSize: 70.5,
+    );
+  }
+
   Widget _buildList(BuildContext context, List<DocumentSnapshot> snapshot) {
     var date = DateTime.now();
     var today = DateFormat('EEEE').format(date);
     var time = DateFormat('Hm').format(date);
     final items = snapshot.toList();
     print(time);
-    List<Widget> children = [];
-    children.add(ListHeader(
+    List<Widget> children, header = [];
+    header.add(ListHeader(
       title: 'Today\'s Classes',
     ));
     for (var item in items) {
@@ -111,7 +114,10 @@ class _HomeState extends State<Home> {
     /*children.add(ListHeader(
       title: 'Today\'s Tasks',
     ));*/
+
+    if (children == null) return _emptyState();
+
     return ListView(
-        padding: const EdgeInsets.only(top: 20.0), children: children);
+        padding: const EdgeInsets.only(top: 20.0), children: header + children);
   }
 }
