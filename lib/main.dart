@@ -2,7 +2,7 @@ import 'package:riphahwebresources/config.dart';
 import 'package:riphahwebresources/data/Downloader.dart';
 import 'package:riphahwebresources/data/PushNotification.dart';
 import 'package:riphahwebresources/pages/Home/home_ui.dart';
-import 'package:riphahwebresources/pages/dashboard_ui.dart';
+import 'package:riphahwebresources/pages/dashboard_splash_ui.dart';
 import 'package:riphahwebresources/pages/klasses_ui.dart';
 import "package:flutter/material.dart";
 import './theme.dart';
@@ -43,7 +43,9 @@ class _WebResourceAppState extends State<WebResourceApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: user.status == AccountStatus.Success ? DashboardUi(user) : HomeUi(),
+      home: user.status == AccountStatus.Success
+          ? DashboardSplashUi(user: user)
+          : HomeUi(),
       theme: lightTheme(),
       darkTheme: darkTheme(),
       themeMode: currentTheme.currentTheme(),

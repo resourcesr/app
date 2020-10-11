@@ -6,7 +6,7 @@ import 'package:riphahwebresources/components/custom_input.dart';
 import 'package:riphahwebresources/data/User.dart';
 import 'package:riphahwebresources/pages/auth/register_ui.dart';
 import 'package:riphahwebresources/pages/auth/reset_ui.dart';
-import 'package:riphahwebresources/pages/dashboard_ui.dart';
+import 'package:riphahwebresources/pages/dashboard_splash_ui.dart';
 
 class LoginUi extends StatefulWidget {
   @override
@@ -47,8 +47,8 @@ class _LoginUiState extends State<LoginUi> {
       ),
     );
     //Navigator.pushNamed(context, '/');
-    Navigator.push(
-        context, MaterialPageRoute(builder: (context) => DashboardUi(u)));
+    Navigator.push(context,
+        MaterialPageRoute(builder: (context) => DashboardSplashUi(user: u)));
   }
 
   void onError(context, err) {
