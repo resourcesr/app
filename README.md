@@ -1,17 +1,57 @@
-# riphahwebresources
+# Riphah Class Resources
+App to share class learning resources and more.
 
-A new Flutter project.
+### Purpose:  
+1. Share Class Resources i.e. lecture, upcoming Assignment, Quiz etc  
+2. See today’s event like lectures etc.  
+3. Keep class notified with any announcement.  
+4. Weekly timetable.  
+5. Download and manage downloaded resources from the app.  
+6. Share downloaded resources directly from the app.  
+### Features:  
+1. Only class CR or management can manage and update resources  
+2. Material UI.  
+3. You can select/change the class.  
+4. Open Source => https://github.com/resourcesr/app  
+Even you can contribute to this project.
+## Contribution
+You're welcome to contribute to this project.
+You should follow contribution guideline [Contribution guideline](https://github.com/resourcesr/app/blob/master/CONTRIBUTING.md)
 
-## Getting Started
+### Development Details:  
+Framework Used: Flutter  
+Programming Language: Dart  
+Cloud: Firebase
 
-This project is a starting point for a Flutter application.
+### Development
 
-A few resources to get you started if this is your first Flutter project:
+Considered flutter and dart is setup on your PC
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
-# web_resources
+#### Running in debugging mode
+```
+flutter run
+```
+#### Running in release mode
+```
+flutter run --release
+```
+
+## Icon
+The logo is and graphic assets provided by [Usman Naeem](https://github.com/Usman-Naeem/)
+
+The files icon get from https://www.flaticon.com/
+
+## License  
+GPL-3  
+  
+## Support  
+If you like this project; Donate coffee?    
+here is the bitcoin address.  
+[![Balance](https://img.balancebadge.io/btc/37x6PA4qtPu2fQnYdW5U7jztYhbchASpBV.svg)](https://img.balancebadge.io/btc/37x6PA4qtPu2fQnYdW5U7jztYhbchASpBV.svg)  
+  
+   ```37x6PA4qtPu2fQnYdW5U7jztYhbchASpBV```    
+ Thank, you so much.  
+  
+## Disclaimer  
+**I do not accept responsibility for any illegal usage**
