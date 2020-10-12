@@ -38,7 +38,7 @@ flutter run --release
 ```
 
 ## Icon
-The logo is and graphic assets provided by [Usman Naeem](https://github.com/Usman-Naeem/)
+The logo is and graphic assets are provided by [Usman Naeem](https://github.com/Usman-Naeem/)
 
 The files icon get from https://www.flaticon.com/
 
