@@ -1,4 +1,4 @@
-# Riphah Class Resources
+# ResourceR App
 App to share class learning resources and more.
 
 ### Purpose:  
