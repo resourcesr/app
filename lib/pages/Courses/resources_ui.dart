@@ -74,22 +74,15 @@ class _ResourcesUiState extends State<ResourcesUi> {
 
   void download(link) async {
     await downloader.start(link);
+
+    //refresh the state.
+    setState(() {});
   }
 
-  listTrallingWidget(url) {
-    var task = downloader.getByUrl(url);
-    var icon;
-    var data;
-    icon = Icon(Icons.home);
-    task.then((value) => {
-          // icon = Icon(Icons.offline_pin),
-          data = value,
-        });
-
-    //if (task.isNotEmpty) return Icon(Icons.offline_pin);
-
-    print("Icon ${data}");
-    return icon;
+  listTrallingWidget(url) async {
+    final task = await downloader.getByUrl(url);
+    if (task.isNotEmpty) return Icons.offline_pin;
+    return null;
   }
 
   _confirmBox(BuildContext context, taskId) {
@@ -106,6 +99,8 @@ class _ResourcesUiState extends State<ResourcesUi> {
           child: Text('Yes'),
           onPressed: () {
             downloader.delete(taskId);
+            //refresh the state.
+            setState(() {});
             Navigator.pop(context);
           },
         ),
@@ -231,17 +226,24 @@ class _ResourcesUiState extends State<ResourcesUi> {
                   padding: const EdgeInsets.symmetric(
                       horizontal: 16.0, vertical: 8.0),
                   child: Card(
-                    child: ListTile(
-                      leading: CircleAvatar(
-                        backgroundColor: Colors.transparent,
-                        child: FileIconAvatar(fileType: data.data['icon']),
-                      ),
-                      title: Text(data.data['name'] ?? ""),
-                      subtitle: Text("$formatted"),
-                      //trailing: listTrallingWidget(data.data['downloadUrl']),
-                      onTap: () =>
-                          {_showBottomSheet(context, data.data['downloadUrl'])},
-                    ),
+                    child: FutureBuilder(
+                        future: listTrallingWidget(data.data['downloadUrl']),
+                        builder: (context, snapshot) {
+                          return ListTile(
+                            leading: CircleAvatar(
+                              backgroundColor: Colors.transparent,
+                              child:
+                                  FileIconAvatar(fileType: data.data['icon']),
+                            ),
+                            title: Text(data.data['name'] ?? ""),
+                            subtitle: Text("$formatted"),
+                            trailing: Icon(snapshot.data),
+                            onTap: () => {
+                              _showBottomSheet(
+                                  context, data.data['downloadUrl'])
+                            },
+                          );
+                        }),
                   ),
                 ),
               );
