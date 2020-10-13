@@ -11,7 +11,7 @@ import 'package:share/share.dart';
 import 'package:open_file/open_file.dart';
 
 class DownloadUi extends StatefulWidget {
-  List<Widget> children = [];
+  List<Map> children = [];
   @override
   _DownloadUiState createState() => _DownloadUiState();
 }
@@ -22,8 +22,7 @@ class _DownloadUiState extends State<DownloadUi> {
   var tasks;
   bool loading = true;
 
-  void onDeleted(context) {
-    widget.children = [];
+  void onDeleted(context, id) {
     load();
     _scaffoldKey.currentState.showSnackBar(
       SnackBar(
@@ -34,6 +33,10 @@ class _DownloadUiState extends State<DownloadUi> {
         ),
       ),
     );
+    setState(() {
+      //TODO
+      /// remove the item form list.
+    });
     Navigator.pop(context);
   }
 
@@ -58,7 +61,7 @@ class _DownloadUiState extends State<DownloadUi> {
           onPressed: () {
             downloader.delete(taskId);
             Navigator.pop(context);
-            onDeleted(context);
+            onDeleted(context, taskId);
 
             //Untill i figure out how can i reload activity upon, we have to be tricky.
             Navigator.pop(context);
@@ -113,27 +116,37 @@ class _DownloadUiState extends State<DownloadUi> {
   load() async {
     var tasks = await downloader.getAll();
     for (var task in tasks) {
-      //print(task.timeCreated);
       var name = task.filename;
       var icon = name.split(".").last;
       bool hasFile = await File('${task.savedDir}/${task.filename}').exists();
       if (hasFile) {
-        widget.children.add(
-          Card(
-            child: ListTile(
-              leading: CircleAvatar(
-                backgroundColor: Colors.transparent,
-                child: FileIconAvatar(fileType: icon),
+        widget.children.addAll([
+          {
+            "id": task.taskId,
+            "title": task.filename,
+            "subtitle": time_ago(task.timeCreated),
+            "icon": icon,
+            "dir": task.savedDir,
+            "url": task.savedDir + "/" + task.filename
+          }
+        ]);
+        /*widget.children.add(
+            Card(
+              child: ListTile(
+                leading: CircleAvatar(
+                  backgroundColor: Colors.transparent,
+                  child: FileIconAvatar(fileType: icon),
+                ),
+                title: Text(task.filename),
+                subtitle: Text(time_ago(task.timeCreated)),
+                onTap: () => {
+                  _showBottomSheet(
+                      task.taskId, task.savedDir + "/" + task.filename)
+                },
               ),
-              title: Text(task.filename),
-              subtitle: Text(time_ago(task.timeCreated)),
-              onTap: () => {
-                _showBottomSheet(
-                    task.taskId, task.savedDir + "/" + task.filename)
-              },
             ),
-          ),
-        );
+          );*/
+        //}
       }
     }
     setState(() {
@@ -150,9 +163,26 @@ class _DownloadUiState extends State<DownloadUi> {
         tSize: 1.5,
         iSize: 40.5,
       );
+
+    List<Widget> childrens = [];
+    for (var items in widget.children) {
+      childrens.add(
+        Card(
+          child: ListTile(
+            leading: CircleAvatar(
+              backgroundColor: Colors.transparent,
+              child: FileIconAvatar(fileType: items['icon']),
+            ),
+            title: Text(items['title']),
+            subtitle: Text(items['subtitle']),
+            onTap: () => {_showBottomSheet(items['id'], items['url'])},
+          ),
+        ),
+      );
+    }
     return Container(
       child: ListView(
-        children: <Widget>[...widget.children],
+        children: <Widget>[...childrens],
       ),
     );
   }
