@@ -34,10 +34,10 @@ class _DownloadUiState extends State<DownloadUi> {
       ),
     );
     setState(() {
-      //TODO
       /// remove the item form list.
+      //widget.children.removeWhere((element) => element['id'] == id);
+      widget.children.clear();
     });
-    Navigator.pop(context);
   }
 
   void _openFile(file) async {
@@ -62,9 +62,6 @@ class _DownloadUiState extends State<DownloadUi> {
             downloader.delete(taskId);
             Navigator.pop(context);
             onDeleted(context, taskId);
-
-            //Untill i figure out how can i reload activity upon, we have to be tricky.
-            Navigator.pop(context);
           },
         ),
       ],
@@ -130,23 +127,6 @@ class _DownloadUiState extends State<DownloadUi> {
             "url": task.savedDir + "/" + task.filename
           }
         ]);
-        /*widget.children.add(
-            Card(
-              child: ListTile(
-                leading: CircleAvatar(
-                  backgroundColor: Colors.transparent,
-                  child: FileIconAvatar(fileType: icon),
-                ),
-                title: Text(task.filename),
-                subtitle: Text(time_ago(task.timeCreated)),
-                onTap: () => {
-                  _showBottomSheet(
-                      task.taskId, task.savedDir + "/" + task.filename)
-                },
-              ),
-            ),
-          );*/
-        //}
       }
     }
     setState(() {
