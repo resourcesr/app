@@ -33,7 +33,6 @@ class _ResourcesUiState extends State<ResourcesUi> {
           children: <Widget>[
             Material(
               color: Theme.of(context).cardColor,
-              elevation: 1.5,
               child: Column(
                 children: <Widget>[
                   Padding(
