@@ -25,7 +25,7 @@ class _ResourcesUiState extends State<ResourcesUi> {
   Downloader downloader = Downloader();
   @override
   Widget build(BuildContext context) {
-    /*return DefaultTabController(
+    return DefaultTabController(
       length: 3,
       child: Scaffold(
         appBar: AppBar(
@@ -38,24 +38,18 @@ class _ResourcesUiState extends State<ResourcesUi> {
               text: "Assignments",
             ),
             Tab(
-              text: "Labs",
-            ),
-            /*Tab(
-              text: "Quizes",
-            ),*/
-            /*Tab(
               text: "About",
-            ),*/
+            ),
           ]),
         ),
         body: _buildBody(context),
       ),
-    );*/
-    return Scaffold(
+    );
+    /* return Scaffold(
       appBar: customAppBar(context, "Resources"),
       //drawer: WebResourceAppDrawer(),
       body: _buildBody(context),
-    );
+    );*/
   }
 
   _openUrl(url) async {
@@ -176,18 +170,22 @@ class _ResourcesUiState extends State<ResourcesUi> {
         });
   }
 
+  Widget _emptyState() {
+    return EmptyState(
+      icon: Icons.collections_bookmark,
+      text: "Sorry, no resources found",
+      tSize: 1.5,
+      iSize: 70.5,
+    );
+  }
+
   Widget _buildBody(BuildContext context) {
     return StreamBuilder<QuerySnapshot>(
       stream: Resources(courseId: widget.courseId).getByCourseId(),
       builder: (context, snapshot) {
         if (!snapshot.hasData) return Loader();
-        if (snapshot.data.documents.isEmpty)
-          return EmptyState(
-            icon: Icons.collections_bookmark,
-            text: "Sorry, no resources found",
-            tSize: 1.5,
-            iSize: 70.5,
-          );
+        if (snapshot.data.documents.isEmpty) return _emptyState();
+
         return _buildList(context, snapshot.data.documents);
       },
     );
@@ -195,7 +193,10 @@ class _ResourcesUiState extends State<ResourcesUi> {
 
   Widget _buildList(BuildContext context, List<DocumentSnapshot> snapshot) {
     final d = snapshot.toList();
+
+    // this is refer to resources or may be labs too.
     List<Widget> children = [];
+    List<Widget> assignments = [];
     List<String> types = [];
     List<String> contents = [];
     for (var item in d) types.add(item.data['type']);
@@ -203,17 +204,10 @@ class _ResourcesUiState extends State<ResourcesUi> {
     for (var item in d) contents.add(item.data['content']);
     contents = contents.toSet().toList();
     for (var content in contents) {
-      children.add(ListHeader(title: capitalize(content ?? " ")));
-      children.add(Divider(
-        color: Colors.black,
-        height: 5,
-        thickness: 3,
-        indent: 10,
-        endIndent: 10,
-      ));
+      if (content != "assignment")
+        children.add(ListHeader(title: capitalize(content ?? " ")));
+
       for (var type in types) {
-        if (content != "assignment")
-          children.add(ListHeader(title: capitalize(type ?? " ")));
         for (var data in d) {
           if (content == data.data['content']) {
             if (type == data.data['type'] && data.data['delete'] == null) {
@@ -221,39 +215,83 @@ class _ResourcesUiState extends State<ResourcesUi> {
                   (data.data['created'] ?? Timestamp.now()).toDate();
               var formatter = new DateFormat('MMM dd, yyyy');
               String formatted = formatter.format(date);
-              children.add(
-                Padding(
-                  padding: const EdgeInsets.symmetric(
-                      horizontal: 16.0, vertical: 8.0),
-                  child: Card(
-                    child: FutureBuilder(
-                        future: listTrallingWidget(data.data['downloadUrl']),
-                        builder: (context, snapshot) {
-                          return ListTile(
-                            leading: CircleAvatar(
-                              backgroundColor: Colors.transparent,
-                              child:
-                                  FileIconAvatar(fileType: data.data['icon']),
-                            ),
-                            title: Text(data.data['name'] ?? ""),
-                            subtitle: Text("$formatted"),
-                            trailing: Icon(snapshot.data),
-                            onTap: () => {
-                              _showBottomSheet(
-                                  context, data.data['downloadUrl'])
-                            },
-                          );
-                        }),
+              if (content == "resource" || content == "lab") {
+                children.add(
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 16.0, vertical: 8.0),
+                    child: Card(
+                      child: FutureBuilder(
+                          future: listTrallingWidget(data.data['downloadUrl']),
+                          builder: (context, snapshot) {
+                            return ListTile(
+                              leading: CircleAvatar(
+                                backgroundColor: Colors.transparent,
+                                child:
+                                    FileIconAvatar(fileType: data.data['icon']),
+                              ),
+                              title: Text(data.data['name'] ?? ""),
+                              subtitle: Text("$formatted"),
+                              trailing: Icon(snapshot.data),
+                              onTap: () => {
+                                _showBottomSheet(
+                                    context, data.data['downloadUrl'])
+                              },
+                            );
+                          }),
+                    ),
                   ),
-                ),
-              );
+                );
+              } else {
+                assignments.add(
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 16.0, vertical: 8.0),
+                    child: Card(
+                      child: FutureBuilder(
+                          future: listTrallingWidget(data.data['downloadUrl']),
+                          builder: (context, snapshot) {
+                            return ListTile(
+                              leading: CircleAvatar(
+                                backgroundColor: Colors.transparent,
+                                child:
+                                    FileIconAvatar(fileType: data.data['icon']),
+                              ),
+                              title: Text(data.data['name'] ?? ""),
+                              subtitle: Text("$formatted"),
+                              trailing: Icon(snapshot.data),
+                              onTap: () => {
+                                _showBottomSheet(
+                                    context, data.data['downloadUrl'])
+                              },
+                            );
+                          }),
+                    ),
+                  ),
+                );
+              }
             }
           }
         }
       }
     }
-
-    return ListView(
-        padding: const EdgeInsets.only(top: 20.0), children: children);
+    return TabBarView(children: [
+      Container(
+        child: children.isNotEmpty
+            ? ListView(
+                padding: const EdgeInsets.only(top: 20.0), children: children)
+            : _emptyState(),
+      ),
+      Container(
+        child: assignments.isNotEmpty
+            ? ListView(
+                padding: const EdgeInsets.only(top: 20.0),
+                children: assignments)
+            : _emptyState(),
+      ),
+      Container(
+        child: Text('About'),
+      ),
+    ]);
   }
 }
