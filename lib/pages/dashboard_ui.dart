@@ -45,15 +45,17 @@ class _DashboardUiState extends State<DashboardUi> {
     ];
 
     for (var tab in tabs) {
-      navItems.add(BottomNavigationBarItem(
-        backgroundColor: Theme.of(context).primaryColorDark,
-        icon: Opacity(
-          opacity: 1,
-          child: Icon(tab['icon']),
+      navItems.add(
+        BottomNavigationBarItem(
+          backgroundColor: Theme.of(context).primaryColorDark,
+          icon: Opacity(
+            opacity: 1,
+            child: Icon(tab['icon']),
+          ),
+          activeIcon: Icon(tab['icon']),
+          label: tab['name'],
         ),
-        activeIcon: Icon(tab['icon']),
-        label: tab['name'],
-      ));
+      );
     }
     return navItems;
   }

@@ -68,7 +68,7 @@ class _CoursesUiState extends State<CoursesUi> {
                 title: data.data['title'],
                 sTitle: data.data['code'] + " - " + data.data['teacher'],
                 tIcon: Icons.arrow_forward,
-                route: () => ResourcesUi(courseId: data.documentID),
+                route: () => ResourcesUi(courseDetail: data),
               ),
             ),
           ));

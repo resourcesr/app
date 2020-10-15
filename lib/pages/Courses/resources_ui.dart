@@ -14,8 +14,8 @@ import 'package:share/share.dart';
 import 'package:open_file/open_file.dart';
 
 class ResourcesUi extends StatefulWidget {
-  ResourcesUi({this.courseId});
-  final String courseId;
+  ResourcesUi({this.courseDetail});
+  final courseDetail;
 
   @override
   _ResourcesUiState createState() => _ResourcesUiState();
@@ -25,7 +25,7 @@ class _ResourcesUiState extends State<ResourcesUi> {
   Downloader downloader = Downloader();
   @override
   Widget build(BuildContext context) {
-    return DefaultTabController(
+    /*return DefaultTabController(
       length: 3,
       child: Scaffold(
         appBar: AppBar(
@@ -43,6 +43,59 @@ class _ResourcesUiState extends State<ResourcesUi> {
           ]),
         ),
         body: _buildBody(context),
+      ),
+    );*/
+
+    return Scaffold(
+      appBar: customAppBar(context, "Resources"),
+      body: DefaultTabController(
+        length: 3,
+        child: Column(
+          children: <Widget>[
+            Material(
+              color: Theme.of(context).cardColor,
+              elevation: 1.5,
+              child: Column(
+                children: <Widget>[
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Container(
+                      child: ListTile(
+                        leading: TextAvatar(
+                          text: widget.courseDetail.data['title'],
+                        ),
+                        title: Text(widget.courseDetail.data['title']),
+                        subtitle: Text(widget.courseDetail.data['code'] +
+                            " - " +
+                            widget.courseDetail.data['teacher']),
+                      ),
+                    ),
+                  ),
+                  Container(
+                    constraints: BoxConstraints(maxHeight: 150.0),
+                    child: TabBar(
+                      isScrollable: true,
+                      tabs: [
+                        Tab(
+                          text: "Resources",
+                        ),
+                        Tab(
+                          text: "Assignments",
+                        ),
+                        Tab(
+                          text: "About",
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            Expanded(
+              child: _buildBody(context),
+            ),
+          ],
+        ),
       ),
     );
     /* return Scaffold(
@@ -181,7 +234,8 @@ class _ResourcesUiState extends State<ResourcesUi> {
 
   Widget _buildBody(BuildContext context) {
     return StreamBuilder<QuerySnapshot>(
-      stream: Resources(courseId: widget.courseId).getByCourseId(),
+      stream:
+          Resources(courseId: widget.courseDetail.documentID).getByCourseId(),
       builder: (context, snapshot) {
         if (!snapshot.hasData) return Loader();
         if (snapshot.data.documents.isEmpty) return _emptyState();
@@ -289,8 +343,30 @@ class _ResourcesUiState extends State<ResourcesUi> {
                 children: assignments)
             : _emptyState(),
       ),
-      Container(
-        child: Text('About'),
+      Padding(
+        padding: const EdgeInsets.all(15),
+        child: Container(
+          child: Column(
+            children: <Widget>[
+              ListTile(
+                title: Text("Course title"),
+                subtitle: Text(widget.courseDetail.data['title']),
+              ),
+              ListTile(
+                title: Text("Teacher"),
+                subtitle: Text(widget.courseDetail.data['teacher']),
+              ),
+              ListTile(
+                title: Text("Credit Code"),
+                subtitle: Text(widget.courseDetail.data['code']),
+              ),
+              ListTile(
+                title: Text("Credit Hr(s)"),
+                subtitle: Text(widget.courseDetail.data['credit'].toString()),
+              )
+            ],
+          ),
+        ),
       ),
     ]);
   }
