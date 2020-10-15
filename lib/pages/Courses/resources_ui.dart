@@ -25,27 +25,6 @@ class _ResourcesUiState extends State<ResourcesUi> {
   Downloader downloader = Downloader();
   @override
   Widget build(BuildContext context) {
-    /*return DefaultTabController(
-      length: 3,
-      child: Scaffold(
-        appBar: AppBar(
-          title: Text('Resources'),
-          bottom: TabBar(tabs: [
-            Tab(
-              text: "Resources",
-            ),
-            Tab(
-              text: "Assignments",
-            ),
-            Tab(
-              text: "About",
-            ),
-          ]),
-        ),
-        body: _buildBody(context),
-      ),
-    );*/
-
     return Scaffold(
       appBar: customAppBar(context, "Resources"),
       body: DefaultTabController(
@@ -98,11 +77,6 @@ class _ResourcesUiState extends State<ResourcesUi> {
         ),
       ),
     );
-    /* return Scaffold(
-      appBar: customAppBar(context, "Resources"),
-      //drawer: WebResourceAppDrawer(),
-      body: _buildBody(context),
-    );*/
   }
 
   _openUrl(url) async {
@@ -238,7 +212,7 @@ class _ResourcesUiState extends State<ResourcesUi> {
           Resources(courseId: widget.courseDetail.documentID).getByCourseId(),
       builder: (context, snapshot) {
         if (!snapshot.hasData) return Loader();
-        if (snapshot.data.documents.isEmpty) return _emptyState();
+        //if (snapshot.data.documents.isEmpty) return _emptyState();
 
         return _buildList(context, snapshot.data.documents);
       },
