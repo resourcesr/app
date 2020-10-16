@@ -21,21 +21,7 @@ class User with ChangeNotifier {
   // Init the user class.
   User(_uid) {
     if (_uid != "") {
-      getCurrentUser().then((value) => {
-            getUserProfile(value.uid).then((val) {
-              if (val != null) {
-                _name = val['name'];
-                _role = val['role'];
-                _klass = val['klass'];
-                _sap = val['sap'];
-              }
-            })
-          });
-
-      // If user profile deleted or disable force him to logout.
-      getCurrentUser().then((val) => {
-            if (val == null) {logout()}
-          });
+      refresh();
       status = AccountStatus.Success;
       notifyListeners();
     }
@@ -49,18 +35,14 @@ class User with ChangeNotifier {
               _role = val['role'];
               _klass = val['klass'];
               _sap = val['sap'];
-              notifyListeners();
+
+              //notifyListeners();
+            } else {
+              // If user profile deleted or disable force him to logout.
+              logout();
             }
           })
         });
-  }
-
-  // get user preference.
-  Future<String> getPrefState() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    //Return String
-    String stringValue = prefs.getString('uid');
-    return stringValue;
   }
 
   // Store user Id in local preferene
