@@ -10,12 +10,13 @@ class User with ChangeNotifier {
   FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
   Firestore _firestore = Firestore.instance;
   final GoogleSignIn _googleSignIn = GoogleSignIn();
-  String _uid, _name, _role, _klass;
+  String _uid, _name, _role, _klass, _sap;
   AccountStatus status = AccountStatus.LoggedOut;
   String get uid => _uid;
   String get name => _name;
   String get role => _role;
   String get klass => _klass;
+  String get sap => _sap;
 
   // Init the user class.
   User(_uid) {
@@ -26,6 +27,7 @@ class User with ChangeNotifier {
                 _name = val['name'];
                 _role = val['role'];
                 _klass = val['klass'];
+                _sap = val['sap'];
               }
             })
           });
@@ -46,6 +48,7 @@ class User with ChangeNotifier {
               _name = val['name'];
               _role = val['role'];
               _klass = val['klass'];
+              _sap = val['sap'];
               notifyListeners();
             }
           })

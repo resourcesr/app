@@ -20,6 +20,15 @@ class _ProfileUiState extends State<ProfileUi> {
   final _formKey = GlobalKey<FormState>();
   bool isLoading = false;
 
+  @override
+  void initState() {
+    setState(() {
+      nameController.value = (TextEditingValue(text: widget.user.name));
+      sapController.value = (TextEditingValue(text: widget.user.sap));
+    });
+    super.initState();
+  }
+
   //@override
   //void dispose() {
   // Clean up the controller when the widget is disposed.
@@ -77,8 +86,6 @@ class _ProfileUiState extends State<ProfileUi> {
   }
 
   Widget _buildBody(BuildContext context) {
-    //List<Widget> children = [];
-
     return CustomForm(
       key: _formKey,
       loading: isLoading,
