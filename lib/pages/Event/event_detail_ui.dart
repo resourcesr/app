@@ -6,7 +6,6 @@ class EventDetailUi extends StatelessWidget {
   EventDetailUi({this.title, this.start, this.end, this.room, this.duration});
   var title, start, end, room, duration;
   @override
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(

@@ -6,14 +6,10 @@ import 'package:riphahwebresources/data/User.dart';
 import 'package:riphahwebresources/pages/Home/home_ui.dart';
 import 'package:riphahwebresources/pages/auth/profile_ui.dart';
 
-class MenuUi extends StatefulWidget {
+class MenuUi extends StatelessWidget {
   MenuUi({this.user});
   User user;
-  @override
-  _MenuUiState createState() => _MenuUiState();
-}
 
-class _MenuUiState extends State<MenuUi> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,15 +19,15 @@ class _MenuUiState extends State<MenuUi> {
           padding: const EdgeInsets.all(8),
           children: <Widget>[
             ListTile(
-              leading: TextAvatar(text: widget.user.name ?? "Your Name"),
-              title: Text(widget.user.name ?? "Your Name"),
-              subtitle: Text(widget.user.role ?? "Your Status"),
+              leading: TextAvatar(text: user.name ?? "Your Name"),
+              title: Text(user.name ?? "Your Name"),
+              subtitle: Text(user.role ?? "Your Status"),
               onTap: () => {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
                         builder: (context) => ProfileUi(
-                              user: widget.user,
+                              user: user,
                             )))
               },
             ),
@@ -42,7 +38,7 @@ class _MenuUiState extends State<MenuUi> {
               leading: Icon(Icons.logout),
               title: Text("Logout"),
               onTap: () => {
-                widget.user.logout(),
+                user.logout(),
                 Navigator.push(
                     context, MaterialPageRoute(builder: (context) => HomeUi()))
               },

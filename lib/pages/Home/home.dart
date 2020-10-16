@@ -10,14 +10,10 @@ import 'package:riphahwebresources/data/KlassEvents.dart';
 import 'package:riphahwebresources/pages/Event/event_detail_ui.dart';
 import 'package:riphahwebresources/utils/functions.dart';
 
-class Home extends StatefulWidget {
+class Home extends StatelessWidget {
   Home({this.code});
   String code;
-  @override
-  _HomeState createState() => _HomeState();
-}
 
-class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -28,9 +24,9 @@ class _HomeState extends State<Home> {
 
   Widget _buildBody(BuildContext context) {
     return StreamBuilder<QuerySnapshot>(
-      stream: KlassEvents(klassId: widget.code).getByKlassId(),
+      stream: KlassEvents(klassId: code).getByKlassId(),
       builder: (context, snapshot) {
-        if (widget.code == null)
+        if (code == null)
           return EmptyState(
             icon: Icons.library_books,
             text: "Select your course.",
@@ -63,7 +59,6 @@ class _HomeState extends State<Home> {
   Widget _buildList(BuildContext context, List<DocumentSnapshot> snapshot) {
     var date = DateTime.now();
     var today = DateFormat('EEEE').format(date);
-    var time = DateFormat('Hm').format(date);
     final items = snapshot.toList();
     List<Widget> children = [], header = [];
     header.add(ListHeader(
@@ -113,6 +108,7 @@ class _HomeState extends State<Home> {
         );
       }
     }
+    // ignore: todo
     // TODO Add other events like assignent detaline etc.
     /*children.add(ListHeader(
       title: 'Today\'s Tasks',

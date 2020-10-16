@@ -8,14 +8,10 @@ import 'package:riphahwebresources/data/Courses.dart';
 import 'package:riphahwebresources/components/empty_state.dart';
 import 'package:riphahwebresources/pages/Courses/resources_ui.dart';
 
-class CoursesUi extends StatefulWidget {
+class CoursesUi extends StatelessWidget {
   CoursesUi({this.code});
   final String code;
-  @override
-  _CoursesUiState createState() => _CoursesUiState();
-}
 
-class _CoursesUiState extends State<CoursesUi> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -26,9 +22,9 @@ class _CoursesUiState extends State<CoursesUi> {
 
   Widget _buildBody(BuildContext context) {
     return StreamBuilder<QuerySnapshot>(
-      stream: Courses(code: widget.code).getByClassId(),
+      stream: Courses(code: code).getByClassId(),
       builder: (context, snapshot) {
-        if (widget.code == null)
+        if (code == null)
           return EmptyState(
             icon: Icons.library_books,
             text: "Select your course.",

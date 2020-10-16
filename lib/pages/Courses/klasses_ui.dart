@@ -7,14 +7,10 @@ import 'package:riphahwebresources/data/klasses.dart';
 import 'package:riphahwebresources/components/empty_state.dart';
 import 'package:riphahwebresources/pages/Courses/courses_ui.dart';
 
-class KlassesUi extends StatefulWidget {
+class KlassesUi extends StatelessWidget {
   KlassesUi({this.dep});
   final String dep;
-  @override
-  _KlassesUiState createState() => _KlassesUiState();
-}
 
-class _KlassesUiState extends State<KlassesUi> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,7 +21,7 @@ class _KlassesUiState extends State<KlassesUi> {
 
   Widget _buildBody(BuildContext context) {
     return StreamBuilder<QuerySnapshot>(
-      stream: Klasss(department: widget.dep).getByDepartment(),
+      stream: Klasss(department: dep).getByDepartment(),
       builder: (context, snapshot) {
         if (!snapshot.hasData) return Loader();
         if (snapshot.data.documents.isEmpty)

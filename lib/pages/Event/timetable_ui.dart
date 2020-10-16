@@ -11,14 +11,9 @@ import 'package:riphahwebresources/pages/Event/event_detail_ui.dart';
 import 'package:string_to_hex/string_to_hex.dart';
 import 'package:riphahwebresources/utils/functions.dart';
 
-class TimetableUi extends StatefulWidget {
+class TimetableUi extends StatelessWidget {
   TimetableUi({@required this.code});
   String code;
-  @override
-  _TimetableUiState createState() => _TimetableUiState();
-}
-
-class _TimetableUiState extends State<TimetableUi> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -28,9 +23,9 @@ class _TimetableUiState extends State<TimetableUi> {
 
   Widget _buildBody(BuildContext context) {
     return StreamBuilder<QuerySnapshot>(
-      stream: KlassEvents(klassId: widget.code).getByKlassId(),
+      stream: KlassEvents(klassId: code).getByKlassId(),
       builder: (context, snapshot) {
-        if (widget.code == null)
+        if (code == null)
           return EmptyState(
             icon: Icons.library_books,
             text: "Select your course.",
@@ -54,7 +49,6 @@ class _TimetableUiState extends State<TimetableUi> {
     var data = snapshot.toList();
     List<FlutterWeekViewEvent> events = [];
     DateTime now = DateTime.now();
-    DateTime date = DateTime(now.year, now.month, now.day);
     var dates = [
       now,
       DateTime(now.year, now.month, now.day + 1),
@@ -68,10 +62,6 @@ class _TimetableUiState extends State<TimetableUi> {
       for (var items in data) {
         var day = items.data['day'];
         if (DateFormat('EEEE').format(_date) == day) {
-          /*NotificationManager().scheduleNotification(
-              "Class Started",
-              items.data['course_title'],
-              dateTimeFromTime(items.data['start'], _date.day));*/
           events.add(
             FlutterWeekViewEvent(
               backgroundColor:
