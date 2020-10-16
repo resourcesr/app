@@ -5,6 +5,7 @@ import 'package:riphahwebresources/components/custom_input.dart';
 import 'package:riphahwebresources/data/User.dart';
 import 'package:riphahwebresources/pages/auth/login_ui.dart';
 import 'package:riphahwebresources/pages/dashboard_ui.dart';
+import 'package:riphahwebresources/utils/validator.dart';
 
 class RegisterUi extends StatefulWidget {
   @override
@@ -64,12 +65,15 @@ class _RegisterUiState extends State<RegisterUi> {
 
   void onSubmit(context) async {
     setState(() => isLoading = true);
-    try {
-      var u = await user.signup(emailController.text, passwordController.text,
-          nameController.text, sapController.text);
-      onSuccess(context, u);
-    } catch (err) {
-      onError(context, err);
+    _formKey.currentState.save();
+    if (_formKey.currentState.validate()) {
+      try {
+        var u = await user.signup(emailController.text, passwordController.text,
+            nameController.text, sapController.text);
+        onSuccess(context, u);
+      } catch (err) {
+        onError(context, err);
+      }
     }
     setState(() {
       emailController.clear();
@@ -88,21 +92,25 @@ class _RegisterUiState extends State<RegisterUi> {
         children: <Widget>[
           CustomInput(
             controller: nameController,
+            validator: nameValidator,
             label: "Name",
             obscureText: false,
           ),
           CustomInput(
             controller: emailController,
+            validator: emailValidator,
             label: "Email",
             obscureText: false,
           ),
           CustomInput(
             controller: sapController,
+            validator: sapValidator,
             label: "SAP",
             obscureText: false,
           ),
           CustomInput(
             controller: passwordController,
+            validator: passwordValidatorl,
             label: "Password",
             obscureText: true,
           ),

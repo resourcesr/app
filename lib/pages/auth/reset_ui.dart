@@ -3,6 +3,7 @@ import 'package:riphahwebresources/components/custom_app_bar.dart';
 import 'package:riphahwebresources/components/custom_form.dart';
 import 'package:riphahwebresources/components/custom_input.dart';
 import 'package:riphahwebresources/data/User.dart';
+import 'package:riphahwebresources/utils/validator.dart';
 
 class ResetUi extends StatefulWidget {
   @override
@@ -57,11 +58,14 @@ class _ResetUiState extends State<ResetUi> {
 
   void onSubmit(context) async {
     setState(() => isLoading = true);
-    try {
-      await user.resetPassword(emailController.text);
-      onSuccess(context);
-    } catch (err) {
-      onError(context, err);
+    _formKey.currentState.save();
+    if (_formKey.currentState.validate()) {
+      try {
+        await user.resetPassword(emailController.text);
+        onSuccess(context);
+      } catch (err) {
+        onError(context, err);
+      }
     }
     setState(() => isLoading = false);
     setState(() => emailController.clear());
@@ -75,6 +79,7 @@ class _ResetUiState extends State<ResetUi> {
         children: <Widget>[
           CustomInput(
             controller: emailController,
+            validator: emailValidator,
             label: "Email",
             obscureText: false,
           ),

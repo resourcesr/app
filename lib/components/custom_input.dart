@@ -2,11 +2,13 @@ import 'package:flutter/material.dart';
 
 class CustomInput extends StatelessWidget {
   CustomInput(
-      {this.controller,
-      this.label,
+      {this.validator,
+      this.controller,
+      @required this.label,
       this.initialValue,
       this.obscureText,
       this.maxLines});
+  final Function validator;
   final TextEditingController controller;
   final String label, initialValue;
   final bool obscureText;
@@ -21,6 +23,7 @@ class CustomInput extends StatelessWidget {
         obscureText: obscureText,
         //initialValue: initialValue,
         controller: controller,
+        validator: validator,
         maxLines: maxLines ?? 1,
         decoration: InputDecoration(
           border: OutlineInputBorder(

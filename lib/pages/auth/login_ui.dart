@@ -7,6 +7,7 @@ import 'package:riphahwebresources/data/User.dart';
 import 'package:riphahwebresources/pages/auth/register_ui.dart';
 import 'package:riphahwebresources/pages/auth/reset_ui.dart';
 import 'package:riphahwebresources/pages/dashboard_splash_ui.dart';
+import 'package:riphahwebresources/utils/validator.dart';
 
 class LoginUi extends StatefulWidget {
   @override
@@ -65,11 +66,14 @@ class _LoginUiState extends State<LoginUi> {
 
   void onSubmit(context) async {
     setState(() => isLoading = true);
-    try {
-      var u = await user.login(emailController.text, passwordController.text);
-      onSuccess(context, u);
-    } catch (err) {
-      onError(context, err);
+    _formKey.currentState.save();
+    if (_formKey.currentState.validate()) {
+      try {
+        var u = await user.login(emailController.text, passwordController.text);
+        onSuccess(context, u);
+      } catch (err) {
+        onError(context, err);
+      }
     }
     setState(() {
       emailController.clear();
@@ -90,7 +94,6 @@ class _LoginUiState extends State<LoginUi> {
   }
 
   Widget _buildBody(BuildContext context) {
-    List<Widget> children = [];
     return CustomForm(
       key: _formKey,
       imagePath: "assets/images/Login.png",
@@ -98,11 +101,13 @@ class _LoginUiState extends State<LoginUi> {
       children: <Widget>[
         CustomInput(
           controller: emailController,
+          validator: emailValidator,
           label: "Email",
           obscureText: false,
         ),
         CustomInput(
           controller: passwordController,
+          validator: passwordValidatorl,
           label: "Password",
           obscureText: true,
         ),

@@ -5,6 +5,7 @@ import 'package:riphahwebresources/components/custom_input.dart';
 import 'package:riphahwebresources/data/User.dart';
 import 'package:riphahwebresources/pages/Home/home_ui.dart';
 import 'package:riphahwebresources/pages/auth/select_klass_ui.dart';
+import 'package:riphahwebresources/utils/validator.dart';
 
 class ProfileUi extends StatefulWidget {
   ProfileUi({@required this.user});
@@ -70,12 +71,15 @@ class _ProfileUiState extends State<ProfileUi> {
 
   void onSubmit(context) async {
     setState(() => isLoading = true);
-    try {
-      await widget.user
-          .update(widget.user.uid, nameController.text, sapController.text);
-      onSuccess(context);
-    } catch (err) {
-      onError(context, err);
+    _formKey.currentState.save();
+    if (_formKey.currentState.validate()) {
+      try {
+        await widget.user
+            .update(widget.user.uid, nameController.text, sapController.text);
+        onSuccess(context);
+      } catch (err) {
+        onError(context, err);
+      }
     }
     setState(() {
       nameController.clear();
@@ -93,11 +97,13 @@ class _ProfileUiState extends State<ProfileUi> {
       children: <Widget>[
         CustomInput(
           controller: nameController,
+          validator: emailValidator,
           label: "Name",
           obscureText: false,
         ),
         CustomInput(
           controller: sapController,
+          validator: sapValidator,
           label: "SAP",
           obscureText: false,
         ),
