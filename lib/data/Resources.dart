@@ -12,6 +12,7 @@ class Resources {
     return _firestore
         .collection('subjects/courses/resources')
         .where("course_id", isEqualTo: this.courseId)
+        .orderBy('created', descending: true)
         .snapshots();
   }
 }

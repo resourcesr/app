@@ -16,6 +16,7 @@ class Klasss {
     return _firestore
         .collection('subjects/classes/main')
         .where("program", isEqualTo: this.department)
+        .orderBy('created', descending: true)
         .snapshots();
   }
 }

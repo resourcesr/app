@@ -12,6 +12,7 @@ class Courses {
     return _firestore
         .collection('subjects/classes/courses')
         .where("class_id", isEqualTo: this.code)
+        .orderBy('created', descending: true)
         .snapshots();
   }
 }

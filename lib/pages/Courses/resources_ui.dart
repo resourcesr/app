@@ -235,6 +235,9 @@ class _ResourcesUiState extends State<ResourcesUi> {
         children.add(ListHeader(title: capitalize(content ?? " ")));
 
       for (var type in types) {
+        if (type == 'books') {
+          children.add(ListHeader(title: capitalize('Books' ?? " ")));
+        }
         for (var data in d) {
           if (content == data.data['content']) {
             if (type == data.data['type'] && data.data['delete'] == null) {
