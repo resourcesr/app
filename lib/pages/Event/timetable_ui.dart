@@ -79,7 +79,7 @@ class TimetableUi extends StatelessWidget {
                       start: humanize(items.data['start']),
                       end: humanize(items.data['end']),
                       room: items.data['room'],
-                      duration: calcluate_duration(
+                      duration: calcluateDuration(
                           items.data['start'], items.data['end']),
                     ),
                   ),

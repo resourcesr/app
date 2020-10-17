@@ -121,7 +121,7 @@ class _DownloadUiState extends State<DownloadUi> {
           {
             "id": task.taskId,
             "title": task.filename,
-            "subtitle": time_ago(task.timeCreated),
+            "subtitle": timeAgo(task.timeCreated),
             "icon": icon,
             "dir": task.savedDir,
             "url": task.savedDir + "/" + task.filename

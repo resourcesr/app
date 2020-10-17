@@ -96,7 +96,7 @@ class Home extends StatelessWidget {
                         start: humanize(item.data['start']),
                         end: humanize(item.data['end']),
                         room: item.data['room'],
-                        duration: calcluate_duration(
+                        duration: calcluateDuration(
                             item.data['start'], item.data['end']),
                       ),
                     ),

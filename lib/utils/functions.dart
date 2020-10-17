@@ -2,7 +2,8 @@ String capitalize(String str) {
   return "${str[0].toUpperCase()}${str.substring(1)}";
 }
 
-String time_ago(timestamp) {
+// ignore: missing_return
+String timeAgo(timestamp) {
   var diff = DateTime.now().toUtc().millisecondsSinceEpoch - (timestamp);
   diff = diff / 1000;
   if (diff <= 60)
@@ -40,7 +41,7 @@ humanize(String time) {
   return "${hr != 12 ? hr % 12 : hr}:${mint <= 9 ? (mint.toString() + "0") : mint} ${hr >= 12 ? "PM" : "AM"}";
 }
 
-calcluate_duration(String start, String end) {
+calcluateDuration(String start, String end) {
   var s = start.split(":");
   var e = end.split(":");
   return "${int.parse(e[0]) - int.parse(s[0])}:${int.parse(e[1]) - int.parse(s[1])} hr(s)";
