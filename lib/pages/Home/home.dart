@@ -50,7 +50,7 @@ class Home extends StatelessWidget {
   Widget _emptyState() {
     return EmptyState(
       icon: Icons.hourglass_empty_outlined,
-      text: "All set",
+      text: "No event",
       tSize: 1.5,
       iSize: 70.5,
     );

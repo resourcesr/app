@@ -1,4 +1,5 @@
 import "package:flutter/material.dart";
+//import 'package:riphahwebresources/components/loader.dart';
 import 'package:riphahwebresources/data/User.dart';
 import 'package:riphahwebresources/pages/Home/home.dart';
 import 'package:riphahwebresources/pages/Courses/courses_ui.dart';
@@ -69,6 +70,10 @@ class _DashboardUiState extends State<DashboardUi> {
         key: PageStorageKey('BottomNavigationBar'),
         body: Builder(
           builder: (context) => tabs[tabIndex]["page"],
+          /*builder: (context) {
+            if (widget.user.status == AccountStatus.LoggedOut) return Loader();
+            return tabs[tabIndex]["page"];
+          },*/
         ),
         bottomNavigationBar: BottomNavigationBar(
           currentIndex: tabIndex,
