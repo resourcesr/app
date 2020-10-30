@@ -93,7 +93,6 @@ class _ResourcesUiState extends State<ResourcesUi> {
   }
 
   void download(link, filename) async {
-    print(filename);
     await downloader.start(link, filename);
 
     //refresh the state.
