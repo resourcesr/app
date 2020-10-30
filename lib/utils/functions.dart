@@ -46,3 +46,15 @@ calcluateDuration(String start, String end) {
   var e = end.split(":");
   return "${int.parse(e[0]) - int.parse(s[0])}:${int.parse(e[1]) - int.parse(s[1])} hr(s)";
 }
+
+// Function to get subject title
+getTitle(text) {
+  if (text != null) {
+    var slices = text.split(" ");
+    if (slices.length > 3) slices = slices.sublist(0, 3);
+    return slices
+        .map((s) => ((s.length >= 1) ? s[0] : ""))
+        .join("")
+        .toUpperCase();
+  }
+}

@@ -36,7 +36,7 @@ class Downloader {
   }
 
   // Start downloading file
-  Future<String> start(String url) async {
+  Future<String> start(String url, String filename) async {
     var tasks = await getByUrl(url);
     await getPath();
     if (tasks.isNotEmpty) return tasks[0].taskId;
@@ -48,7 +48,7 @@ class Downloader {
       savedDir: _path,
       showNotification: true,
       openFileFromNotification: true,
-      //fileName: fileName ?? null,
+      fileName: filename,
     );
   }
 

@@ -92,8 +92,9 @@ class _ResourcesUiState extends State<ResourcesUi> {
     } catch (_) {}
   }
 
-  void download(link) async {
-    await downloader.start(link);
+  void download(link, filename) async {
+    print(filename);
+    await downloader.start(link, filename);
 
     //refresh the state.
     setState(() {});
@@ -135,7 +136,7 @@ class _ResourcesUiState extends State<ResourcesUi> {
     );
   }
 
-  _showBottomSheet(context, url) async {
+  _showBottomSheet(context, url, filename) async {
     var task = await downloader.getByUrl(url);
     List<Widget> children = [];
     if (task.isNotEmpty) {
@@ -181,7 +182,7 @@ class _ResourcesUiState extends State<ResourcesUi> {
         ListTile(
           leading: Icon(Icons.download_rounded),
           title: Text("Download"),
-          onTap: () => {download(url), Navigator.pop(context)},
+          onTap: () => {download(url, filename), Navigator.pop(context)},
         ),
       );
     }
@@ -265,7 +266,14 @@ class _ResourcesUiState extends State<ResourcesUi> {
                               trailing: Icon(snapshot.data),
                               onTap: () => {
                                 _showBottomSheet(
-                                    context, data.data['downloadUrl'])
+                                    context,
+                                    data.data['downloadUrl'],
+                                    getTitle(
+                                            widget.courseDetail.data['title']) +
+                                        ":" +
+                                        data.data['name'] +
+                                        "." +
+                                        data.data['icon'])
                               },
                             );
                           }),
@@ -292,7 +300,14 @@ class _ResourcesUiState extends State<ResourcesUi> {
                               trailing: Icon(snapshot.data),
                               onTap: () => {
                                 _showBottomSheet(
-                                    context, data.data['downloadUrl'])
+                                    context,
+                                    data.data['downloadUrl'],
+                                    getTitle(
+                                            widget.courseDetail.data['title']) +
+                                        ":" +
+                                        data.data['name'] +
+                                        "." +
+                                        data.data['icon'])
                               },
                             );
                           }),
