@@ -1,27 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:riphahwebresources/utils/functions.dart';
 import 'package:string_to_hex/string_to_hex.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class TextAvatar extends StatelessWidget {
   TextAvatar({this.text});
   String text;
-  getTitle() {
-    if (text != null) {
-      var slices = text.split(" ");
-      if (slices.length > 3) slices = slices.sublist(0, 3);
-      return slices
-          .map((s) => ((s.length >= 1) ? s[0] : ""))
-          .join("")
-          .toUpperCase();
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
     return Container(
       child: CircleAvatar(
         backgroundColor: text != null ? Color(StringToHex.toColor(text)) : null,
-        child: text != null ? Text(getTitle()) : null,
+        child: text != null ? Text(getTitle(text)) : null,
         foregroundColor: Colors.white,
       ),
     );
