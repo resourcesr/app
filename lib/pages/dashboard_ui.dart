@@ -1,7 +1,7 @@
 import "package:flutter/material.dart";
 //import 'package:riphahwebresources/components/loader.dart';
 import 'package:riphahwebresources/data/User.dart';
-import 'package:riphahwebresources/pages/Home/home.dart';
+import 'package:riphahwebresources/pages/Event/home.dart';
 import 'package:riphahwebresources/pages/Courses/courses_ui.dart';
 import 'package:riphahwebresources/pages/menu_ui.dart';
 import 'package:riphahwebresources/pages/Event/timetable_ui.dart';
