@@ -62,7 +62,7 @@ class Home extends StatelessWidget {
     final items = snapshot.toList();
     List<Widget> children = [], header = [];
     header.add(ListHeader(
-      title: 'Today\'s Classes',
+      title: 'Event\'s',
     ));
     for (var item in items) {
       var itemDay = item.data['day'].toString().toLowerCase();
@@ -107,12 +107,34 @@ class Home extends StatelessWidget {
           ),
         );
       }
+      if (item.data['type'] != 'class') {
+        if ((date.day <= item.data['day'] &&
+                date.month == item.data['month']) &&
+            date.year == item.data['year']) {
+          children.add(
+            Card(
+              child: ListTile(
+                leading: TextAvatar(
+                  text: item.data['course_title'],
+                ),
+                title: Text(item.data['course_title']),
+                subtitle: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    Text("Last date: " +
+                        item.data['day'].toString() +
+                        "/" +
+                        item.data['month'].toString() +
+                        " " +
+                        item.data['end'].toString()),
+                  ],
+                ),
+              ),
+            ),
+          );
+        }
+      }
     }
-    // ignore: todo
-    // TODO Add other events like assignent detaline etc.
-    /*children.add(ListHeader(
-      title: 'Today\'s Tasks',
-    ));*/
 
     if (children.isEmpty) return _emptyState();
 
