@@ -1,15 +1,15 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import "package:flutter/material.dart";
 import 'package:intl/intl.dart';
-import 'package:riphahwebresources/components/custom_app_bar.dart';
-import 'package:riphahwebresources/components/empty_state.dart';
-import 'package:riphahwebresources/components/loader.dart';
-import 'package:riphahwebresources/data/KlassEvents.dart';
+import 'package:resourcesr/components/custom_app_bar.dart';
+import 'package:resourcesr/components/empty_state.dart';
+import 'package:resourcesr/components/loader.dart';
+import 'package:resourcesr/data/KlassEvents.dart';
 import 'package:flutter_week_view/flutter_week_view.dart';
-//import 'package:riphahwebresources/models/NotificationManager.dart';
-import 'package:riphahwebresources/pages/Event/event_detail_ui.dart';
+//import 'package:resourcesr/models/NotificationManager.dart';
+import 'package:resourcesr/pages/Event/event_detail_ui.dart';
 import 'package:string_to_hex/string_to_hex.dart';
-import 'package:riphahwebresources/utils/functions.dart';
+import 'package:resourcesr/utils/functions.dart';
 
 class TimetableUi extends StatelessWidget {
   TimetableUi({@required this.code});

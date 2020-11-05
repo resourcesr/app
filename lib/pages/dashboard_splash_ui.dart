@@ -1,9 +1,9 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:riphahwebresources/components/loader.dart';
-import 'package:riphahwebresources/data/User.dart';
-import 'package:riphahwebresources/pages/dashboard_ui.dart';
+import 'package:resourcesr/components/loader.dart';
+import 'package:resourcesr/data/User.dart';
+import 'package:resourcesr/pages/dashboard_ui.dart';
 
 class DashboardSplashUi extends StatefulWidget {
   DashboardSplashUi({@required this.user});

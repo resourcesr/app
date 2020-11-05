@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:riphahwebresources/utils/functions.dart';
+import 'package:resourcesr/utils/functions.dart';
 import 'package:string_to_hex/string_to_hex.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 

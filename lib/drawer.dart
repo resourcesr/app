@@ -1,7 +1,7 @@
 import "package:flutter/material.dart";
-import 'package:riphahwebresources/components/menu.dart';
-import 'package:riphahwebresources/pages/Home/home_ui.dart';
-import 'package:riphahwebresources/pages/auth/login_ui.dart';
+import 'package:resourcesr/components/menu.dart';
+import 'package:resourcesr/pages/Home/home_ui.dart';
+import 'package:resourcesr/pages/auth/login_ui.dart';
 
 class WebResourceAppDrawer extends StatelessWidget {
   @override

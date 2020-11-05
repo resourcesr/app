@@ -1,8 +1,8 @@
 import "package:flutter/material.dart";
-import 'package:riphahwebresources/components/custom_app_bar.dart';
-import 'package:riphahwebresources/components/custom_form.dart';
-import 'package:riphahwebresources/components/custom_input.dart';
-import 'package:riphahwebresources/data/Contact.dart';
+import 'package:resourcesr/components/custom_app_bar.dart';
+import 'package:resourcesr/components/custom_form.dart';
+import 'package:resourcesr/components/custom_input.dart';
+import 'package:resourcesr/data/Contact.dart';
 
 class FeedbackUi extends StatefulWidget {
   @override

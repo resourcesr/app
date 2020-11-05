@@ -1,5 +1,5 @@
 library config.globals;
 
-import 'package:riphahwebresources/models/ThemeChanger.dart';
+import 'package:resourcesr/models/ThemeChanger.dart';
 
 ThemeChanger currentTheme = ThemeChanger();

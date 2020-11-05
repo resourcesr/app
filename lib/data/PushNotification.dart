@@ -1,5 +1,5 @@
 import 'package:firebase_messaging/firebase_messaging.dart';
-import 'package:riphahwebresources/models/NotificationManager.dart';
+import 'package:resourcesr/models/NotificationManager.dart';
 
 class PushNotifications {
   PushNotifications._();

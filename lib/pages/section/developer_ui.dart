@@ -1,7 +1,7 @@
 import "package:flutter/material.dart";
-import 'package:riphahwebresources/components/avatars.dart';
-import 'package:riphahwebresources/components/custom_app_bar.dart';
-import 'package:riphahwebresources/components/list_header.dart';
+import 'package:resourcesr/components/avatars.dart';
+import 'package:resourcesr/components/custom_app_bar.dart';
+import 'package:resourcesr/components/list_header.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class DeveloperUi extends StatelessWidget {

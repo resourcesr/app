@@ -1,8 +1,8 @@
 import "package:flutter/material.dart";
-import 'package:riphahwebresources/pages/downlaod_ui.dart';
-import 'package:riphahwebresources/pages/feedback_ui.dart';
-import 'package:riphahwebresources/pages/section/about_ui.dart';
-import 'package:riphahwebresources/pages/section/developer_ui.dart';
+import 'package:resourcesr/pages/downlaod_ui.dart';
+import 'package:resourcesr/pages/feedback_ui.dart';
+import 'package:resourcesr/pages/section/about_ui.dart';
+import 'package:resourcesr/pages/section/developer_ui.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:share/share.dart';
 

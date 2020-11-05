@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:riphahwebresources/components/avatars.dart';
+import 'package:resourcesr/components/avatars.dart';
 
 class CourseItemView extends StatelessWidget {
   CourseItemView({this.lIcon, this.title, this.sTitle, this.tIcon, this.route});

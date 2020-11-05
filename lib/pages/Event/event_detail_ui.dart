@@ -1,6 +1,6 @@
 import "package:flutter/material.dart";
-import 'package:riphahwebresources/components/avatars.dart';
-import 'package:riphahwebresources/components/list_header.dart';
+import 'package:resourcesr/components/avatars.dart';
+import 'package:resourcesr/components/list_header.dart';
 
 class EventDetailUi extends StatelessWidget {
   EventDetailUi({this.title, this.start, this.end, this.room, this.duration});

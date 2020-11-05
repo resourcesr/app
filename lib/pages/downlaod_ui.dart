@@ -1,12 +1,12 @@
 import 'dart:io';
 
 import "package:flutter/material.dart";
-import 'package:riphahwebresources/components/avatars.dart';
-import 'package:riphahwebresources/components/custom_app_bar.dart';
-import 'package:riphahwebresources/components/empty_state.dart';
-import 'package:riphahwebresources/components/loader.dart';
-import 'package:riphahwebresources/data/Downloader.dart';
-import 'package:riphahwebresources/utils/functions.dart';
+import 'package:resourcesr/components/avatars.dart';
+import 'package:resourcesr/components/custom_app_bar.dart';
+import 'package:resourcesr/components/empty_state.dart';
+import 'package:resourcesr/components/loader.dart';
+import 'package:resourcesr/data/Downloader.dart';
+import 'package:resourcesr/utils/functions.dart';
 import 'package:share/share.dart';
 import 'package:open_file/open_file.dart';
 

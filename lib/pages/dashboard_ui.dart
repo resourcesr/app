@@ -1,10 +1,10 @@
 import "package:flutter/material.dart";
-//import 'package:riphahwebresources/components/loader.dart';
-import 'package:riphahwebresources/data/User.dart';
-import 'package:riphahwebresources/pages/Event/home.dart';
-import 'package:riphahwebresources/pages/Courses/courses_ui.dart';
-import 'package:riphahwebresources/pages/menu_ui.dart';
-import 'package:riphahwebresources/pages/Event/timetable_ui.dart';
+//import 'package:resourcesr/components/loader.dart';
+import 'package:resourcesr/data/User.dart';
+import 'package:resourcesr/pages/Event/home.dart';
+import 'package:resourcesr/pages/Courses/courses_ui.dart';
+import 'package:resourcesr/pages/menu_ui.dart';
+import 'package:resourcesr/pages/Event/timetable_ui.dart';
 
 class DashboardUi extends StatefulWidget {
   DashboardUi(this.user);

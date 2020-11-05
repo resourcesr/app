@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:riphahwebresources/components/custom_app_bar.dart';
-import 'package:riphahwebresources/components/custom_form.dart';
-import 'package:riphahwebresources/components/custom_input.dart';
-import 'package:riphahwebresources/data/User.dart';
-import 'package:riphahwebresources/pages/Home/home_ui.dart';
-import 'package:riphahwebresources/pages/auth/select_klass_ui.dart';
-import 'package:riphahwebresources/utils/validator.dart';
+import 'package:resourcesr/components/custom_app_bar.dart';
+import 'package:resourcesr/components/custom_form.dart';
+import 'package:resourcesr/components/custom_input.dart';
+import 'package:resourcesr/data/User.dart';
+import 'package:resourcesr/pages/Home/home_ui.dart';
+import 'package:resourcesr/pages/auth/select_klass_ui.dart';
+import 'package:resourcesr/utils/validator.dart';
 
 class ProfileUi extends StatefulWidget {
   ProfileUi({@required this.user});

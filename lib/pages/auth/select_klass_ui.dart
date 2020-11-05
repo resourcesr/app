@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:riphahwebresources/components/custom_app_bar.dart';
+import 'package:resourcesr/components/custom_app_bar.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:riphahwebresources/components/loader.dart';
-import 'package:riphahwebresources/data/User.dart';
-import 'package:riphahwebresources/data/klasses.dart';
+import 'package:resourcesr/components/loader.dart';
+import 'package:resourcesr/data/User.dart';
+import 'package:resourcesr/data/klasses.dart';
 
 class SelectKlassUi extends StatefulWidget {
   SelectKlassUi({@required this.user});

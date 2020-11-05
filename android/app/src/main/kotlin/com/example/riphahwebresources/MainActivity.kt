@@ -1,4 +1,4 @@
-package com.example.riphahwebresources
+package com.example.resourcesr
 
 import io.flutter.embedding.android.FlutterActivity
 

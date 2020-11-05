@@ -1,9 +1,9 @@
-import 'package:riphahwebresources/config.dart';
-import 'package:riphahwebresources/data/Downloader.dart';
-import 'package:riphahwebresources/data/PushNotification.dart';
-import 'package:riphahwebresources/pages/Home/home_ui.dart';
-import 'package:riphahwebresources/pages/dashboard_splash_ui.dart';
-import 'package:riphahwebresources/pages/Courses/klasses_ui.dart';
+import 'package:resourcesr/config.dart';
+import 'package:resourcesr/data/Downloader.dart';
+import 'package:resourcesr/data/PushNotification.dart';
+import 'package:resourcesr/pages/Home/home_ui.dart';
+import 'package:resourcesr/pages/dashboard_splash_ui.dart';
+import 'package:resourcesr/pages/Courses/klasses_ui.dart';
 import "package:flutter/material.dart";
 import './theme.dart';
 import 'data/User.dart';

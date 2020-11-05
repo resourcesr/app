@@ -1,12 +1,12 @@
 import "package:flutter/material.dart";
-import 'package:riphahwebresources/components/course_item_view.dart';
-import 'package:riphahwebresources/components/custom_app_bar.dart';
-import 'package:riphahwebresources/components/list_header.dart';
+import 'package:resourcesr/components/course_item_view.dart';
+import 'package:resourcesr/components/custom_app_bar.dart';
+import 'package:resourcesr/components/list_header.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:riphahwebresources/components/loader.dart';
-import 'package:riphahwebresources/data/Courses.dart';
-import 'package:riphahwebresources/components/empty_state.dart';
-import 'package:riphahwebresources/pages/Courses/resources_ui.dart';
+import 'package:resourcesr/components/loader.dart';
+import 'package:resourcesr/data/Courses.dart';
+import 'package:resourcesr/components/empty_state.dart';
+import 'package:resourcesr/pages/Courses/resources_ui.dart';
 
 class CoursesUi extends StatelessWidget {
   CoursesUi({this.code});

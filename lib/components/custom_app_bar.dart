@@ -1,5 +1,5 @@
 import "package:flutter/material.dart";
-import 'package:riphahwebresources/config.dart';
+import 'package:resourcesr/config.dart';
 
 AppBar customAppBar(BuildContext context, String title, {bool back = true}) {
   return AppBar(

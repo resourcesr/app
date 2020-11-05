@@ -1,4 +1,4 @@
-package com.ClassX.lablnet.riphahwebresources
+package com.ClassX.lablnet.resourcesr
 
 import io.flutter.embedding.android.FlutterActivity
 
