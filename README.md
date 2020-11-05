@@ -1,3 +1,4 @@
+
 # ResourceR App
 App to share class learning resources and more.
 
@@ -22,6 +23,8 @@ You should follow contribution guideline [Contribution guideline](https://github
 Framework Used: Flutter  
 Programming Language: Dart  
 Cloud: Firebase
+
+**Caution: *This app only tested in Android, for `IOS` the platform specific configuration is required***
 
 ### Development
 
