@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-//TODO
 class CustomForm extends StatelessWidget {
   CustomForm({this.children, this.imagePath, this.loading, this.key});
   List<Widget> children;

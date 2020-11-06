@@ -34,23 +34,24 @@ class _CustomInputState extends State<CustomInput> {
   @override
   Widget build(BuildContext context) {
     return Container(
-        child: Padding(
-      padding: const EdgeInsets.all(20.20),
-      child: TextFormField(
-        obscureText: widget.obscureText ? obscurePass : false,
-        //initialValue: initialValue,
-        controller: widget.controller,
-        validator: widget.validator,
-        maxLines: widget.maxLines ?? 1,
-        decoration: InputDecoration(
-          border: OutlineInputBorder(
-              borderSide: BorderSide(color: Theme.of(context).accentColor)),
-          focusedBorder: OutlineInputBorder(
-              borderSide: BorderSide(color: Theme.of(context).accentColor)),
-          labelText: widget.label,
-          suffixIcon: _getSufixIcon(widget.obscureText),
+      child: Padding(
+        padding: const EdgeInsets.all(20.20),
+        child: TextFormField(
+          obscureText: widget.obscureText ? obscurePass : false,
+          //initialValue: initialValue,
+          controller: widget.controller,
+          validator: widget.validator,
+          maxLines: widget.maxLines ?? 1,
+          decoration: InputDecoration(
+            border: OutlineInputBorder(
+                borderSide: BorderSide(color: Theme.of(context).accentColor)),
+            focusedBorder: OutlineInputBorder(
+                borderSide: BorderSide(color: Theme.of(context).accentColor)),
+            labelText: widget.label,
+            suffixIcon: _getSufixIcon(widget.obscureText),
+          ),
         ),
       ),
-    ));
+    );
   }
 }
