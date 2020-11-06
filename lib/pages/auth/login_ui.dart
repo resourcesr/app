@@ -8,6 +8,7 @@ import 'package:resourcesr/pages/auth/register_ui.dart';
 import 'package:resourcesr/pages/auth/reset_ui.dart';
 import 'package:resourcesr/pages/dashboard_splash_ui.dart';
 import 'package:resourcesr/utils/validator.dart';
+import 'package:resourcesr/config.dart';
 
 class LoginUi extends StatefulWidget {
   @override
@@ -47,7 +48,6 @@ class _LoginUiState extends State<LoginUi> {
         ),
       ),
     );
-    //Navigator.pushNamed(context, '/');
     Navigator.push(context,
         MaterialPageRoute(builder: (context) => DashboardSplashUi(user: u)));
   }
@@ -152,7 +152,7 @@ class _LoginUiState extends State<LoginUi> {
             width: double.infinity,
             child: GoogleSignInButton(
               onPressed: () => {onGoogleSubmit(context)},
-              //darkMode: true,
+              darkMode: currentTheme.isDark,
             ),
           ),
         ),
