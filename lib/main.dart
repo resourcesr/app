@@ -1,3 +1,4 @@
+import 'package:flutter/services.dart';
 import 'package:resourcesr/config.dart';
 import 'package:resourcesr/data/Downloader.dart';
 import 'package:resourcesr/data/PushNotification.dart';
@@ -18,6 +19,10 @@ Future<void> main() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     uid = prefs.getString('uid') ?? "";
   } catch (_) {}
+
+  /*SystemChrome.setEnabledSystemUIOverlays([SystemUiOverlay.top])
+      .then((_) => runApp(WebResourceApp(uid)));*/
+
   runApp(WebResourceApp(uid));
 }
 
