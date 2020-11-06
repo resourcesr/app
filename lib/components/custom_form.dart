@@ -13,6 +13,7 @@ class CustomForm extends StatelessWidget {
     return Form(
       key: key,
       child: ListView(
+        shrinkWrap: true,
         children: <Widget>[
           loading ? LinearProgressIndicator() : SizedBox(height: 2),
           SizedBox(height: 30),
