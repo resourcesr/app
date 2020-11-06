@@ -2,7 +2,7 @@ import "package:flutter/material.dart";
 import 'package:resourcesr/pages/downlaod_ui.dart';
 import 'package:resourcesr/pages/feedback_ui.dart';
 import 'package:resourcesr/pages/section/about_ui.dart';
-import 'package:resourcesr/pages/section/developer_ui.dart';
+import 'package:resourcesr/pages/section/teams_ui.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:share/share.dart';
 
@@ -58,10 +58,10 @@ List<Widget> menu(context) {
     ),
     ListTile(
       leading: Icon(Icons.developer_board),
-      title: Text("Developers"),
+      title: Text("Teams"),
       onTap: () => {
         Navigator.push(
-            context, MaterialPageRoute(builder: (context) => DeveloperUi()))
+            context, MaterialPageRoute(builder: (context) => TeamsUi()))
       },
     ),
     ListTile(

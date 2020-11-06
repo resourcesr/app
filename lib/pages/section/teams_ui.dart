@@ -4,7 +4,7 @@ import 'package:resourcesr/components/custom_app_bar.dart';
 import 'package:resourcesr/components/list_header.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class DeveloperUi extends StatelessWidget {
+class TeamsUi extends StatelessWidget {
   _openUrl(url) async {
     if (await canLaunch(url)) {
       await launch(url);
@@ -16,7 +16,7 @@ class DeveloperUi extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: customAppBar(context, "Developers"),
+      appBar: customAppBar(context, "Teams"),
       body: Container(
         child: ListView(
           children: <Widget>[
