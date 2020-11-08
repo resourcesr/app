@@ -13,7 +13,7 @@ class AboutUi extends StatelessWidget {
             ListHeader(title: "App"),
             ListTile(
               title: Text("ResourcesR"),
-              subtitle: Text("Version: 1.1.0"),
+              subtitle: Text("Version: 1.2.0"),
             ),
             ListTile(
               title: Text("Copyright"),
@@ -26,7 +26,7 @@ class AboutUi extends StatelessWidget {
             ListHeader(title: "Flutter"),
             ListTile(
               title: Text("Flutter version"),
-              subtitle: Text("1.22.1"),
+              subtitle: Text("1.23.0"),
             ),
             ListTile(
               title: Text("SDK Channel"),
@@ -34,7 +34,7 @@ class AboutUi extends StatelessWidget {
             ),
             ListTile(
               title: Text("Dark SDK version"),
-              subtitle: Text("2.9.2"),
+              subtitle: Text("2.11.0"),
             ),
           ],
         ),
