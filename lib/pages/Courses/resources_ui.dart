@@ -9,6 +9,7 @@ import 'package:resourcesr/data/Resources.dart';
 import 'package:resourcesr/components/empty_state.dart';
 import 'package:intl/intl.dart';
 import 'package:resourcesr/utils/functions.dart';
+import 'package:resourcesr/utils/url.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:share/share.dart';
 import 'package:open_file/open_file.dart';
@@ -130,6 +131,14 @@ class _ResourcesUiState extends State<ResourcesUi> {
   _showBottomSheet(context, url, filename) async {
     var task = await downloader.getByUrl(url);
     List<Widget> children = [];
+
+    children.add(
+      ListTile(
+        leading: Icon(Icons.file_present),
+        title: Text("Open in Browser"),
+        onTap: () => {openUrl(url), Navigator.pop(context)},
+      ),
+    );
     if (task.isNotEmpty) {
       var id = task.first.taskId;
       if (task.first.progress == 100) {
