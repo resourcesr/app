@@ -78,14 +78,6 @@ class _ResourcesUiState extends State<ResourcesUi> {
     );
   }
 
-  _openUrl(url) async {
-    if (await canLaunch(url)) {
-      await launch(url);
-    } else {
-      throw 'Could not launch $url';
-    }
-  }
-
   void _openFile(file) async {
     try {
       await OpenFile.open(file);

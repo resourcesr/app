@@ -2,17 +2,9 @@ import "package:flutter/material.dart";
 import 'package:resourcesr/components/avatars.dart';
 import 'package:resourcesr/components/custom_app_bar.dart';
 import 'package:resourcesr/components/list_header.dart';
-import 'package:url_launcher/url_launcher.dart';
+import 'package:resourcesr/utils/url.dart';
 
 class TeamsUi extends StatelessWidget {
-  _openUrl(url) async {
-    if (await canLaunch(url)) {
-      await launch(url);
-    } else {
-      throw 'Could not launch $url';
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,7 +19,7 @@ class TeamsUi extends StatelessWidget {
               title: Text("Muhammad Umer Farooq"),
               subtitle: Text("Lead Developer"),
               onTap: () => {
-                _openUrl("https://github.com/lablnet"),
+                openUrl("https://github.com/lablnet"),
               },
             ),
             ListTile(
@@ -36,7 +28,7 @@ class TeamsUi extends StatelessWidget {
               title: Text("Usman Naeem"),
               subtitle: Text("Graphic Designer"),
               onTap: () => {
-                _openUrl("https://github.com/Usman-Naeem"),
+                openUrl("https://github.com/Usman-Naeem"),
               },
             ),
           ],

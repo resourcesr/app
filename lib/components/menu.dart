@@ -3,16 +3,8 @@ import 'package:resourcesr/pages/downlaod_ui.dart';
 import 'package:resourcesr/pages/feedback_ui.dart';
 import 'package:resourcesr/pages/section/about_ui.dart';
 import 'package:resourcesr/pages/section/teams_ui.dart';
-import 'package:url_launcher/url_launcher.dart';
+import 'package:resourcesr/utils/url.dart';
 import 'package:share/share.dart';
-
-_openUrl(url) async {
-  if (await canLaunch(url)) {
-    await launch(url);
-  } else {
-    throw 'Could not launch $url';
-  }
-}
 
 List<Widget> menu(context) {
   List<Widget> childrens = [];
@@ -37,7 +29,7 @@ List<Widget> menu(context) {
       leading: Icon(Icons.security),
       title: Text("Privacy Policy"),
       onTap: () => {
-        _openUrl("http://resourcesr.web.app/privacy"),
+        openUrl("http://resourcesr.web.app/privacy"),
       },
     ),
     ListTile(
@@ -68,7 +60,7 @@ List<Widget> menu(context) {
       leading: Icon(Icons.code),
       title: Text("Source Code"),
       onTap: () => {
-        _openUrl("https://github.com/resourcesr/app"),
+        openUrl("https://github.com/resourcesr/app"),
       },
     ),
   ]);

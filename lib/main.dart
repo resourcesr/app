@@ -1,10 +1,10 @@
+import "package:flutter/material.dart";
 import 'package:resourcesr/config.dart';
 import 'package:resourcesr/data/Downloader.dart';
 import 'package:resourcesr/data/PushNotification.dart';
 import 'package:resourcesr/pages/Home/home_ui.dart';
 import 'package:resourcesr/pages/dashboard_splash_ui.dart';
 import 'package:resourcesr/pages/Courses/klasses_ui.dart';
-import "package:flutter/material.dart";
 import './theme.dart';
 import 'data/User.dart';
 import './config.dart';
@@ -12,6 +12,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 Future<void> main() async {
   String uid = "";
+
   try {
     WidgetsFlutterBinding.ensureInitialized();
     await Downloader().init();
