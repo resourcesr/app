@@ -3,7 +3,6 @@ import 'package:resourcesr/pages/downlaod_ui.dart';
 import 'package:resourcesr/pages/feedback_ui.dart';
 import 'package:resourcesr/pages/section/about_ui.dart';
 import 'package:resourcesr/pages/section/contributers_ui.dart';
-import 'package:resourcesr/pages/section/teams_ui.dart';
 import 'package:resourcesr/utils/url.dart';
 import 'package:share/share.dart';
 
