@@ -91,7 +91,7 @@ class _ProfileUiState extends State<ProfileUi> {
 
   Widget _buildBody(BuildContext context) {
     return CustomForm(
-      key: _formKey,
+      fromKey: _formKey,
       loading: isLoading,
       imagePath: "assets/images/Login.png",
       children: <Widget>[

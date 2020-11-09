@@ -95,7 +95,7 @@ class _LoginUiState extends State<LoginUi> {
 
   Widget _buildBody(BuildContext context) {
     return CustomForm(
-      key: _formKey,
+      fromKey: _formKey,
       imagePath: "assets/images/Login.png",
       loading: isLoading,
       children: <Widget>[

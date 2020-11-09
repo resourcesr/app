@@ -73,7 +73,7 @@ class _ResetUiState extends State<ResetUi> {
 
   Widget _buildBody(BuildContext context) {
     return CustomForm(
-        key: _formKey,
+        fromKey: _formKey,
         loading: isLoading,
         imagePath: "assets/images/forgot.png",
         children: <Widget>[

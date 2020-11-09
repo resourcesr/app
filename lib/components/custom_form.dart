@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
 
 class CustomForm extends StatelessWidget {
-  CustomForm({this.children, this.imagePath, this.loading, this.key});
+  CustomForm({this.children, this.imagePath, this.loading, this.fromKey});
   List<Widget> children;
   String imagePath;
   bool loading;
-  Key key;
+  Key fromKey;
+
   @override
   Widget build(BuildContext context) {
     if (imagePath == null) imagePath = "assets/images/logo.png";
     return Form(
-      key: key,
+      key: fromKey,
       child: ListView(
         shrinkWrap: true,
         children: <Widget>[

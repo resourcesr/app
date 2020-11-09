@@ -48,7 +48,7 @@ class _FeedbackUiState extends State<FeedbackUi> {
 
   Widget _buildBody(BuildContext context) {
     return CustomForm(
-      key: null,
+      fromKey: null,
       imagePath: null,
       loading: isLoading,
       children: <Widget>[
