@@ -28,21 +28,19 @@ class User with ChangeNotifier {
   }
 
   refresh() async {
-    getCurrentUser().then((value) => {
-          getUserProfile(value.uid).then((val) {
-            if (val != null) {
-              _name = val['name'];
-              _role = val['role'];
-              _klass = val['klass'];
-              _sap = val['sap'];
-
-              //notifyListeners();
-            } else {
-              // If user profile deleted or disable force him to logout.
-              logout();
-            }
-          })
-        });
+    var value = await getCurrentUser();
+    if (value.uid != null) {
+      var usr = await getUserProfile(value.uid);
+      if (usr != null) {
+        _name = usr['name'];
+        _role = usr['role'];
+        _klass = usr['klass'];
+        _sap = usr['sap'];
+        status = AccountStatus.Success;
+      } else
+        status = AccountStatus.Error;
+    } else
+      status = AccountStatus.Error;
   }
 
   // Store user Id in local preferene
