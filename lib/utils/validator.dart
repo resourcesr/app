@@ -13,7 +13,8 @@ String nameValidator(String value) {
 
 String emailValidator(String value) {
   if (value.isEmpty) return "Email field should not be empty";
-  var regx = RegExp("^.*\@.*\..*\$");
+  var regx = RegExp(
+      r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+");
   return regx.hasMatch(value) ? null : "Please provide valid email";
 }
 
