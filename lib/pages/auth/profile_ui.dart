@@ -74,19 +74,13 @@ class _ProfileUiState extends State<ProfileUi> {
     _formKey.currentState.save();
     if (_formKey.currentState.validate()) {
       try {
-        await widget.user
-            .update(widget.user.uid, nameController.text, sapController.text);
+        await widget.user.update(nameController.text, sapController.text);
         onSuccess(context);
       } catch (err) {
         onError(context, err);
       }
     }
-    setState(() {
-      nameController.clear();
-      sapController.clear();
-    });
     setState(() => isLoading = false);
-    Navigator.push(context, MaterialPageRoute(builder: (context) => HomeUi()));
   }
 
   Widget _buildBody(BuildContext context) {
@@ -97,7 +91,7 @@ class _ProfileUiState extends State<ProfileUi> {
       children: <Widget>[
         CustomInput(
           controller: nameController,
-          validator: emailValidator,
+          validator: nameValidator,
           label: "Name",
           obscureText: false,
         ),

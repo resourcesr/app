@@ -4,7 +4,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
-enum AccountStatus { Success, LoggedOut }
+enum AccountStatus { Success, LoggedOut, Error }
 
 class User with ChangeNotifier {
   FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
@@ -27,7 +27,7 @@ class User with ChangeNotifier {
     }
   }
 
-  refresh() {
+  refresh() async {
     getCurrentUser().then((value) => {
           getUserProfile(value.uid).then((val) {
             if (val != null) {
@@ -82,7 +82,9 @@ class User with ChangeNotifier {
   }
 
   // Update user profile
-  Future<void> update(String uid, String name, String sap) async {
+  Future<void> update(String name, String sap) async {
+    var value = await getCurrentUser();
+    String uid = value.uid;
     bool profile = await hasProfile(uid);
     if (profile)
       await updateProfile(uid, name, sap);
