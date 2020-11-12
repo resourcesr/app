@@ -3,7 +3,7 @@
 ### v1.3.0
 1. fix bug in forms, flutter gives error multiple key used by multiple widgets.
 2. Fix bug in download, on deleting item didn't hide.
-
+3. Fix update profile bug, cause creating duplicate profile.
 
 ### v1.2.0
 1. Fix show download icon when resource downloaded 
