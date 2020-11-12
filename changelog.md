@@ -1,7 +1,8 @@
 # changelog
 
 ### v1.3.0
-1. fix bug in forms, flutter gives error multiple key used by multiple widgets
+1. fix bug in forms, flutter gives error multiple key used by multiple widgets.
+2. Fix bug in download, on deleting item didn't hide.
 
 
 ### v1.2.0

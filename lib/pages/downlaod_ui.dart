@@ -34,8 +34,6 @@ class _DownloadUiState extends State<DownloadUi> {
       ),
     );
     setState(() {
-      /// remove the item form list.
-      //widget.children.removeWhere((element) => element['id'] == id);
       widget.children.clear();
     });
   }
@@ -58,8 +56,8 @@ class _DownloadUiState extends State<DownloadUi> {
         ),
         FlatButton(
           child: Text('Yes'),
-          onPressed: () {
-            downloader.delete(taskId);
+          onPressed: () async {
+            await downloader.delete(taskId);
             Navigator.pop(context);
             onDeleted(context, taskId);
           },
