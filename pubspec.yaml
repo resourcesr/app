@@ -44,6 +44,7 @@ dependencies:
   flutter_local_notifications: ^2.0.0
   google_sign_in: ^4.5.4
   flutter_week_view: ^1.0.0+1
+  firebase_admob: ^0.9.3
 
 
   # The following adds the Cupertino Icons font to your application.
