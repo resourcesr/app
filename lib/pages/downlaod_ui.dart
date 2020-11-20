@@ -38,12 +38,6 @@ class _DownloadUiState extends State<DownloadUi> {
     });
   }
 
-  void _openFile(file) async {
-    try {
-      await OpenFile.open(file);
-    } catch (_) {}
-  }
-
   _confirmBox(BuildContext context, taskId) {
     AlertDialog alert = AlertDialog(
       content: Text("Are you sure?"),
@@ -84,7 +78,7 @@ class _DownloadUiState extends State<DownloadUi> {
                 ListTile(
                   leading: Icon(Icons.file_present),
                   title: Text("Open"),
-                  onTap: () => {_openFile(file), Navigator.pop(context)},
+                  onTap: () => {(file), Navigator.pop(context)},
                 ),
                 ListTile(
                   leading: Icon(Icons.share),

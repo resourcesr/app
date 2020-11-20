@@ -10,9 +10,8 @@ import 'package:resourcesr/components/empty_state.dart';
 import 'package:intl/intl.dart';
 import 'package:resourcesr/utils/functions.dart';
 import 'package:resourcesr/utils/url.dart';
-import 'package:url_launcher/url_launcher.dart';
+import 'package:resourcesr/utils/util.dart';
 import 'package:share/share.dart';
-import 'package:open_file/open_file.dart';
 
 class ResourcesUi extends StatefulWidget {
   ResourcesUi({this.courseDetail});
@@ -79,12 +78,6 @@ class _ResourcesUiState extends State<ResourcesUi> {
     );
   }
 
-  void _openFile(file) async {
-    try {
-      await OpenFile.open(file);
-    } catch (_) {}
-  }
-
   void download(link, filename) async {
     await downloader.start(link, filename);
 
@@ -147,7 +140,7 @@ class _ResourcesUiState extends State<ResourcesUi> {
             leading: Icon(Icons.file_present),
             title: Text("Open"),
             onTap: () => {
-              _openFile(task.first.savedDir + "/" + task.first.filename),
+              openFile(task.first.savedDir + "/" + task.first.filename),
               Navigator.pop(context)
             },
           ),
