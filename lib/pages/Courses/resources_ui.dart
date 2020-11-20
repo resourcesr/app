@@ -235,78 +235,10 @@ class _ResourcesUiState extends State<ResourcesUi> {
         for (var data in d) {
           if (content == data.data['content']) {
             if (type == data.data['type'] && data.data['delete'] == null) {
-              DateTime date =
-                  (data.data['created'] ?? Timestamp.now()).toDate();
-              var formatter = new DateFormat('MMM dd, yyyy');
-              String formatted = formatter.format(date);
               if (content == "resource" || content == "lab") {
-                children.add(
-                  Padding(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 16.0, vertical: 8.0),
-                    child: Card(
-                      child: FutureBuilder(
-                          future: listTrallingWidget(data.data['downloadUrl']),
-                          builder: (context, snapshot) {
-                            return ListTile(
-                              leading: CircleAvatar(
-                                backgroundColor: Colors.transparent,
-                                child:
-                                    FileIconAvatar(fileType: data.data['icon']),
-                              ),
-                              title: Text(data.data['name'] ?? ""),
-                              subtitle: Text("$formatted"),
-                              trailing: Icon(snapshot.data),
-                              onTap: () => {
-                                _showBottomSheet(
-                                    context,
-                                    data.data['downloadUrl'],
-                                    getTitle(
-                                            widget.courseDetail.data['title']) +
-                                        ":" +
-                                        data.data['name'] +
-                                        "." +
-                                        data.data['icon'])
-                              },
-                            );
-                          }),
-                    ),
-                  ),
-                );
+                children.add(buildResources(data));
               } else {
-                assignments.add(
-                  Padding(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 16.0, vertical: 8.0),
-                    child: Card(
-                      child: FutureBuilder(
-                          future: listTrallingWidget(data.data['downloadUrl']),
-                          builder: (context, snapshot) {
-                            return ListTile(
-                              leading: CircleAvatar(
-                                backgroundColor: Colors.transparent,
-                                child:
-                                    FileIconAvatar(fileType: data.data['icon']),
-                              ),
-                              title: Text(data.data['name'] ?? ""),
-                              subtitle: Text("$formatted"),
-                              trailing: Icon(snapshot.data),
-                              onTap: () => {
-                                _showBottomSheet(
-                                    context,
-                                    data.data['downloadUrl'],
-                                    getTitle(
-                                            widget.courseDetail.data['title']) +
-                                        ":" +
-                                        data.data['name'] +
-                                        "." +
-                                        data.data['icon'])
-                              },
-                            );
-                          }),
-                    ),
-                  ),
-                );
+                assignments.add(buildResources(data));
               }
             }
           }
@@ -353,5 +285,39 @@ class _ResourcesUiState extends State<ResourcesUi> {
         ),
       ),
     ]);
+  }
+
+  Widget buildResources(data) {
+    DateTime date = (data.data['created'] ?? Timestamp.now()).toDate();
+    var formatter = new DateFormat('MMM dd, yyyy');
+    String formatted = formatter.format(date);
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+      child: Card(
+        child: FutureBuilder(
+            future: listTrallingWidget(data.data['downloadUrl']),
+            builder: (context, snapshot) {
+              return ListTile(
+                leading: CircleAvatar(
+                  backgroundColor: Colors.transparent,
+                  child: FileIconAvatar(fileType: data.data['icon']),
+                ),
+                title: Text(data.data['name'] ?? ""),
+                subtitle: Text("$formatted"),
+                trailing: Icon(snapshot.data),
+                onTap: () => {
+                  _showBottomSheet(
+                      context,
+                      data.data['downloadUrl'],
+                      getTitle(widget.courseDetail.data['title']) +
+                          ":" +
+                          data.data['name'] +
+                          "." +
+                          data.data['icon'])
+                },
+              );
+            }),
+      ),
+    );
   }
 }
