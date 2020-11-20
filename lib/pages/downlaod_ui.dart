@@ -7,8 +7,8 @@ import 'package:resourcesr/components/empty_state.dart';
 import 'package:resourcesr/components/loader.dart';
 import 'package:resourcesr/data/Downloader.dart';
 import 'package:resourcesr/utils/functions.dart';
+import 'package:resourcesr/utils/util.dart';
 import 'package:share/share.dart';
-import 'package:open_file/open_file.dart';
 
 class DownloadUi extends StatefulWidget {
   List<Map> children = [];
@@ -78,7 +78,7 @@ class _DownloadUiState extends State<DownloadUi> {
                 ListTile(
                   leading: Icon(Icons.file_present),
                   title: Text("Open"),
-                  onTap: () => {(file), Navigator.pop(context)},
+                  onTap: () => {openFile(file), Navigator.pop(context)},
                 ),
                 ListTile(
                   leading: Icon(Icons.share),
