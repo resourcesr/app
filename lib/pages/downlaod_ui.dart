@@ -60,6 +60,7 @@ class _DownloadUiState extends State<DownloadUi> {
             await downloader.delete(taskId);
             Navigator.pop(context);
             onDeleted(context, taskId);
+            Navigator.pop(context);
           },
         ),
       ],
