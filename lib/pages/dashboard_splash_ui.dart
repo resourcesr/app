@@ -26,7 +26,8 @@ class _DashboardSplashUi extends State<DashboardSplashUi> {
 
   startTimer() async {
     var duration = Duration(seconds: 5);
-    //if (widget.user.status == AccountStatus.Success) return route();
+    // Todo: need to handle the deleted, disabled profiles.
+    if (widget.user.klass != null) return route();
     return Timer(duration, route);
   }
 
