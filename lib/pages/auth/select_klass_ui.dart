@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:resourcesr/components/avatars.dart';
 import 'package:resourcesr/components/custom_app_bar.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:resourcesr/components/loader.dart';
@@ -50,14 +51,35 @@ class _SelectKlassUiState extends State<SelectKlassUi> {
 
   Widget _buildList(BuildContext context, List<DocumentSnapshot> snapshot) {
     final items = snapshot.toList();
-    List<String> klasses = [];
-    Map kMap = {};
+    //List<String> klasses = [];
+    //Map kMap = {};
+    List<Widget> children = [];
     for (var item in items) {
-      var i = item.data['name'].toString().replaceAll(" ", "-");
+      /*var i = item.data['name'].toString().replaceAll(" ", "-");
       klasses.add(i);
-      kMap[i] = item.documentID;
+      kMap[i] = item.documentID;*/
+      children.add(
+        Card(
+          child: ListTile(
+            leading: TextAvatar(text: item.data['name']),
+            title: Text(item.data['name']),
+            subtitle: Text(
+                "${item.data['cr']} - ${item.data['program'].toString().toUpperCase()}"),
+            tileColor: (item.documentID == widget.user.klass)
+                ? Colors.green[200]
+                : Colors.transparent,
+            onTap: () => {
+              onSubmit(item.documentID),
+            },
+          ),
+        ),
+      );
     }
-    return DropdownButton<String>(
+    return ListView(
+      padding: const EdgeInsets.only(top: 20.0),
+      children: children,
+    );
+    /*return DropdownButton<String>(
       value: dropdownValue,
       icon: Icon(Icons.arrow_downward),
       iconSize: 24,
@@ -79,6 +101,6 @@ class _SelectKlassUiState extends State<SelectKlassUi> {
           child: Text(value),
         );
       }).toList(),
-    );
+    );*/
   }
 }
