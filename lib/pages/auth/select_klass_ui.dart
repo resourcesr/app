@@ -51,13 +51,8 @@ class _SelectKlassUiState extends State<SelectKlassUi> {
 
   Widget _buildList(BuildContext context, List<DocumentSnapshot> snapshot) {
     final items = snapshot.toList();
-    //List<String> klasses = [];
-    //Map kMap = {};
     List<Widget> children = [];
     for (var item in items) {
-      /*var i = item.data['name'].toString().replaceAll(" ", "-");
-      klasses.add(i);
-      kMap[i] = item.documentID;*/
       children.add(
         Card(
           child: ListTile(
@@ -77,30 +72,10 @@ class _SelectKlassUiState extends State<SelectKlassUi> {
     }
     return ListView(
       padding: const EdgeInsets.only(top: 20.0),
-      children: children,
+      children: [
+        Text("Select your class: "),
+        ...children,
+      ],
     );
-    /*return DropdownButton<String>(
-      value: dropdownValue,
-      icon: Icon(Icons.arrow_downward),
-      iconSize: 24,
-      elevation: 5,
-      style: TextStyle(color: Colors.deepPurple),
-      underline: Container(
-        height: 2,
-        color: Colors.deepPurpleAccent,
-      ),
-      onChanged: (String newValue) {
-        setState(() {
-          dropdownValue = newValue;
-        });
-        onSubmit(kMap[newValue]);
-      },
-      items: klasses.map<DropdownMenuItem<String>>((String value) {
-        return DropdownMenuItem<String>(
-          value: value,
-          child: Text(value),
-        );
-      }).toList(),
-    );*/
   }
 }
