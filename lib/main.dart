@@ -12,20 +12,22 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 Future<void> main() async {
   String uid = "";
-
+  bool theme = false;
   try {
     WidgetsFlutterBinding.ensureInitialized();
     await Downloader().init();
     SharedPreferences prefs = await SharedPreferences.getInstance();
     uid = prefs.getString('uid') ?? "";
+    theme = prefs.getBool('theme');
   } catch (_) {}
 
-  runApp(WebResourceApp(uid));
+  runApp(WebResourceApp(uid, theme));
 }
 
 class WebResourceApp extends StatefulWidget {
-  WebResourceApp(this.uid);
+  WebResourceApp(this.uid, this.theme);
   final String uid;
+  final bool theme;
 
   @override
   _WebResourceAppState createState() => _WebResourceAppState();
@@ -33,6 +35,7 @@ class WebResourceApp extends StatefulWidget {
 
 class _WebResourceAppState extends State<WebResourceApp> {
   User user;
+  bool theme;
 
   @override
   void initState() {
@@ -52,7 +55,7 @@ class _WebResourceAppState extends State<WebResourceApp> {
           : HomeUi(),
       theme: lightTheme(),
       darkTheme: darkTheme(),
-      themeMode: currentTheme.currentTheme(),
+      themeMode: currentTheme.currentTheme(theme: widget.theme),
       routes: {
         '/classes': (context) => KlassesUi(dep: "fc"),
       },
