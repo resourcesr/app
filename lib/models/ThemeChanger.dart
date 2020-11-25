@@ -6,16 +6,6 @@ class ThemeChanger with ChangeNotifier {
   bool _isDark = false, _rchange = false;
   bool get isDark => _isDark;
 
-  ThemeChanger() {
-    getState().then((value) => {_isDark = value ?? false});
-    notifyListeners();
-  }
-
-  Future<bool> getState() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    return prefs.getBool('theme');
-  }
-
   void saveState(status) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     await prefs.setBool("theme", status);

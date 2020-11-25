@@ -13,6 +13,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 Future<void> main() async {
   String uid = "";
   bool theme = false;
+
   try {
     WidgetsFlutterBinding.ensureInitialized();
     await Downloader().init();
@@ -35,7 +36,6 @@ class WebResourceApp extends StatefulWidget {
 
 class _WebResourceAppState extends State<WebResourceApp> {
   User user;
-  bool theme;
 
   @override
   void initState() {
