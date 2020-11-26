@@ -1,9 +1,14 @@
 # changelog
 
+### v1.4.0
+
 ### v1.3.0
 1. fix bug in forms, flutter gives error multiple key used by multiple widgets.
 2. Fix bug in download, on deleting item didn't hide.
 3. Fix update profile bug, cause creating duplicate profile.
+4. Persistence dark theme.
+5. Performance and UI improvement.
+6. Mirror fixes.
 
 ### v1.2.0
 1. Fix show download icon when resource downloaded 
