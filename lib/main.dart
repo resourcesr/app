@@ -19,7 +19,7 @@ Future<void> main() async {
     await Downloader().init();
     SharedPreferences prefs = await SharedPreferences.getInstance();
     uid = prefs.getString('uid') ?? "";
-    theme = prefs.getBool('theme');
+    theme = prefs.getBool('theme') ?? false;
   } catch (_) {}
 
   runApp(WebResourceApp(uid, theme));

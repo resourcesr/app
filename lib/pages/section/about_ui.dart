@@ -13,7 +13,7 @@ class AboutUi extends StatelessWidget {
             ListHeader(title: "App"),
             ListTile(
               title: Text("ResourcesR"),
-              subtitle: Text("Version: 1.3.0"),
+              subtitle: Text("Version: 1.3.1"),
             ),
             ListTile(
               title: Text("Copyright"),
