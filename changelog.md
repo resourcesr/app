@@ -2,6 +2,9 @@
 
 ### v1.4.0
 
+### v1.3.1
+Fix app crashing bug cause by 1.3.0
+
 ### v1.3.0
 1. fix bug in forms, flutter gives error multiple key used by multiple widgets.
 2. Fix bug in download, on deleting item didn't hide.
