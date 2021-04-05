@@ -1,0 +1,14 @@
+1. firebase login
+2. firebase init
+3. 
+
+{
+  "hosting": {
+    "site": "riphah",
+    "public": "public",
+    ...
+  }
+}
+
+
+firebase deploy --only hosting:riphah 

@@ -26,25 +26,24 @@ dependencies:
 
   firebase_core:
   firebase_auth:
-  cloud_firestore: ^0.12.9
-  intl: ^0.16.1
-  flutter_downloader: ^1.5.1
-  shared_preferences: ^0.5.12
+  cloud_firestore:
+  intl: 
+  flutter_downloader: 
+  shared_preferences:
   provider:
-  url_launcher: ^5.7.2
+  url_launcher:
   firebase_messaging:
   device_id:
-  path_provider: ^1.6.5
-  permission_handler: ^5.0.1+1
-  string_to_hex: ^0.2.1+30
-  flutter_svg: ^0.19.0
-  share: ^0.6.5+2
-  http: ^0.12.2
-  open_file: ^3.0.1
-  flutter_local_notifications: ^2.0.0
-  google_sign_in: ^4.5.4
-  flutter_week_view: ^1.0.0+1
-  firebase_admob: ^0.9.3
+  path_provider: 
+  permission_handler: 
+  string_to_hex:
+  flutter_svg:
+  share: 
+  http:
+  open_file: 
+  flutter_local_notifications: 
+  google_sign_in:
+  flutter_week_view:
 
 
   # The following adds the Cupertino Icons font to your application.
