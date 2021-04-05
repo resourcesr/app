@@ -1,4 +1,5 @@
 import "package:flutter/material.dart";
+import "package:flutter/scheduler.dart";
 import 'package:resourcesr/config.dart';
 import 'package:resourcesr/data/Downloader.dart';
 import 'package:resourcesr/data/PushNotification.dart';
@@ -20,6 +21,13 @@ Future<void> main() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     uid = prefs.getString('uid') ?? "";
     theme = prefs.getBool('theme') ?? false;
+
+    // get the system theme.
+    
+    var brightness = SchedulerBinding.instance.window.platformBrightness;
+    theme = brightness == Brightness.dark;
+
+
   } catch (_) {}
 
   runApp(WebResourceApp(uid, theme));
