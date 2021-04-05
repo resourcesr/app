@@ -2,6 +2,9 @@
 
 ### v1.4.0
 
+### v1.3.3
+1. Sync theme with system theme
+
 ### v1.3.1
 Fix app crashing bug cause by 1.3.0
 
