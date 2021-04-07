@@ -31,7 +31,8 @@ class FileIconAvatar extends StatelessWidget {
       "zip": "zip.svg",
       "ppt": "powerpoint.svg",
       "pptx": "powerpoint.svg",
-      "powerpoint": "powerpoint.svg"
+      "powerpoint": "powerpoint.svg",
+      "PowerPoint": "powerpoint.svg"
     };
     if (fileType != null) {
       return "assets/images/files/" + (icons[fileType] ?? "file.svg");
