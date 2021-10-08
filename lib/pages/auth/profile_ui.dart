@@ -9,7 +9,9 @@ import 'package:resourcesr/utils/validator.dart';
 
 class ProfileUi extends StatefulWidget {
   ProfileUi({@required this.user});
+
   User user;
+
   @override
   _ProfileUiState createState() => _ProfileUiState();
 }
@@ -20,12 +22,14 @@ class _ProfileUiState extends State<ProfileUi> {
   final _scaffoldKey = GlobalKey<ScaffoldState>();
   final _formKey = GlobalKey<FormState>();
   bool isLoading = false;
+  int currentSem = 0;
 
   @override
   void initState() {
     setState(() {
       nameController.value = (TextEditingValue(text: widget.user.name));
       sapController.value = (TextEditingValue(text: widget.user.sap));
+      currentSem = widget.user.sem ?? 1;
     });
     super.initState();
   }
@@ -83,6 +87,20 @@ class _ProfileUiState extends State<ProfileUi> {
     setState(() => isLoading = false);
   }
 
+  onChangeSem(value, context) async {
+    setState(() => {isLoading = true, currentSem = value});
+    _formKey.currentState.save();
+    try {
+      await widget.user.updateSem(value);
+
+      onSuccess(context);
+    } catch (err) {
+      onError(context, err);
+    }
+
+    setState(() => isLoading = false);
+  }
+
   Widget _buildBody(BuildContext context) {
     return CustomForm(
       fromKey: _formKey,
@@ -115,7 +133,30 @@ class _ProfileUiState extends State<ProfileUi> {
         ),
         Padding(
           padding: const EdgeInsets.all(20.20),
-          child: FlatButton(
+          child: InputDecorator(
+            decoration: InputDecoration(
+              labelText: 'Current Semester',
+              border:
+                  OutlineInputBorder(borderRadius: BorderRadius.circular(5.0)),
+              contentPadding: EdgeInsets.all(10),
+            ),
+            child: DropdownButton<int>(
+              items: <int>[1, 2, 3, 4, 5, 6, 7, 8].map((int value) {
+                return DropdownMenuItem<int>(
+                  value: value,
+                  child: Text(value.toString()),
+                );
+              }).toList(),
+              value: currentSem,
+              onChanged: (value) async {
+                await onChangeSem(value, context);
+              },
+            ),
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.all(20.20),
+          child: TextButton(
             onPressed: () => {
               Navigator.push(
                 context,

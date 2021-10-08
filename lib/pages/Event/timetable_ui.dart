@@ -12,8 +12,9 @@ import 'package:string_to_hex/string_to_hex.dart';
 import 'package:resourcesr/utils/functions.dart';
 
 class TimetableUi extends StatelessWidget {
-  TimetableUi({@required this.code});
+  TimetableUi({@required this.code, @required this.sem});
   String code;
+  int sem;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,7 +24,7 @@ class TimetableUi extends StatelessWidget {
 
   Widget _buildBody(BuildContext context) {
     return StreamBuilder<QuerySnapshot>(
-      stream: KlassEvents(klassId: code).getByKlassId(),
+      stream: KlassEvents(klassId: code, sem: sem).getByKlassId(),
       builder: (context, snapshot) {
         if (code == null)
           return EmptyState(

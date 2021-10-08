@@ -11,12 +11,14 @@ class User with ChangeNotifier {
   Firestore _firestore = Firestore.instance;
   final GoogleSignIn _googleSignIn = GoogleSignIn();
   String _uid, _name, _role, _klass, _sap;
+  int _sem;
   AccountStatus status = AccountStatus.LoggedOut;
   String get uid => _uid;
   String get name => _name;
   String get role => _role;
   String get klass => _klass;
   String get sap => _sap;
+  int get sem => _sem;
 
   // Init the user class.
   User(_uid) {
@@ -36,6 +38,7 @@ class User with ChangeNotifier {
         _role = usr['role'];
         _klass = usr['klass'];
         _sap = usr['sap'];
+        _sem = usr['sem'];
         status = AccountStatus.Success;
       } else
         status = AccountStatus.Error;
@@ -43,7 +46,7 @@ class User with ChangeNotifier {
       status = AccountStatus.Error;
   }
 
-  // Store user Id in local preferene
+  // Store user Id in local preference
   Future<void> saveId(uid) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     await prefs.setString("uid", uid);
@@ -68,6 +71,7 @@ class User with ChangeNotifier {
       "sap": sap,
       'role': "student",
       'klass': null,
+      'sem': 1,
     });
   }
 
@@ -77,6 +81,19 @@ class User with ChangeNotifier {
       "name": name,
       "sap": sap,
     });
+  }
+  Future<void> updateSemInternal(String uid, int semVal) async {
+    await _firestore.collection("users").document(uid).updateData({
+      "sem": semVal,
+    });
+  }
+  Future<void> updateSem(int semVal) async {
+    var value = await getCurrentUser();
+    String uid = value.uid;
+    bool profile = await hasProfile(uid);
+    if (profile) {
+      await updateSemInternal(uid, semVal);
+    }
   }
 
   // Update user profile

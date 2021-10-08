@@ -11,8 +11,9 @@ import 'package:resourcesr/pages/Event/event_detail_ui.dart';
 import 'package:resourcesr/utils/functions.dart';
 
 class Home extends StatelessWidget {
-  Home({this.code});
+  Home({this.code, this.sem});
   String code;
+  int sem;
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +25,7 @@ class Home extends StatelessWidget {
 
   Widget _buildBody(BuildContext context) {
     return StreamBuilder<QuerySnapshot>(
-      stream: KlassEvents(klassId: code).getByKlassId(),
+      stream: KlassEvents(klassId: code, sem: sem).getByKlassId(),
       builder: (context, snapshot) {
         if (code == null)
           return EmptyState(

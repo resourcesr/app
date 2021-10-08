@@ -22,12 +22,14 @@ class _DashboardUiState extends State<DashboardUi> {
     widget.user.refresh();
     List<BottomNavigationBarItem> navItems = [];
     var k_id = widget.user.klass;
+    var sem = widget.user.sem;
     tabs = [
       {
         "name": "Home",
         "icon": Icons.home,
         "page": Home(
           code: k_id ?? null,
+          sem: sem ?? 1,
         )
       },
       {
@@ -40,7 +42,7 @@ class _DashboardUiState extends State<DashboardUi> {
       {
         "name": "Time Table",
         "icon": Icons.calendar_today,
-        "page": TimetableUi(code: k_id ?? null)
+        "page": TimetableUi(code: k_id ?? null, sem: sem ?? 1,)
       },
       {"name": "Menu", "icon": Icons.menu, "page": MenuUi(user: widget.user)}
     ];
