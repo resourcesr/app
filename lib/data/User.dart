@@ -6,19 +6,19 @@ import 'package:google_sign_in/google_sign_in.dart';
 
 enum AccountStatus { Success, LoggedOut, Error }
 
-class User with ChangeNotifier {
+class UserCustom with ChangeNotifier {
   FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
-  Firestore _firestore = Firestore.instance;
+  FirebaseFirestore _firestore = FirebaseFirestore.instance;
   final GoogleSignIn _googleSignIn = GoogleSignIn();
-  String _uid, _name, _role, _klass, _sap;
-  int _sem;
+  String? _uid, _name, _role, _klass, _sap;
+  int? _sem;
   AccountStatus status = AccountStatus.LoggedOut;
-  String get uid => _uid;
-  String get name => _name;
-  String get role => _role;
-  String get klass => _klass;
-  String get sap => _sap;
-  int get sem => _sem;
+  String? get uid => _uid;
+  String? get name => _name;
+  String? get role => _role;
+  String? get klass => _klass;
+  String? get sap => _sap;
+  int? get sem => _sem;
 
   // Init the user class.
   User(_uid) {
@@ -54,36 +54,34 @@ class User with ChangeNotifier {
 
   // Get user profile.
   Future<dynamic> getUserProfile(String id) async {
-    var doc = await _firestore.document("/users/$id/").get();
+    var doc = await _firestore.doc("/users/$id/").get();
     return doc.data;
   }
 
   // Get user profile.
   Future<dynamic> hasProfile(String id) async {
-    var doc = await _firestore.document("/users/$id/").get();
+    var doc = await _firestore.doc("/users/$id/").get();
     return doc.exists;
   }
 
   // Save user profile
-  Future<void> saveUserInDocument(String uid, String name, String sap) async {
-    await _firestore.collection("users").document(uid).setData({
+  Future<void> saveUserInDocument(String uid, String name, String sap) async => await _firestore.collection("users").doc(uid).set({
       "name": name,
       "sap": sap,
       'role': "student",
       'klass': null,
       'sem': 1,
     });
-  }
 
   // Update user profile
   Future<void> updateProfile(String uid, String name, String sap) async {
-    await _firestore.collection("users").document(uid).updateData({
+    await _firestore.collection("users").doc(uid).update({
       "name": name,
       "sap": sap,
     });
   }
   Future<void> updateSemInternal(String uid, int semVal) async {
-    await _firestore.collection("users").document(uid).updateData({
+    await _firestore.collection("users").doc(uid).update({
       "sem": semVal,
     });
   }
@@ -110,7 +108,7 @@ class User with ChangeNotifier {
   // Update user class.
   Future<void> updateKlass(String k_id) async {
     getCurrentUser().then((val) => {
-          _firestore.collection("users").document(val.uid).updateData({
+          _firestore.collection("users").doc(val?.uid).update({
             "klass": k_id,
           })
         });
@@ -124,7 +122,7 @@ class User with ChangeNotifier {
   // user signup.
   Future<User> signup(
       String email, String password, String name, String sap) async {
-    FirebaseUser user = (await _firebaseAuth.createUserWithEmailAndPassword(
+    User? user = (await _firebaseAuth.createUserWithEmailAndPassword(
             email: email, password: password))
         .user;
     if (user != null) {
@@ -156,7 +154,7 @@ class User with ChangeNotifier {
       accessToken: googleAuth.accessToken,
       idToken: googleAuth.idToken,
     );
-    final FirebaseUser user =
+    final User user =
         (await _firebaseAuth.signInWithCredential(credential)).user;
     if (user != null) {
       saveId(user.uid);

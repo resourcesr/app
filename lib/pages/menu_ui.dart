@@ -7,7 +7,7 @@ import 'package:resourcesr/pages/Home/home_ui.dart';
 import 'package:resourcesr/pages/auth/profile_ui.dart';
 
 class MenuUi extends StatelessWidget {
-  MenuUi({this.user});
+  MenuUi({required this.user});
   User user;
 
   @override

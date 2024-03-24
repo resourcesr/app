@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:resourcesr/components/avatars.dart';
 
 class CourseItemView extends StatelessWidget {
-  CourseItemView({this.lIcon, this.title, this.sTitle, this.tIcon, this.route});
+  CourseItemView({required this.lIcon, required this.title, required this.sTitle, required this.tIcon, required this.route});
 
   final IconData lIcon;
   final String title;

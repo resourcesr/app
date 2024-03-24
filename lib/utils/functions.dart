@@ -32,6 +32,7 @@ String timeAgo(timestamp) {
     return (diff / 31207680 == 1)
         ? "Yr ago"
         : '${(diff / 31207680).toStringAsFixed(2)} yrs ago';
+  return "";
 }
 
 humanize(String time) {

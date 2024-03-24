@@ -9,7 +9,7 @@ class PrimaryButton extends StatelessWidget {
 }
 
 class StretchableButton extends StatelessWidget {
-  VoidCallback onPressed;
+  final VoidCallback onPressed;
   final double borderRadius;
   final double buttonPadding;
   final Color buttonColor, splashColor;
@@ -18,13 +18,13 @@ class StretchableButton extends StatelessWidget {
   final bool centered;
 
   StretchableButton({
-    this.buttonColor,
-    this.borderRadius,
-    this.children,
-    this.splashColor,
-    this.buttonBorderColor,
-    this.onPressed,
-    this.buttonPadding,
+    required this.buttonColor,
+    required this.borderRadius,
+    required this.children,
+    required this.splashColor,
+    required this.buttonBorderColor,
+    required this.onPressed,
+    required this.buttonPadding,
     this.centered = false,
   });
   @override
@@ -40,24 +40,28 @@ class StretchableButton extends StatelessWidget {
         contents.add(Spacer());
       }
       BorderSide bs;
-      if (buttonBorderColor != null) {
-        bs = BorderSide(
-          color: buttonBorderColor,
-        );
-      } else {
-        bs = BorderSide.none;
-      }
-      return ButtonTheme(
+      bs = BorderSide(
+        color: buttonBorderColor,
+      );
+          return ButtonTheme(
         height: 48,
         padding: EdgeInsets.all(buttonPadding),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(borderRadius),
           side: bs,
         ),
-        child: RaisedButton(
+        child:  ElevatedButton(
           onPressed: onPressed,
-          color: buttonColor,
-          splashColor: splashColor,
+          style: ButtonStyle(
+            backgroundColor: MaterialStateProperty.all(buttonColor),
+            shape: MaterialStateProperty.all(
+              RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(borderRadius),
+                side: bs,
+              ),
+            ),
+            overlayColor: MaterialStateProperty.all(splashColor),
+          ),
           child: Row(
             mainAxisSize: MainAxisSize.min,
             children: contents,
@@ -86,17 +90,17 @@ class GoogleSignInButton extends StatelessWidget {
   /// blue background variant with white text, otherwise an all-white background
   /// with dark text is used.
   GoogleSignInButton(
-      {this.onPressed,
+      {
+        required this.onPressed,
       this.text = 'Sign in with Google',
-      this.textStyle,
-      this.splashColor,
+      required this.textStyle,
+      required this.splashColor,
       this.darkMode = false,
       // Google doesn't specify a border radius, but this looks about right.
       this.borderRadius = 0, //defaultBorderRadius,
       this.centered = false,
-      Key key})
-      : assert(text != null),
-        super(key: key);
+      required Key key})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -107,6 +111,7 @@ class GoogleSignInButton extends StatelessWidget {
       onPressed: onPressed,
       buttonPadding: 0.0,
       centered: centered,
+      buttonBorderColor: darkMode ? Colors.transparent : Colors.grey,
       children: <Widget>[
         // The Google design guidelines aren't consistent. The dark mode
         // seems to have a perfect square of white around the logo, with a
@@ -143,14 +148,7 @@ class GoogleSignInButton extends StatelessWidget {
           padding: const EdgeInsets.fromLTRB(0.0, 8.0, 8.0, 8.0),
           child: Text(
             text,
-            style: textStyle ??
-                TextStyle(
-                  fontSize: 18.0,
-                  fontFamily: "Roboto",
-                  fontWeight: FontWeight.w500,
-                  color:
-                      darkMode ? Colors.white : Colors.black.withOpacity(0.54),
-                ),
+            style: textStyle,
           ),
         ),
       ],

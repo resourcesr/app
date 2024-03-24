@@ -1,10 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Klasss {
-  Klasss({this.department});
+  Klasss({required this.department});
 
   final String department;
-  final Firestore _firestore = Firestore.instance;
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
   // Get all classes.
   Stream<QuerySnapshot> getAllKlasses() {

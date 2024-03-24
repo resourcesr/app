@@ -4,7 +4,7 @@ import 'package:path_provider/path_provider.dart';
 import 'package:flutter_downloader/flutter_downloader.dart';
 
 class Downloader {
-  String _path;
+  late String _path;
 
   // Init the Flutter downloader
   init() async {
@@ -13,33 +13,33 @@ class Downloader {
 
   // Get the application path.
   Future<void> getPath() async {
-    Directory appDocDir = await getExternalStorageDirectory();
-    _path = appDocDir.path + '/Download';
+    Directory? appDocDir = await getExternalStorageDirectory();
+    _path = appDocDir!.path + '/Download';
   }
 
   // Get downloaded task by URL
-  Future<List<DownloadTask>> getByUrl(String url) async {
+  Future<List<DownloadTask>?> getByUrl(String url) async {
     return await FlutterDownloader.loadTasksWithRawQuery(
         query: 'SELECT * FROM task WHERE url="$url";');
   }
 
   // Get downloaded task by ID
-  Future<List<DownloadTask>> getById(var id) async {
+  Future<List<DownloadTask>?> getById(var id) async {
     return await FlutterDownloader.loadTasksWithRawQuery(
         query: 'SELECT * FROM task WHERE task_id="$id";');
   }
 
   // Get all downloaded tasks
-  Future<List<DownloadTask>> getAll() async {
+  Future<List<DownloadTask>?> getAll() async {
     return await FlutterDownloader.loadTasksWithRawQuery(
         query: 'SELECT * FROM task WHERE status=3;');
   }
 
   // Start downloading file
-  Future<String> start(String url, String filename) async {
+  Future<String?> start(String url, String filename) async {
     var tasks = await getByUrl(url);
     await getPath();
-    if (tasks.isNotEmpty) return tasks[0].taskId;
+    if (tasks != null && tasks.isNotEmpty) return tasks[0].taskId;
     var savedDir = Directory(_path);
     bool hasDir = await savedDir.exists();
     if (!hasDir) savedDir.create();
@@ -56,7 +56,7 @@ class Downloader {
   Future<DownloadTaskStatus> getStatus(String url) async {
     var tasks = await getByUrl(url);
     return (tasks ?? []).isNotEmpty
-        ? tasks[0].status
+        ? tasks![0].status
         : DownloadTaskStatus.undefined;
   }
 
@@ -79,7 +79,7 @@ class Downloader {
   Future<void> delete(String taskId) async {
     var task = await getById(taskId);
     await getPath();
-    var file = task.first.filename;
+    var file = task!.first.filename;
     var toDeleted = File("${_path}/${file}");
     bool hasFile = await toDeleted.exists();
     // Before deleting check, does file exists.

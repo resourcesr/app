@@ -1,3 +1,4 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:resourcesr/models/NotificationManager.dart';
 
@@ -8,7 +9,7 @@ class PushNotifications {
   factory PushNotifications() => _instance;
   static final PushNotifications _instance = PushNotifications._();
 
-  final FirebaseMessaging _firebaseMessaging = FirebaseMessaging();
+  final FirebaseMessaging _firebaseMessaging = FirebaseMessaging.instance;
   bool _initialized = false;
 
   // Sub for notification
@@ -18,31 +19,24 @@ class PushNotifications {
 
   Future<void> init() async {
     if (!_initialized) {
-      _registerOnFirebase();
-      // For iOS required premission.
-      _firebaseMessaging.requestNotificationPermissions();
+      // Initialize Firebase
+      await Firebase.initializeApp();
 
-      // Let's configure it.
-      _firebaseMessaging.configure(
-        onMessage: (Map<String, dynamic> message) async {
-          NotificationManager().sendNotification(
-              message['notification']['title'],
-              message['notification']['title']);
-          //print("onMessage: $message");
-        },
-        onLaunch: (Map<String, dynamic> message) async {
-          NotificationManager().sendNotification(
-              message['notification']['title'],
-              message['notification']['title']);
-          //print("onLaunch: $message");
-        },
-        onResume: (Map<String, dynamic> message) async {
-          NotificationManager().sendNotification(
-              message['notification']['title'],
-              message['notification']['title']);
-          //print("onResume: $message");
-        },
-      );
+      _registerOnFirebase();
+
+      // Request notification permissions for iOS
+
+      FirebaseMessaging.onMessage.listen((RemoteMessage message) {
+        NotificationManager().sendNotification(
+            message.notification!.title ?? "",
+            message.notification!.body ?? "");
+      });
+
+      FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
+        NotificationManager().sendNotification(
+            message.notification!.title ?? "",
+            message.notification!.body ?? "");
+      });
 
       // For testing print the Messaging token
       //String token = await _firebaseMessaging.getToken();

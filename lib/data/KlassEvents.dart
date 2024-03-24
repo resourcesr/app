@@ -1,11 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class KlassEvents {
-  KlassEvents({this.klassId, this.sem});
+  KlassEvents({required this.klassId, required this.sem});
 
   final String klassId;
   final int sem;
-  final Firestore _firestore = Firestore.instance;
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
   // Get event by course ID.
   Stream<QuerySnapshot> getByKlassId() {

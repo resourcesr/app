@@ -4,15 +4,15 @@ import 'package:string_to_hex/string_to_hex.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class TextAvatar extends StatelessWidget {
-  TextAvatar({this.text});
-  String text;
+  TextAvatar({required this.text});
+  final String text;
 
   @override
   Widget build(BuildContext context) {
     return Container(
       child: CircleAvatar(
-        backgroundColor: text != null ? Color(StringToHex.toColor(text)) : null,
-        child: text != null ? Text(getTitle(text)) : null,
+        backgroundColor: Color(StringToHex.toColor(text)),
+        child: Text(getTitle(text)),
         foregroundColor: Colors.white,
       ),
     );
@@ -20,8 +20,8 @@ class TextAvatar extends StatelessWidget {
 }
 
 class FileIconAvatar extends StatelessWidget {
-  FileIconAvatar({this.fileType});
-  String fileType;
+  FileIconAvatar({required this.fileType});
+  final String fileType;
 
   getIconPath() {
     Map<String, String> icons = {
@@ -34,10 +34,7 @@ class FileIconAvatar extends StatelessWidget {
       "powerpoint": "powerpoint.svg",
       "PowerPoint": "powerpoint.svg"
     };
-    if (fileType != null) {
-      return "assets/images/files/" + (icons[fileType] ?? "file.svg");
-    }
-    return "assets/images/files/file.svg";
+    return "assets/images/files/" + (icons[fileType] ?? "file.svg");
   }
 
   @override
@@ -53,7 +50,7 @@ class FileIconAvatar extends StatelessWidget {
 
 class ImageAvatar extends StatelessWidget {
   ImageAvatar(this.url);
-  String url;
+  final String url;
   @override
   Widget build(BuildContext context) {
     return Container(

@@ -2,15 +2,16 @@ import 'package:flutter/material.dart';
 
 class CustomInput extends StatefulWidget {
   CustomInput(
-      {this.validator,
-      this.controller,
+      {required this.validator,
+      required this.controller,
       @required this.label,
       this.initialValue,
-      this.obscureText,
-      this.maxLines});
-  final Function validator;
+      this.obscureText = false,
+      this.maxLines = 1
+    });
+  final String? Function(String?)? validator;
   final TextEditingController controller;
-  final String label, initialValue;
+  final String? label, initialValue;
   final bool obscureText;
   final int maxLines;
 
@@ -21,12 +22,12 @@ class CustomInput extends StatefulWidget {
 class _CustomInputState extends State<CustomInput> {
   bool obscurePass = true;
 
-  IconButton _getSufixIcon(bool obscureText) {
+  IconButton? _getSufixIcon(bool obscureText) {
     if (!obscureText) return null;
     return IconButton(
       icon: obscurePass ? Icon(Icons.visibility) : Icon(Icons.visibility_off),
       onPressed: () => {
-        setState(() => {obscurePass = !obscurePass})
+        setState(() {obscurePass = !obscurePass;})
       },
     );
   }
@@ -41,12 +42,12 @@ class _CustomInputState extends State<CustomInput> {
           //initialValue: initialValue,
           controller: widget.controller,
           validator: widget.validator,
-          maxLines: widget.maxLines ?? 1,
+          maxLines: widget.maxLines,
           decoration: InputDecoration(
             border: OutlineInputBorder(
-                borderSide: BorderSide(color: Theme.of(context).accentColor)),
+                borderSide: BorderSide(color: Theme.of(context).hintColor)),
             focusedBorder: OutlineInputBorder(
-                borderSide: BorderSide(color: Theme.of(context).accentColor)),
+                borderSide: BorderSide(color: Theme.of(context).hintColor)),
             labelText: widget.label,
             suffixIcon: _getSufixIcon(widget.obscureText),
           ),

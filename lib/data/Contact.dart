@@ -5,7 +5,7 @@ import 'package:http/http.dart' as http;
 class Contact {
   Future<http.Response> sent(String name, String email, String comment) {
     return http.post(
-      'https://formspree.io/f/xrgoeybj',
+      'https://formspree.io/f/xrgoeybj' as Uri,
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
       },

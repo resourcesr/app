@@ -1,11 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Resources {
-  Resources({this.courseId});
+  Resources({required this.courseId});
 
   // the code refers, to class_id
   final String courseId;
-  final Firestore _firestore = Firestore.instance;
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
   // Get resources by course ID.
   Stream<QuerySnapshot> getByCourseId() {

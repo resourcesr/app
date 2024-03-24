@@ -1,15 +1,17 @@
 import 'package:flutter/material.dart';
 
 class CustomForm extends StatelessWidget {
-  CustomForm({this.children, this.imagePath, this.loading, this.fromKey});
-  List<Widget> children;
-  String imagePath;
-  bool loading;
-  Key fromKey;
+  CustomForm({required this.children, this.imagePath, required this.loading, this.fromKey});
+
+  final List<Widget> children;
+  final String? imagePath;
+  final bool loading;
+  final Key? fromKey;
 
   @override
   Widget build(BuildContext context) {
-    if (imagePath == null) imagePath = "assets/images/logo.png";
+    String? imagePath = this.imagePath;
+    if (this.imagePath == null) imagePath = "assets/images/logo.png";
     return Form(
       key: fromKey,
       child: ListView(
@@ -18,7 +20,7 @@ class CustomForm extends StatelessWidget {
           loading ? LinearProgressIndicator() : SizedBox(height: 2),
           SizedBox(height: 30),
           Image.asset(
-            imagePath,
+            imagePath!,
             height: 230,
           ),
           SizedBox(height: 10),
